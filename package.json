@@ -1,0 +1,27 @@
+{
+    "name": "VSVapp",
+    "version": "1.0.0",
+    "description": "A simple CAP project.",
+    "repository": "https://github.com/svolochj/WMapp-CAP.git",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@sap/cds": "^4",
+        "express": "^4",
+        "@sap/hana-client": "^2.6.61"
+    },
+    "devDependencies": {
+        "@sap/ux-specification": "^1.84.5",
+        "sqlite3": "^5"
+    },
+    "scripts": {
+        "start": "cds run"
+    },
+    "cds": {
+        "requires": {
+            "db": {
+                "kind": "sql"
+            }
+        }
+    }
+}

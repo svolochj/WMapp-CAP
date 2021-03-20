@@ -1,0 +1,156 @@
+{
+    "_version": "",
+    "sap.app": {
+        "id": "wm.doc.receive",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "dataSources": {
+            "mainService": {
+                "uri": "/vsvappsrv/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0"
+                }
+            }
+        },
+        "offline": false,
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "ui5template.fiorielements.v4.lrop",
+            "version": "1.0.0"
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "resources": {
+            "js": [],
+            "css": []
+        },
+        "dependencies": {
+            "minUI5Version": "1.76.0",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.fe.templates": {}
+            }
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            }
+        },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "ReceiveList",
+                    "target": "ReceiveList"
+                },
+                {
+                    "pattern": "Receive({key}):?query:",
+                    "name": "ReceiveObjectPage",
+                    "target": "ReceiveObjectPage"
+                },
+                    {
+                        "pattern": "Receive({key})/Items({key2}):?query:",
+                        "name": "docReceive_ItemsObjectPage",
+                        "target": "docReceive_ItemsObjectPage"
+                    }
+            ],
+            "targets": {
+                "ReceiveList": {
+                    "type": "Component",
+                    "id": "ReceiveList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "entitySet": "Receive",
+                            "variantManagement": "Page",
+                            "navigation": {
+                                "Receive": {
+                                    "detail": {
+                                        "route": "ReceiveObjectPage"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "ReceiveObjectPage": {
+                    "type": "Component",
+                    "id": "ReceiveObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "entitySet": "Receive",
+                                "navigation": {
+                                    "Items": {
+                                        "detail": {
+                                            "route": "docReceive_ItemsObjectPage"
+                                        }
+                                    }
+                                }
+                        }
+                    }
+                },
+                    "docReceive_ItemsObjectPage": {
+                        "type": "Component",
+                        "id": "docReceive_ItemsObjectPage",
+                        "name": "sap.fe.templates.ObjectPage",
+                        "options": {
+                            "settings": {
+                                "entitySet": "docReceive_Items"
+                            }
+                        }
+                    }
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    },
+    "sap.platform.abap": {
+        "_version": "1.1.0",
+        "uri": ""
+    },
+    "sap.platform.hcp": {
+        "_version": "1.1.0",
+        "uri": ""
+    },
+    "sap.fiori": {
+        "_version": "1.1.0",
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

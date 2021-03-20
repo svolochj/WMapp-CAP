@@ -1,0 +1,12 @@
+### Create Doc
+GET  http://localhost:4004/vsvappsrv/Receive(ID=63b57deb-6777-43f5-9760-d1a87ecd5231,Number='90000000001')/Items
+### Create Doc
+POST  http://localhost:4004/vsvappsrv/Receive
+Content-Type: application/json
+
+{
+    "Number":"0000000004"
+}
+
+### Recalculate Stock 
+GET  http://localhost:4004/vsvappsrv/calculateStock()
