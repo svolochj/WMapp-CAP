@@ -1,9 +1,9 @@
 namespace WM.model.doc;
 
 using { managed, cuid } from '@sap/cds/common';
-using { WM.model.voc.Product.Data as product } from '../voc/Product';
-using { WM.model.voc.UOM.Data as uom } from '../voc/UOM';
-using { WM.model.voc.Location.Data as location } from '../voc/Location';
+using { WM.model.cat.Product.Data as product } from '../cat/Product';
+using { WM.model.cat.UOM.Data as uom } from '../cat/UOM';
+using { WM.model.cat.Location.Data as location } from '../cat/Location';
 
 
 context common {

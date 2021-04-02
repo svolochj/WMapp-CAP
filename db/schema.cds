@@ -1,6 +1,6 @@
-using { WM.model.voc.Product.Data as Product } from './model/voc/Product';
-using { WM.model.voc.UOM.Data as UOM } from './model/voc/UOM';
-using { WM.model.voc.Location.Data as Location } from './model/voc/Location';
+using { WM.model.cat.Product.Data as Product } from './model/cat/Product';
+using { WM.model.cat.UOM.Data as UOM } from './model/cat/UOM';
+using { WM.model.cat.Location.Data as Location } from './model/cat/Location';
 
 
 using { WM.model.doc.docReceive } from './model/doc/Receive';

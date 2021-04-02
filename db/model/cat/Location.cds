@@ -1,6 +1,6 @@
 using { cuid, managed} from '@sap/cds/common';
 
-namespace WM.model.voc;
+namespace WM.model.cat;
 
 context Location  {
     entity Data : cuid, managed {

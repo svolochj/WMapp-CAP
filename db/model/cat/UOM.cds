@@ -1,6 +1,6 @@
 using {managed, sap.common.CodeList as CodeList} from '@sap/cds/common';
 
-namespace WM.model.voc;
+namespace WM.model.cat;
 
 context UOM {
     entity Data : managed, CodeList {

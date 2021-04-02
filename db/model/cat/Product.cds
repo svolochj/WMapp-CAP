@@ -1,8 +1,8 @@
 using { cuid, managed} from '@sap/cds/common';
 
-using { WM.model.voc.UOM.Data as UOM } from './UOM';
+using { WM.model.cat.UOM.Data as UOM } from './UOM';
 
-namespace WM.model.voc;
+namespace WM.model.cat;
 
 context Product  {
     entity Data : cuid, managed {
