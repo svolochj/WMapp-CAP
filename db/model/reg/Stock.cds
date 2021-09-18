@@ -1,9 +1,9 @@
 namespace WM.model.reg;
 
 using { cuid } from '@sap/cds/common';
-using { WM.model.cat.Product.Data as product } from '../cat/Product';
-using { WM.model.cat.UOM.Data as uom } from '../cat/UOM';
-using { WM.model.cat.Location.Data as location } from '../cat/Location';
+using { WM.model.cat.Product as product } from '../cat/Product';
+using { WM.model.cat.UOM as uom } from '../cat/UOM';
+using { WM.model.cat.Location as location } from '../cat/Location';
 
 entity Stock : cuid {
     Product     : Association to one product;

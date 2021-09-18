@@ -1,27 +1,26 @@
-using { cuid, managed} from '@sap/cds/common';
-
-using { WM.model.cat.UOM.Data as UOM } from './UOM';
-
 namespace WM.model.cat;
 
-context Product  {
-    entity Data : cuid, managed {
-        Code        : String(23)        @(title : 'Code');
-        Name        : String(200)       @(title : 'Name');
+using { cuid, managed}      from '@sap/cds/common';
+using { WM.model.cat.UOM }  from './UOM';
 
-        Description : String            @(title : 'Description');
+entity Product : cuid, managed {
+    Code        : String(23)        @(title : 'Code');
+    Name        : String(200)       @(title : 'Name');
 
-        UOM         : Association to one UOM
-                                        @(title : 'UOM');    
-    }
+    Description : String            @(title : 'Description');
+
+    UOM         : Association to one UOM
+                                    @(title : 'UOM');    
 }
 
-annotate Product.Data with @(
+annotate Product with @(
 
      cds.odata.valuelist,
 
     UI : {
-        Identification: [ {Value: ID} ],
+    
+    Identification: [ {Value: ID} ],
+    
     LineItem   : [
     {
         ![@UI.Hidden],

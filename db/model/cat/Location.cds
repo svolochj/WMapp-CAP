@@ -1,14 +1,12 @@
-using { cuid, managed} from '@sap/cds/common';
-
 namespace WM.model.cat;
 
-context Location  {
-    entity Data : cuid, managed {
-        Code        : String(23);
-        Name        : String(200);
+using { cuid, managed} from '@sap/cds/common';
 
-        Description : String;
-    }
+entity Location : cuid, managed {
+    Code        : String(23);
+    Name        : String(200);
+
+    Description : String;
 }
 
 annotate Location.Data with @( 
