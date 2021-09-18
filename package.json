@@ -1,7 +1,7 @@
 {
-    "name": "VSVapp",
+    "name": "wmapp",
     "version": "1.0.0",
-    "description": "A simple CAP project.",
+    "description": "Warehouse Manegement application",
     "repository": "https://github.com/svolochj/WMapp-CAP.git",
     "license": "UNLICENSED",
     "private": true,

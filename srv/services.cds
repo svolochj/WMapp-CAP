@@ -8,7 +8,7 @@ using { WM.model.cat.Product.Data   as Product,
          } from '../db/schema';
 
 
-service vsvappsrv {
+service wmappsrv {
 
     //Vocabularies
     entity Products 
