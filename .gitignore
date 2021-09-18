@@ -27,3 +27,19 @@ mta_archives/
 # IDEs
 # .vscode
 # .idea
+
+#Environment
+default-env.json
+
+# auto generated wildcard
+WMapp-CAP/gen/db/.env
+# auto generated wildcard
+WMapp-CAP/gen/db/.env
+# auto generated wildcard
+WMapp-CAP/gen/db/.env
+# auto generated wildcard
+WMapp-CAP/gen/db/.env
+# auto generated wildcard
+WMapp-CAP/gen/db/.env
+# auto generated wildcard
+WMapp-CAP/.env

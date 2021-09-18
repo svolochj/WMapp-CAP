@@ -21,26 +21,22 @@ service wmappsrv {
     entity Locations    
         @( odata.draft.enabled : true )    
         as select from Location;
-
+        
     //Documents
     entity Receive  
         @( odata.draft.enabled : true )     
         as projection on docReceive;
-        action postReceiveDoc();
+
     entity Issue        
         @( odata.draft.enabled : true )    
         as projection on docIssue;
-        // action postIssue();
+
     entity Movement     
         @( odata.draft.enabled : true )
         as projection on docMovement;
-        // action postMovement();
 
     //Registry
     entity Stock 
         @(readonly:true)
         as projection on _Stock;
-    //     action calculateStock();
-
-    function calculateStock() returns Integer;    
 }
