@@ -7,102 +7,110 @@ entity Product : cuid, managed {
     Code        : String(23)        @(title : 'Code');
     Name        : String(200)       @(title : 'Name');
 
-    Description : String            @(title : 'Description');
+    Description : String(1000)      @(title : 'Description');
 
-    UOM         : Association to one UOM
-                                    @(title : 'UOM');    
+    UOM         : Association to one UOM;    
 }
+
+annotate Product with {
+
+    ID      @UI: { Hidden : true };
+
+    UOM     @Common : { Text : UOM.name, TextArrangement : #TextOnly, ValueList : {
+        $Type : 'Common.ValueListType',
+        CollectionPath : 'UOM',
+        Parameters : [
+            {
+                $Type : 'Common.ValueListParameterIn',
+                LocalDataProperty : UOM_ID,
+                ValueListProperty : 'ID',
+            },
+            {
+                $Type : 'Common.ValueListParameterDisplayOnly',
+                ValueListProperty : 'name',
+            },
+            {
+                $Type : 'Common.ValueListParameterDisplayOnly',
+                ValueListProperty : 'description',
+            },
+        ],
+    },}
+    @(
+        title:       'UOM',
+        description: 'Unit of Measures'
+    ); 
+};
+
 
 annotate Product with @(
 
-     cds.odata.valuelist,
-
     UI : {
     
-    Identification: [ {Value: ID} ],
+        Identification: [ {Value: ID} ],
     
-    LineItem   : [
-    {
-        ![@UI.Hidden],
-        Value : ID,
-        Label : 'ID'
-    },
-    {
-        $Type : 'UI.DataField',    
-        Value : Code,
-        Label : 'Code'
-    },
-    {
-        $Type : 'UI.DataField',     
-        Value : Name,
-        Label : 'Name'
-    },
-    {
-        $Type : 'UI.DataField', 
-        Value : UOM.name,
-        Label : 'UOM'
-    }
-    ],
+        LineItem   : [
+            {  
+                Value : Code
+            },{     
+                Value : Name
+            },{
+                Value : UOM
+            }
+        ],
 
-    HeaderInfo : {
-        $Type          : 'UI.HeaderInfoType',
-        TypeName       : 'Product',
-        TypeNamePlural : 'Products',
-        Title          : {Value : Name},
-        Description    : {Value : Description}
-    },
+        HeaderInfo : {
+            $Type          : 'UI.HeaderInfoType',
+            TypeName       : 'Product',
+            TypeNamePlural : 'Products',
+            Title          : {Value : Name},
+            Description    : {Value : Description}
+        },
 
-    HeaderFacets  : [
-        {
-            $Type: 'UI.CollectionFacet',
-            Facets: [
-                {  
-                    $Type: 'UI.ReferenceFacet', 
-                    Target : '@UI.FieldGroup#AdministrativeData',
-                    Label: 'Administrative data' 
+        HeaderFacets  : [
+            {
+                $Type: 'UI.CollectionFacet',
+                Facets: [
+                    {  
+                        $Type: 'UI.ReferenceFacet', 
+                        Target : '@UI.FieldGroup#AdministrativeData',
+                        Label: 'Administrative data' 
+                    }
+                ]
+            }
+        ],
+
+        Facets  : [
+            {  
+                $Type:      'UI.ReferenceFacet', 
+                Target :    '@UI.FieldGroup#GeneralData', 
+                Label:      'General data'
+            }
+        ],
+
+        FieldGroup #AdministrativeData : {
+            Label : '{i18n>Admin}',
+            Data  : [
+            {Value : createdBy},
+            {Value : createdAt},
+            {Value : modifiedBy},
+            {Value : modifiedAt}
+            ]
+        },
+
+        FieldGroup #GeneralData : {
+            $Type : 'UI.FieldGroupType',
+            Data: [
+                {
+                    Value: Code
+                },{
+                    Value: Name
+                },{
+                    Value: UOM
+                },
+                {
+                    Value: Description
                 }
             ]
         }
-    ],
-
-    Facets  : [
-        {  
-            $Type:      'UI.ReferenceFacet', 
-            Target :    '@UI.FieldGroup#MainData', 
-            Label:      'Main datat'
-        }
-    ],
-
-    FieldGroup #AdministrativeData : {
-        Label : '{i18n>Admin}',
-        Data  : [
-        {Value : createdBy},
-        {Value : createdAt},
-        {Value : modifiedBy},
-        {Value : modifiedAt}
-        ]
-    },
-
-    FieldGroup #MainData : {
-        $Type : 'UI.FieldGroupType',
-        Data: [
-            {
-                Value: Code
-            },{
-                Value: Name
-            },{
-                $Type:'UI.DataField',
-                Value: UOM_id,
-                Label: 'UOM',
-                
-            },{
-                $Type:'UI.DataField',
-                Value: UOM_id,
-                Label: 'UOM ID'
-            },
-            {
-                Value: Description
-            }
-        ]
     }
-});
+);

@@ -1,10 +1,10 @@
 namespace WM.model.doc;
 
-using { WM.model.doc.common.Header   as WMDoc } from './common';
+using { WM.model.doc.Header   as WMDoc } from './common';
 
 entity docReceive : WMDoc { }
 
-annotate WM.model.doc.docReceive_Items with @(
+annotate WM.model.doc.docReceive.Items with @(
         UI.LineItem : [
         {
             Value: ID,

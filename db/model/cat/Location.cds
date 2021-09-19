@@ -16,10 +16,6 @@ annotate Location.Data with @(
         
         LineItem   : [
             {
-                Value : ID,
-                Label : 'ID'
-            },
-            {
                 Value : Code,
                 Label : 'Code'
             },
@@ -37,11 +33,24 @@ annotate Location.Data with @(
         Description    : {Value : Description}
     },
 
-    Facets  : [
+    HeaderFacets  : [
         {
-            $Type: 'UI.ReferenceFacet', 
-            Target : '@UI.FieldGroup#AdministrativeData', 
-            Label: 'Admin'
+            $Type: 'UI.CollectionFacet',
+            Facets: [
+                {  
+                    $Type:      'UI.ReferenceFacet', 
+                    Target :    '@UI.FieldGroup#AdministrativeData',
+                    Label: '    Administrative data' 
+                }
+            ]
+        }
+    ],
+
+    Facets  : [
+        {  
+            $Type:      'UI.ReferenceFacet', 
+            Target :    '@UI.FieldGroup#GeneralData', 
+            Label:      'General data'
         }
     ],
 
@@ -53,5 +62,18 @@ annotate Location.Data with @(
         {Value : modifiedBy},
         {Value : modifiedAt}
         ]
+    },
+
+    FieldGroup #GeneralData : {
+        $Type : 'UI.FieldGroupType',
+        Data: [
+            {
+                Value: Name
+            },
+            {
+                Value: Description
+            }
+        ]
     }
+    
 });

@@ -1,19 +1,23 @@
 namespace WM.model.cat;
 
-using {managed, sap.common.CodeList as CodeList} from '@sap/cds/common';
+using {cuid, managed, sap.common.CodeList as CodeList} from '@sap/cds/common';
 
-entity UOM : managed, CodeList, {
-    key id  : UUID;
-}
+entity UOM : cuid, managed, CodeList, {}
 
 annotate UOM with {
-    name @Common.Text :name;
+    ID @UI : { Hidden, }
 };
 
-annotate UOM with @(      
+
+annotate UOM with @( 
+
     UI: {
+
+        Identification  : [
+            { Value: ID }
+        ],
+
         LineItem  : [
-            {Value:id,      Label:'ID'},
             {Value:name,    Label:'Name'},
             {Value:descr,   Label:'Description'} 
         ],
@@ -31,9 +35,9 @@ annotate UOM with @(
                 $Type: 'UI.CollectionFacet',
                 Facets: [
                     {  
-                        $Type: 'UI.ReferenceFacet', 
-                        Target : '@UI.FieldGroup#AdministrativeData',
-                        Label: 'Administrative data' 
+                        $Type:      'UI.ReferenceFacet', 
+                        Target :    '@UI.FieldGroup#AdministrativeData',
+                        Label: '    Administrative data' 
                     }
                 ]
             }
@@ -42,8 +46,8 @@ annotate UOM with @(
         Facets  : [
             {  
                 $Type:      'UI.ReferenceFacet', 
-                Target :    '@UI.FieldGroup#MainData', 
-                Label:      'Main datat'
+                Target :    '@UI.FieldGroup#GeneralData', 
+                Label:      'General data'
             }
         ],
 
@@ -57,7 +61,7 @@ annotate UOM with @(
             ]
         },
 
-        FieldGroup #MainData : {
+        FieldGroup #GeneralData : {
             $Type : 'UI.FieldGroupType',
             Data: [
                 {
