@@ -31,7 +31,7 @@ annotate Product with {
             },
             {
                 $Type : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty : 'description',
+                ValueListProperty : 'descr',
             },
         ],
     },}
@@ -54,7 +54,7 @@ annotate Product with @(
             },{     
                 Value : Name
             },{
-                Value : UOM
+                Value : UOM_ID
             }
         ],
 
@@ -105,7 +105,7 @@ annotate Product with @(
                 },{
                     Value: Name
                 },{
-                    Value: UOM
+                    Value: UOM_ID
                 },
                 {
                     Value: Description
