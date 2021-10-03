@@ -14,27 +14,32 @@ entity Product : cuid, managed {
 
 annotate Product with {
 
-    ID      @UI: { Hidden : true };
+    ID      @UI: { Hidden : true } 
+            @Common : { Text : 'Name', TextArrangement : #TextOnly };
 
-    UOM     @Common : { Text : UOM.name, TextArrangement : #TextOnly, ValueList : {
-        $Type : 'Common.ValueListType',
-        CollectionPath : 'UOM',
-        Parameters : [
-            {
-                $Type : 'Common.ValueListParameterIn',
-                LocalDataProperty : UOM_ID,
-                ValueListProperty : 'ID',
-            },
-            {
-                $Type : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty : 'name',
-            },
-            {
-                $Type : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty : 'descr',
-            },
-        ],
-    },}
+    UOM     @Common : { 
+        Text : UOM.name, 
+        TextArrangement : #TextOnly, 
+        ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'UOM',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterOut',
+                    LocalDataProperty : UOM_ID,
+                    ValueListProperty : 'ID',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'descr',
+                },
+            ],
+        }
+    }
     @(
         title:       'UOM',
         description: 'Unit of Measures'

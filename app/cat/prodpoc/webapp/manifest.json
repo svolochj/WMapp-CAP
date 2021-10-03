@@ -15,7 +15,7 @@
 		"resources": "resources.json",
 		"dataSources": {
 			"mainService": {
-				"uri": "/vsvappsrv/",
+				"uri": "/wmappsrv/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0",

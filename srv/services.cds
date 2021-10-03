@@ -18,10 +18,12 @@ service wmappsrv {
     entity UOM
         @( odata.draft.enabled : true )       
         as select from UOM_Data;
+
     entity Locations    
         @( odata.draft.enabled : true )    
         as select from Location;
-        
+
+
     //Documents
     entity Receive  
         @( odata.draft.enabled : true )     
@@ -34,6 +36,7 @@ service wmappsrv {
     entity Movement     
         @( odata.draft.enabled : true )
         as projection on docMovement;
+
 
     //Registry
     entity Stock 

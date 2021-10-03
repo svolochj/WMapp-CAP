@@ -5,7 +5,25 @@ using {cuid, managed, sap.common.CodeList as CodeList} from '@sap/cds/common';
 entity UOM : cuid, managed, CodeList, {}
 
 annotate UOM with {
-    ID @UI : { Hidden, }
+    ID @UI : { Hidden, };
+
+    // name @Common : {
+    //     ValueList : {
+    //         $Type : 'Common.ValueListType',
+    //         CollectionPath : 'UOM',
+    //         Parameters : [
+    //             {
+    //                 $Type : 'Common.ValueListParameterOut',
+    //                 LocalDataProperty : 'UOM_ID',
+    //                 ValueListProperty : 'ID',
+    //             },
+    //             {
+    //                 $Type : 'Common.ValueListParameterDisplayOnly',
+    //                 ValueListProperty : 'name',
+    //             },
+    //         ],
+    //     },
+    // }
 };
 
 

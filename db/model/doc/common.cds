@@ -14,14 +14,13 @@ aspect Header : cuid , managed {
         Items   : Composition of many Items ;
 }
 
-aspect Items 
-: cuid {
-    key Linenr      : Integer;
-        Product     : Association to one product;
-        Quantity    : Decimal(10,3);
-        UOM         : Association to one uom;
-        LocationFrom: Association to one location;
-        LocationTo  : Association to one location;       
+aspect Items : cuid {
+    Linenr      : Integer;
+    Product     : Association to one product;
+    Quantity    : Decimal(10,3);
+    UOM         : Association to one uom;
+    LocationFrom: Association to one location;
+    LocationTo  : Association to one location;       
 }
 
 type docNumber: String(11);

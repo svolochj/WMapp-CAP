@@ -20,10 +20,12 @@
     "test": "jest"
   },
   "cds": {
+    "hana": {
+      "deploy-format": "hdbtable"
+    },
     "requires": {
       "db": {
-        "kind": "sqlite",
-        "model": "*"
+        "kind": "hana"
       }
     }
   }

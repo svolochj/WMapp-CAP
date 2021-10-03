@@ -2,14 +2,47 @@ namespace WM.model.doc;
 
 using { WM.model.doc.Header   as WMDoc } from './common';
 
-entity docReceive : WMDoc { }
+entity docReceive : WMDoc {  } 
 
-annotate WM.model.doc.docReceive.Items with @(
-        UI.LineItem : [
-        {
-            Value: ID,
-            Label: 'ID'
-        },
+annotate WM.model.doc.docReceive_Items with {
+    ID @UI : {  Hidden : true };
+
+    Quantity @Measures : { Unit : UOM };  
+
+    UOM @Common : { 
+        
+        IsUnit: true, 
+        
+        Text : UOM.name, 
+        TextArrangement : #TextOnly, 
+        
+        ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'UOM',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterOut',
+                    LocalDataProperty : UOM_ID,
+                    ValueListProperty : 'ID',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'descr',
+                },
+            ],
+        } 
+    }
+}
+
+annotate WM.model.doc.docReceive_Items with @(
+
+    UI.Identification: [ { Value: ID } ],
+
+    UI.LineItem : [
         {
             Value: Linenr,
             Label: 'Line Nr.'
@@ -23,18 +56,18 @@ annotate WM.model.doc.docReceive.Items with @(
             Label: 'Quantity'
         },
         {
-            Value: UOM.name,
-            Label: 'UOM'
-        },
-        {
             Value: LocationTo.Name,
             Label: 'Receive location'
         }
     ]
 );
 
+annotate WM.model.doc.docReceive with {
+    ID @UI : {  Hidden }
+};
+
 annotate WM.model.doc.docReceive with @(
-    UI.Identification: [ {Value: Number} ],
+    UI.Identification: [ {Value: ID} ],
 
     UI.HeaderInfo : {
         $Type          : 'UI.HeaderInfoType',
@@ -47,6 +80,10 @@ annotate WM.model.doc.docReceive with @(
         {
             Value: Number,
             Label: 'Number'
+        },
+        {
+            Value: PostDate,
+            Label: 'Post date'
         }
     ],
         
@@ -64,7 +101,7 @@ annotate WM.model.doc.docReceive with @(
         {
             $Type :     'UI.ReferenceFacet',
             Target :    'Items/@UI.LineItem',
-            Label:      'Items'
+            Label:      'Items',
         }
     ],
 
