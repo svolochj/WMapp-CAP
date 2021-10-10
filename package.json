@@ -11,7 +11,7 @@
     "@sap/hana-client": "^2.6.61"
   },
   "devDependencies": {
-    "@sap/ux-specification": "^1.84.5",
+    "@sap/ux-specification": "^1.90.10",
     "jest": "^26.6.3",
     "sqlite3": "^5"
   },
@@ -28,5 +28,10 @@
         "kind": "hana"
       }
     }
-  }
+  },
+  "sapux": [
+    "app/uom",
+    "app/locations",
+    "app/products"
+  ]
 }
