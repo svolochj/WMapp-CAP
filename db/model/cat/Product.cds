@@ -9,17 +9,23 @@ entity Product : cuid, managed {
 
     Description : String(1000)      @(title : 'Description');
 
-    UOM         : Association to one UOM;    
+    UOM         : Association to one UOM @(title : 'UOM');    
 }
 
 annotate Product with {
 
-    ID      @UI: { Hidden : true } 
-            @Common : { Text : 'Name', TextArrangement : #TextOnly };
+    ID      @UI: { Hidden : true }
+            @Common : {   
+            IsUnit :            true, 
+            Text:               Name, 
+            TextArrangement:    #TextOnly };
 
-    UOM     @Common : { 
+    UOM     @Common : {
+        IsUnit: true,  
+
         Text : UOM.name, 
         TextArrangement : #TextOnly, 
+        
         ValueList : {
             $Type : 'Common.ValueListType',
             CollectionPath : 'UOM',
@@ -39,11 +45,7 @@ annotate Product with {
                 },
             ],
         }
-    }
-    @(
-        title:       'UOM',
-        description: 'Unit of Measures'
-    ); 
+    }; 
 };
 
 
@@ -111,8 +113,7 @@ annotate Product with @(
                     Value: Name
                 },{
                     Value: UOM_ID
-                },
-                {
+                },{
                     Value: Description
                 }
             ]

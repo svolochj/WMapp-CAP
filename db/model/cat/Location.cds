@@ -9,7 +9,11 @@ entity Location : cuid, managed {
     Description : String;
 }
 
-annotate Location.Data with @( 
+annotate Location with {
+    ID @UI: { Hidden : true };
+};
+
+annotate Location with @( 
     UI : {
         
         Identification: [ {Value: ID} ],
@@ -18,62 +22,60 @@ annotate Location.Data with @(
             {
                 Value : Code,
                 Label : 'Code'
-            },
-            {
+            },{
                 Value : Name,
                 Label : 'Name'
             }
         ],
 
-    HeaderInfo : {
-        $Type          : 'UI.HeaderInfoType',
-        TypeName       : 'Location',
-        TypeNamePlural : 'Locations',
-        Title          : {Value : Name},
-        Description    : {Value : Description}
-    },
+        HeaderInfo : {
+            $Type          : 'UI.HeaderInfoType',
+            TypeName       : 'Location',
+            TypeNamePlural : 'Locations',
+            Title          : {Value : Name},
+            Description    : {Value : Description}
+        },
 
-    HeaderFacets  : [
-        {
-            $Type: 'UI.CollectionFacet',
-            Facets: [
-                {  
-                    $Type:      'UI.ReferenceFacet', 
-                    Target :    '@UI.FieldGroup#AdministrativeData',
-                    Label: '    Administrative data' 
+        HeaderFacets  : [
+            {
+                $Type: 'UI.CollectionFacet',
+                Facets: [
+                    {  
+                        $Type:      'UI.ReferenceFacet', 
+                        Target :    '@UI.FieldGroup#AdministrativeData',
+                        Label: '    Administrative data' 
+                    }
+                ]
+            }
+        ],
+
+        Facets  : [
+            {  
+                $Type:      'UI.ReferenceFacet', 
+                Target :    '@UI.FieldGroup#GeneralData', 
+                Label:      'General data'
+            }
+        ],
+
+        FieldGroup #AdministrativeData : {
+            Label : '{i18n>Admin}',
+            Data  : [
+            {Value : createdBy},
+            {Value : createdAt},
+            {Value : modifiedBy},
+            {Value : modifiedAt}
+            ]
+        },
+
+        FieldGroup #GeneralData : {
+            $Type : 'UI.FieldGroupType',
+            Data: [
+                {
+                    Value: Name
+                },{
+                    Value: Description
                 }
             ]
         }
-    ],
-
-    Facets  : [
-        {  
-            $Type:      'UI.ReferenceFacet', 
-            Target :    '@UI.FieldGroup#GeneralData', 
-            Label:      'General data'
-        }
-    ],
-
-    FieldGroup #AdministrativeData : {
-        Label : '{i18n>Admin}',
-        Data  : [
-        {Value : createdBy},
-        {Value : createdAt},
-        {Value : modifiedBy},
-        {Value : modifiedAt}
-        ]
-    },
-
-    FieldGroup #GeneralData : {
-        $Type : 'UI.FieldGroupType',
-        Data: [
-            {
-                Value: Name
-            },
-            {
-                Value: Description
-            }
-        ]
     }
-    
-});
+);

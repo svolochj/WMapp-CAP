@@ -55,6 +55,6 @@ resources:
      service: hana  # or 'hanatrial' on trial landscapes
      service-plan: hdi-shared
    properties:
-     hdi-service-name: ${service-name}
+     hdi-service-name: wmapp-db
 
 

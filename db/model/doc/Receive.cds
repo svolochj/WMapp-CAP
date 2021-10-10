@@ -7,15 +7,74 @@ entity docReceive : WMDoc {  }
 annotate WM.model.doc.docReceive_Items with {
     ID @UI : {  Hidden : true };
 
-    Quantity @Measures : { Unit : UOM };  
+    Quantity @Measures : { Unit : UOM_ID };
 
-    UOM @Common : { 
-        
+    Product @Common : {
+
+        Text : Product.Name, 
+        TextArrangement : #TextOnly, 
+
+        ValueList : {          
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Products',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterOut',
+                    LocalDataProperty : Product_ID,
+                    ValueListProperty : 'ID',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Code',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Description',
+                },
+            ],
+        } 
+    };
+
+    LocationTo @Common : {
+
+        Text : LocationTo.Name, 
+        TextArrangement : #TextOnly, 
+
+        ValueList : {          
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Locations',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterOut',
+                    LocalDataProperty : LocationTo_ID,
+                    ValueListProperty : 'ID',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Code',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Description',
+                },
+            ],
+        } 
+    };   
+
+    UOM_ID @Common : { 
         IsUnit: true, 
         
         Text : UOM.name, 
         TextArrangement : #TextOnly, 
-        
+
         ValueList : {
             $Type : 'Common.ValueListType',
             CollectionPath : 'UOM',
@@ -35,7 +94,7 @@ annotate WM.model.doc.docReceive_Items with {
                 },
             ],
         } 
-    }
+    };
 }
 
 annotate WM.model.doc.docReceive_Items with @(
@@ -48,7 +107,7 @@ annotate WM.model.doc.docReceive_Items with @(
             Label: 'Line Nr.'
         },
         {
-            Value: Product.Name,
+            Value: Product_ID,
             Label: 'Product'
         },
         {
@@ -56,7 +115,7 @@ annotate WM.model.doc.docReceive_Items with @(
             Label: 'Quantity'
         },
         {
-            Value: LocationTo.Name,
+            Value: LocationTo_ID,
             Label: 'Receive location'
         }
     ]
