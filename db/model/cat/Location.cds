@@ -10,7 +10,10 @@ entity Location : cuid, managed {
 }
 
 annotate Location with {
-    ID @UI: { Hidden : true };
+    ID  @UI: { Hidden : true }
+        @Common : {
+            Text:               Name, 
+            TextArrangement:    #TextOnly };
 };
 
 annotate Location with @( 

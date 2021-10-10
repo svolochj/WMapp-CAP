@@ -2,16 +2,16 @@ namespace WM.model.cat;
 
 using {cuid, managed, sap.common.CodeList as CodeList} from '@sap/cds/common';
 
-
 entity UOM : cuid, managed, CodeList, {}
 
 annotate UOM with {
-    ID  @UI : { Hidden } 
+    ID  @UI : { Hidden }             
         @Common : {   
             IsUnit :            true, 
             Text:               name, 
-            TextArrangement:    #TextOnly
-        };
+            TextArrangement:    #TextOnly };
+
+    // name @Common : { IsUnit : true };
 };
 
 annotate UOM with @(

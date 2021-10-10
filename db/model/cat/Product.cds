@@ -15,8 +15,7 @@ entity Product : cuid, managed {
 annotate Product with {
 
     ID      @UI: { Hidden : true }
-            @Common : {   
-            IsUnit :            true, 
+            @Common : {
             Text:               Name, 
             TextArrangement:    #TextOnly };
 
