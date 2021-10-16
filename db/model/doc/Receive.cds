@@ -6,7 +6,7 @@ entity docReceive : WMDoc {  }
 
 annotate WM.model.doc.docReceive_Items with {
     ID @UI : {  Hidden : true };
-    // LocationFrom_ID @UI : {  Hidden : true };
+    Linenr @Common : { Label : 'Line number' };
     LocationTo_ID @UI : {  Hidden : true };
     LocationFrom_ID @UI : {  Hidden : true };
     UOM_ID @UI : {  Hidden : true };
@@ -105,6 +105,14 @@ annotate WM.model.doc.docReceive_Items with @(
 
     UI.Identification: [ { Value: ID } ],
 
+    UI.HeaderInfo : {
+        $Type          : 'UI.HeaderInfoType',
+        TypeName       : 'Item',
+        TypeNamePlural : '',
+        Title          : {Value : Product.Name},
+        Description    : {Value : Linenr, Label: 'Line number' }
+    },
+
     UI.LineItem : [
         {
             Value: Linenr,
@@ -126,7 +134,29 @@ annotate WM.model.doc.docReceive_Items with @(
             Value: LocationTo_ID,
             Label: 'Receive location'
         }
-    ]
+    ],
+
+    UI.Facets :[
+        {
+            $Type :     'UI.ReferenceFacet',
+            Target :    '@UI.FieldGroup#LineItemData',
+            Label :     'Item data'
+        },
+    ],
+
+    UI.FieldGroup #LineItemData : {
+        Label : 'Item data',
+        Data  : [
+            {   Value : Product_ID,
+                Label : 'Product' },
+            {   Value : Quantity,
+                Label : 'Quantity' },
+            {   Value : UOM_ID,
+                Label : 'UOM' },
+            {   Value : LocationTo_ID,
+                Label : 'Receive location' }
+        ]
+    }
 );
 
 annotate WM.model.doc.docReceive with {
