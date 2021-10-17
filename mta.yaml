@@ -37,4 +37,29 @@ resources:
       service-plan: hdi-shared
     properties:
       hdi-service-name: wmapp-db
+  - name: wmapp-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+    properties:
+      HTML5Runtime_enabled: true
+  - name: wmapp-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: wmapp-${space}    #  name + space dependency
+        tenant-mode: dedicated
+        role-collections:
+          - name: 'WMAdmin-${space}'
+            description: Administrator
+            role-template-references:
+              - $XSAPPNAME.Admin
+          - name: 'WMViewer-${space}'
+            description: Viewer
+            role-template-references:
+              - $XSAPPNAME.Viewer
 copyright: SVO
