@@ -1,65 +1,144 @@
-_schema-version: '3.1'
+_schema-version: "3.1"
 ID: wmapp
-version: 1.0.0
 description: Warehouse Manegement application
+version: 1.0.0
+copyright: SVO
+modules:
+- name: wmapp-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: wmapp-db
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+- name: wmapp-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: wmapp-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: wmapp-destinations
+  type: com.sap.application.content
+  requires:
+  - name: wmapp-xsuaa-service
+    parameters:
+      service-key:
+        name: wmapp-xsuaa-service-key
+  - name: wmapp-html5-repo-host
+    parameters:
+      service-key:
+        name: wmapp-html5-repo-host-key
+  - name: srv-api
+  - name: wmapp-destination
+    parameters:
+      content-target: true
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Authentication: OAuth2UserTokenExchange
+          Name: wmapp-app-srv
+          TokenServiceInstanceName: wmapp-xsuaa-service
+          TokenServiceKeyName: wmapp-xsuaa-service-key
+          URL: ~{srv-api/srv-url}
+          sap.cloud.service: wmapp.service
+        - Name: wmapp-html5-repo-host
+          ServiceInstanceName: wmapp-html5-repo-host
+          ServiceKeyName: wmapp-html5-repo-host-key
+          sap.cloud.service: wmapp.service
+        - Authentication: OAuth2UserTokenExchange
+          Name: wmapp-xsuaa-service
+          ServiceInstanceName: wmapp-xsuaa-service
+          ServiceKeyName: wmapp-xsuaa-service-key
+          sap.cloud.service: wmapp.service
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+- name: wmapp-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: wmapp-html5-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - wmcatproducts.zip
+      name: wmcatproducts
+      target-path: resources/
+- name: wmcatproducts
+  type: html5
+  path: app/cat/products
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: wmapp-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+  properties:
+    hdi-service-name: wmapp-db
+- name: wmapp-destination
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-plan: lite
+  properties:
+    HTML5Runtime_enabled: true
+- name: wmapp-html5-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: wmapp-xsuaa-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      role-collections:
+      - description: Administrator
+        name: WMAdmin-${space}
+        role-template-references:
+        - $XSAPPNAME.Admin
+      - description: Viewer
+        name: WMViewer-${space}
+        role-template-references:
+        - $XSAPPNAME.Viewer
+      tenant-mode: dedicated
+      xsappname: wmapp-${space}
+    path: ./xs-security.json
+    service: xsuaa
+    service-plan: application
 parameters:
+  deploy_mode: html5-repo
   enable-parallel-deployments: true
 build-parameters:
   before-all:
-    - builder: custom
-      commands:
-        - npm install --production
-        - npx -p @sap/cds-dk cds build --production
-modules:
-  - name: wmapp-srv
-    type: nodejs
-    path: gen/srv
-    parameters:
-      buildpack: nodejs_buildpack
-    requires:
-      - name: wmapp-db
-    provides:
-      - name: srv-api
-        properties:
-          srv-url: '${default-url}'
-  - name: wmapp-db-deployer
-    type: hdb
-    path: gen/db
-    parameters:
-      buildpack: nodejs_buildpack
-    requires:
-      - name: wmapp-db
-resources:
-  - name: wmapp-db
-    type: com.sap.xs.hdi-container
-    parameters:
-      service: hana
-      service-plan: hdi-shared
-    properties:
-      hdi-service-name: wmapp-db
-  - name: wmapp-destination
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-    properties:
-      HTML5Runtime_enabled: true
-  - name: wmapp-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./xs-security.json
-      config:
-        xsappname: wmapp-${space}    #  name + space dependency
-        tenant-mode: dedicated
-        role-collections:
-          - name: 'WMAdmin-${space}'
-            description: Administrator
-            role-template-references:
-              - $XSAPPNAME.Admin
-          - name: 'WMViewer-${space}'
-            description: Viewer
-            role-template-references:
-              - $XSAPPNAME.Viewer
-copyright: SVO
+  - builder: custom
+    commands:
+    - npm install --production
+    - npx -p @sap/cds-dk cds build --production

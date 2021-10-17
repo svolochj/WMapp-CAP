@@ -1,41 +1,43 @@
 {
-  "name": "wmapp",
-  "version": "1.0.0",
-  "description": "Warehouse Manegement application",
-  "repository": "https://github.com/svolochj/WMapp-CAP.git",
-  "license": "UNLICENSED",
-  "private": true,
-  "dependencies": {
-    "@sap/cds": "^4",
-    "express": "^4",
-    "@sap/hana-client": "^2.6.61"
-  },
-  "devDependencies": {
-    "@sap/ux-specification": "^1.90.10",
-    "jest": "^26.6.3",
-    "sqlite3": "^5"
-  },
-  "scripts": {
-    "start": "cds run",
-    "test": "jest"
-  },
-  "cds": {
-    "hana": {
-      "deploy-format": "hdbtable"
+    "name": "wmapp",
+    "version": "1.0.0",
+    "description": "Warehouse Manegement application",
+    "repository": "https://github.com/svolochj/WMapp-CAP.git",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@sap/cds": "^4",
+        "@sap/hana-client": "^2.6.61",
+        "express": "^4",
+        "passport": "^0.5.0"
     },
-    "requires": {
-      "db": {
-        "kind": "hana"
-      },
-      "uaa": {
-        "kind": "xsuaa",
-        "credentials": {}
-      }
-    }
-  },
-  "sapux": [
-    "app/uom",
-    "app/locations",
-    "app/products"
-  ]
+    "devDependencies": {
+        "@sap/ux-specification": "^1.90.10",
+        "jest": "^26.6.3",
+        "sqlite3": "^5"
+    },
+    "scripts": {
+        "start": "cds run",
+        "test": "jest",
+        "undeploy": "cf undeploy wmapp --delete-services --delete-service-keys"
+    },
+    "cds": {
+        "hana": {
+            "deploy-format": "hdbtable"
+        },
+        "requires": {
+            "db": {
+                "kind": "hana"
+            },
+            "uaa": {
+                "kind": "xsuaa",
+                "credentials": {}
+            }
+        }
+    },
+    "sapux": [
+        "app/uom",
+        "app/locations",
+        "app/products"
+    ]
 }
