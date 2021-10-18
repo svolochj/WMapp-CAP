@@ -1,7 +1,7 @@
 {
     "_version": "1.32.0",
     "sap.app": {
-        "id": "wm.cat.products",
+        "id": "wm.cat.locations",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
@@ -23,18 +23,6 @@
         "sourceTemplate": {
             "id": "ui5template.fiorielements.v4.lrop",
             "version": "1.0.0"
-        },
-        "crossNavigation": {
-            "inbounds": {
-                "Products-display": {
-                    "signature": {
-                        "parameters": {},
-                        "additionalParameters": "allowed"
-                    },
-                    "semanticObject": "Products",
-                    "action": "display"
-                }
-            }
         }
     },
     "sap.ui": {
@@ -62,8 +50,7 @@
             "minUI5Version": "1.95.0",
             "libs": {
                 "sap.ui.core": {},
-                "sap.fe.templates": {},
-                "sap.f": {}
+                "sap.fe.templates": {}
             }
         },
         "models": {
@@ -90,42 +77,42 @@
             "routes": [
                 {
                     "pattern": ":?query:",
-                    "name": "ProductsList",
-                    "target": "ProductsList"
+                    "name": "LocationsList",
+                    "target": "LocationsList"
                 },
                 {
-                    "pattern": "Products({key}):?query:",
-                    "name": "ProductsObjectPage",
-                    "target": "ProductsObjectPage"
+                    "pattern": "Locations({key}):?query:",
+                    "name": "LocationsObjectPage",
+                    "target": "LocationsObjectPage"
                 }
             ],
             "targets": {
-                "ProductsList": {
+                "LocationsList": {
                     "type": "Component",
-                    "id": "ProductsList",
+                    "id": "LocationsList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings": {
-                            "entitySet": "Products",
+                            "entitySet": "Locations",
                             "variantManagement": "Page",
                             "navigation": {
-                                "Products": {
+                                "Locations": {
                                     "detail": {
-                                        "route": "ProductsObjectPage"
+                                        "route": "LocationsObjectPage"
                                     }
                                 }
                             }
                         }
                     }
                 },
-                "ProductsObjectPage": {
+                "LocationsObjectPage": {
                     "type": "Component",
-                    "id": "ProductsObjectPage",
+                    "id": "LocationsObjectPage",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "Products"
+                            "entitySet": "Locations"
                         }
                     }
                 }

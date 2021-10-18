@@ -73,9 +73,38 @@ modules:
       - wmcatproducts.zip
       name: wmcatproducts
       target-path: resources/
+    - artifacts:
+      - wmcatlocations.zip
+      name: wmcatlocations
+      target-path: resources/
+    - artifacts:
+      - wmcatuom.zip
+      name: wmcatuom
+      target-path: resources/
 - name: wmcatproducts
   type: html5
+  description: WM app
   path: app/cat/products
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: wmcatlocations
+  type: html5
+  path: app/cat/locations
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: wmcatuom
+  type: html5
+  path: app/cat/uom
   build-parameters:
     build-result: dist
     builder: custom

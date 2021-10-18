@@ -1,7 +1,7 @@
 {
     "_version": "1.32.0",
     "sap.app": {
-        "id": "wm.cat.locationa.locations",
+        "id": "wm.cat.locations",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
@@ -135,5 +135,9 @@
         "_version": "1.1.0",
         "registrationIds": [],
         "archeType": "transactional"
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "wmapp.service"
     }
 }

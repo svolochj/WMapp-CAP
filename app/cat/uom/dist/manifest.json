@@ -1,7 +1,7 @@
 {
     "_version": "1.32.0",
     "sap.app": {
-        "id": "wm.cat.products",
+        "id": "wm.cat.uom",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
@@ -23,18 +23,6 @@
         "sourceTemplate": {
             "id": "ui5template.fiorielements.v4.lrop",
             "version": "1.0.0"
-        },
-        "crossNavigation": {
-            "inbounds": {
-                "Products-display": {
-                    "signature": {
-                        "parameters": {},
-                        "additionalParameters": "allowed"
-                    },
-                    "semanticObject": "Products",
-                    "action": "display"
-                }
-            }
         }
     },
     "sap.ui": {
@@ -90,50 +78,72 @@
             "routes": [
                 {
                     "pattern": ":?query:",
-                    "name": "ProductsList",
-                    "target": "ProductsList"
+                    "name": "UOMList",
+                    "target": [
+                        "UOMList"
+                    ]
                 },
                 {
-                    "pattern": "Products({key}):?query:",
-                    "name": "ProductsObjectPage",
-                    "target": "ProductsObjectPage"
+                    "pattern": "UOM({key}):?query:",
+                    "name": "UOMObjectPage",
+                    "target": [
+                        "UOMList",
+                        "UOMObjectPage"
+                    ]
                 }
             ],
             "targets": {
-                "ProductsList": {
+                "UOMList": {
                     "type": "Component",
-                    "id": "ProductsList",
+                    "id": "UOMList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings": {
-                            "entitySet": "Products",
+                            "entitySet": "UOM",
                             "variantManagement": "Page",
                             "navigation": {
-                                "Products": {
+                                "UOM": {
                                     "detail": {
-                                        "route": "ProductsObjectPage"
+                                        "route": "UOMObjectPage"
                                     }
                                 }
                             }
                         }
-                    }
+                    },
+                    "controlAggregation": "beginColumnPages",
+                    "contextPattern": ""
                 },
-                "ProductsObjectPage": {
+                "UOMObjectPage": {
                     "type": "Component",
-                    "id": "ProductsObjectPage",
+                    "id": "UOMObjectPage",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "Products"
+                            "entitySet": "UOM"
                         }
-                    }
+                    },
+                    "controlAggregation": "midColumnPages",
+                    "contextPattern": "/UOM({key})"
                 }
+            },
+            "config": {
+                "flexibleColumnLayout": {
+                    "defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
+                    "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+                },
+                "routerClass": "sap.f.routing.Router"
             }
         },
         "contentDensities": {
             "compact": true,
             "cozy": true
+        },
+        "rootView": {
+            "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+            "type": "XML",
+            "async": true,
+            "id": "appRootView"
         }
     },
     "sap.platform.abap": {
