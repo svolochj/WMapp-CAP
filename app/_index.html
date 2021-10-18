@@ -5,18 +5,35 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Warehouse Management</title>
 
     <script>
         window['sap-ushell-config'] = {
             defaultRenderer: 'fiori2',
             applications: {
+				"manage-uom": {
+					title:                  "UOM",
+					description:            "",
+					additionalInformation:  "SAPUI5.Component=wm.cat.uom",
+					applicationType :       "URL",
+                    url:                    "/cat/uom/webapp",
+					navigationMode:         "embedded"
+                },
+				"manage-locations": {
+					title:                  "Locations",
+					description:            "",
+					additionalInformation:  "SAPUI5.Component=wm.cat.locations",
+					applicationType :       "URL",
+                    url:                    "/cat/locations/webapp",
+					navigationMode:         "embedded"
+                },
 				"manage-products": {
 					title:                  "Products",
 					description:            "",
-					additionalInformation:  "SAPUI5.Component=wm.voc.products",
+					additionalInformation:  "SAPUI5.Component=wm.cat.products",
 					applicationType :       "URL",
-					url:                    "/voc/products/webapp",
+					url:                    "/cat/products/webapp",
 					navigationMode:         "embedded"
                 },
                 "manage-docreceive": {

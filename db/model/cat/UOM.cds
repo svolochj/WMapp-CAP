@@ -5,14 +5,18 @@ using {cuid, managed, sap.common.CodeList as CodeList} from '@sap/cds/common';
 entity UOM : cuid, managed, CodeList, {}
 
 annotate UOM with {
-    ID @UI : { Hidden, }
+    ID  @UI : { Hidden }             
+        @Common : {   
+            IsUnit :            true, 
+            Text:               name, 
+            TextArrangement:    #TextOnly };
+
+    // name @Common : { IsUnit : true };
 };
 
-
-annotate UOM with @( 
-
+annotate UOM with @(
+    
     UI: {
-
         Identification  : [
             { Value: ID }
         ],
@@ -72,6 +76,5 @@ annotate UOM with @(
                 }
             ]
         }
-
-    },
+    }
 );

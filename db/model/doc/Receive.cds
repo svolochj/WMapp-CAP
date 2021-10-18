@@ -2,20 +2,124 @@ namespace WM.model.doc;
 
 using { WM.model.doc.Header   as WMDoc } from './common';
 
-entity docReceive : WMDoc { }
+entity docReceive : WMDoc {  } 
 
-annotate WM.model.doc.docReceive.Items with @(
-        UI.LineItem : [
-        {
-            Value: ID,
-            Label: 'ID'
-        },
+annotate WM.model.doc.docReceive_Items with {
+    ID @UI : {  Hidden : true };
+    Linenr @Common : { Label : 'Line number' };
+    LocationTo_ID @UI : {  Hidden : true };
+    LocationFrom_ID @UI : {  Hidden : true };
+    UOM_ID @UI : {  Hidden : true };
+    
+    //@TODO: Switch to Unit
+    //10.10.2021 -> Looksbuggy
+    // Quantity @Measures : { Unit : UOM_ID };
+
+    Product @Common : {
+
+        Text : Product.Name, 
+        TextArrangement : #TextOnly, 
+
+        ValueList : {          
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Products',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterOut',
+                    LocalDataProperty : Product_ID,
+                    ValueListProperty : 'ID',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Code',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Description',
+                },
+            ],
+        } 
+    };
+
+    LocationTo @Common : {
+
+        Text : LocationTo.Name, 
+        TextArrangement : #TextOnly, 
+
+        ValueList : {          
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Locations',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterOut',
+                    LocalDataProperty : LocationTo_ID,
+                    ValueListProperty : 'ID',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Code',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Description',
+                },
+            ],
+        } 
+    };   
+
+    UOM @Common : {
+        Text : UOM.name, 
+        TextArrangement : #TextOnly, 
+
+        ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'UOM',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterOut',
+                    LocalDataProperty : UOM_ID,
+                    ValueListProperty : 'ID',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'descr',
+                },
+            ],
+        } 
+    };
+}
+
+annotate WM.model.doc.docReceive_Items with @(
+
+    UI.Identification: [ { Value: ID } ],
+
+    UI.HeaderInfo : {
+        $Type          : 'UI.HeaderInfoType',
+        TypeName       : 'Item',
+        TypeNamePlural : '',
+        Title          : {Value : Product.Name},
+        Description    : {Value : Linenr, Label: 'Line number' }
+    },
+
+    UI.LineItem : [
         {
             Value: Linenr,
             Label: 'Line Nr.'
         },
         {
-            Value: Product.Name,
+            Value: Product_ID,
             Label: 'Product'
         },
         {
@@ -23,18 +127,44 @@ annotate WM.model.doc.docReceive.Items with @(
             Label: 'Quantity'
         },
         {
-            Value: UOM.name,
+            Value: UOM_ID,
             Label: 'UOM'
         },
         {
-            Value: LocationTo.Name,
+            Value: LocationTo_ID,
             Label: 'Receive location'
         }
-    ]
+    ],
+
+    UI.Facets :[
+        {
+            $Type :     'UI.ReferenceFacet',
+            Target :    '@UI.FieldGroup#LineItemData',
+            Label :     'Item data'
+        },
+    ],
+
+    UI.FieldGroup #LineItemData : {
+        Label : 'Item data',
+        Data  : [
+            {   Value : Product_ID,
+                Label : 'Product' },
+            {   Value : Quantity,
+                Label : 'Quantity' },
+            {   Value : UOM_ID,
+                Label : 'UOM' },
+            {   Value : LocationTo_ID,
+                Label : 'Receive location' }
+        ]
+    }
 );
 
+annotate WM.model.doc.docReceive with {
+    ID @UI : {  Hidden }
+};
+
 annotate WM.model.doc.docReceive with @(
-    UI.Identification: [ {Value: Number} ],
+    UI.Identification: [ {Value: ID} ],
 
     UI.HeaderInfo : {
         $Type          : 'UI.HeaderInfoType',
@@ -47,6 +177,10 @@ annotate WM.model.doc.docReceive with @(
         {
             Value: Number,
             Label: 'Number'
+        },
+        {
+            Value: PostDate,
+            Label: 'Post date'
         }
     ],
         
@@ -64,7 +198,7 @@ annotate WM.model.doc.docReceive with @(
         {
             $Type :     'UI.ReferenceFacet',
             Target :    'Items/@UI.LineItem',
-            Label:      'Items'
+            Label:      'Items',
         }
     ],
 

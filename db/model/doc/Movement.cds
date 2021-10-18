@@ -4,7 +4,7 @@ using { WM.model.doc.Header   as WMDoc } from './common';
 
 entity docMovement : WMDoc { }
 
-annotate WM.model.doc.docMovement.Items with @(
+annotate WM.model.doc.docMovement_Items with @(
         UI.LineItem : [
         {
             Value: ID,

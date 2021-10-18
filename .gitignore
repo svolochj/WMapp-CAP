@@ -31,6 +31,9 @@ mta_archives/
 #Environment
 default-env.json
 
+#Package lock
+package-lock.json
+
 # auto generated wildcard
 WMapp-CAP/gen/db/.env
 # auto generated wildcard
@@ -49,3 +52,9 @@ WMapp-CAP/gen/db/.env
 WMapp-CAP/gen/db/.env
 # auto generated wildcard
 WMapp-CAP/gen/db/.env
+# auto generated wildcard
+WMapp-CAP/gen/db/.env
+# auto generated wildcard
+WMapp-CAP/gen/db/.env
+
+.env
