@@ -11,7 +11,7 @@
         "description": "{{appDescription}}",
         "dataSources": {
             "mainService": {
-                "uri": "/wmappsrv/",
+                "uri": "wmappsrv/",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "4.0"
@@ -27,12 +27,12 @@
         "crossNavigation": {
             "inbounds": {
                 "UOM-display": {
-                "signature": {
-                    "parameters": {},
-                    "additionalParameters": "allowed"
-                },
-                "semanticObject": "UOM",
-                "action": "display"
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "UOM",
+                    "action": "display"
                 }
             }
         }

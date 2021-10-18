@@ -1,0 +1,33 @@
+{
+  "xsappname": "wmapp",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.WMAdmin",
+      "description": "WM Administrator"
+    },
+    {
+      "name": "$XSAPPNAME.WMViewer",
+      "description": "WM Viewer"
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "WMAdmin",
+      "description": "Administrator",
+      "scope-references": [
+        "$XSAPPNAME.WMAdmin"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "WMViewer",
+      "description": "WM Viewer",
+      "scope-references": [
+        "$XSAPPNAME.WMViewer"
+      ],
+      "attribute-references": []
+    }
+  ]
+}
