@@ -1,5 +1,5 @@
 {
-    "_version": "",
+    "_version": "1.32.0",
     "sap.app": {
         "id": "wm.doc.receive",
         "type": "application",
@@ -47,13 +47,17 @@
             "css": []
         },
         "dependencies": {
-            "minUI5Version": "1.76.0",
+            "minUI5Version": "1.95.0",
             "libs": {
                 "sap.ui.core": {},
                 "sap.fe.templates": {}
             }
         },
         "models": {
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
             "i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
                 "uri": "i18n/i18n.properties"
@@ -81,11 +85,11 @@
                     "name": "ReceiveObjectPage",
                     "target": "ReceiveObjectPage"
                 },
-                    {
-                        "pattern": "Receive({key})/Items({key2}):?query:",
-                        "name": "docReceive_ItemsObjectPage",
-                        "target": "docReceive_ItemsObjectPage"
-                    }
+                {
+                    "pattern": "Receive({key})/Items({key2}):?query:",
+                    "name": "Receive_ItemsObjectPage",
+                    "target": "Receive_ItemsObjectPage"
+                }
             ],
             "targets": {
                 "ReceiveList": {
@@ -112,27 +116,29 @@
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
+                            "editableHeaderContent": false,
                             "entitySet": "Receive",
-                                "navigation": {
-                                    "Items": {
-                                        "detail": {
-                                            "route": "docReceive_ItemsObjectPage"
-                                        }
+                            "navigation": {
+                                "Items": {
+                                    "detail": {
+                                        "route": "Receive_ItemsObjectPage"
                                     }
                                 }
-                        }
-                    }
-                },
-                    "docReceive_ItemsObjectPage": {
-                        "type": "Component",
-                        "id": "docReceive_ItemsObjectPage",
-                        "name": "sap.fe.templates.ObjectPage",
-                        "options": {
-                            "settings": {
-                                "entitySet": "docReceive_Items"
                             }
                         }
                     }
+                },
+                "Receive_ItemsObjectPage": {
+                    "type": "Component",
+                    "id": "Receive_ItemsObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "entitySet": "Receive_Items"
+                        }
+                    }
+                }
             }
         },
         "contentDensities": {
@@ -152,5 +158,9 @@
         "_version": "1.1.0",
         "registrationIds": [],
         "archeType": "transactional"
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "wmapp.service"
     }
 }

@@ -12,7 +12,7 @@
         "passport": "^0.5.0"
     },
     "devDependencies": {
-        "@sap/ux-specification": "^1.90.10",
+        "@sap/ux-specification": "^1.90.12",
         "jest": "^26.6.3",
         "sqlite3": "^5"
     },
@@ -36,8 +36,9 @@
         }
     },
     "sapux": [
-        "app/uom",
-        "app/locations",
-        "app/products"
+        "app/cat/uom",
+        "app/cat/locations",
+        "app/cat/products",
+        "app/doc/receive"
     ]
 }
