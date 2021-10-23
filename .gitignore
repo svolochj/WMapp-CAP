@@ -40,3 +40,6 @@ WMapp-CAP/.env
 WMapp-CAP/gen/db/.env
 
 .env
+
+# Apps
+app/**/dist
