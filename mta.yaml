@@ -9,6 +9,7 @@ modules:
   path: gen/srv
   requires:
   - name: wmapp-db
+  - name: wmapp-logs
   provides:
   - name: srv-api
     properties:
@@ -20,6 +21,7 @@ modules:
   path: gen/db
   requires:
   - name: wmapp-db
+  - name: wmapp-logs
   parameters:
     buildpack: nodejs_buildpack
 - name: wmapp-destinations
@@ -178,6 +180,12 @@ resources:
     path: ./xs-security.json
     service: xsuaa
     service-plan: application
+- name: wmapp-logs
+  type: org.cloudfoundry.managed-service
+  description: WM application  logging service
+  parameters:
+    service: application-logs
+    service-plan: lite
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
