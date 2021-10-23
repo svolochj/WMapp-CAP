@@ -9,21 +9,21 @@ modules:
     path: gen/srv
     requires:
       - name: wmapp-db
+      - name: wmapp-logs
     provides:
       - name: srv-api
         properties:
           srv-url: '${default-url}'
     parameters:
       buildpack: nodejs_buildpack
-
   - name: wmapp-db-deployer
     type: hdb
     path: gen/db
     requires:
       - name: wmapp-db
+      - name: wmapp-logs
     parameters:
       buildpack: nodejs_buildpack
-  
   - name: wmapp-destinations
     type: com.sap.application.content
     requires:
@@ -61,7 +61,6 @@ modules:
           existing_destinations_policy: update
     build-parameters:
       no-source: true
-
   - name: wmapp-app-content
     type: com.sap.application.content
     path: .
@@ -84,7 +83,6 @@ modules:
             - wmcatuom.zip
           name: wmcatuom
           target-path: resources/
-# UI apps
   - name: wmcatproducts
     type: html5
     description: WM app - Pproducts
@@ -96,7 +94,6 @@ modules:
         - npm install
         - 'npm run build:cf'
       supported-platforms: []
-
   - name: wmcatlocations
     type: html5
     path: app/cat/locations
@@ -108,7 +105,6 @@ modules:
         - 'npm run build:cf'
       supported-platforms: []
     description: WM app - Locations
-
   - name: wmcatuom
     type: html5
     path: app/cat/uom
@@ -170,6 +166,12 @@ resources:
       path: ./xs-security.json
       service: xsuaa
       service-plan: application
+  - name: wmapp-logs
+    type: org.cloudfoundry.managed-service
+    description: WM application  logging service
+    parameters:
+      service: application-logs
+      service-plan: lite
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
