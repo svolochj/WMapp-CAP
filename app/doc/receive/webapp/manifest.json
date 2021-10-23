@@ -26,13 +26,15 @@
         },
         "crossNavigation": {
             "inbounds": {
-                "Receive-manage": {
+                "Receive-display": {
                 "signature": {
                     "parameters": {},
                     "additionalParameters": "allowed"
                 },
                 "semanticObject": "Receive",
-                "action": "manage"
+                "action": "display",
+                "title": "{{appTitle}}",
+                "icon":"sap-icon://journey-arrive"
                 }
             }
         }
