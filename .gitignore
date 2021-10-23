@@ -7,7 +7,7 @@ gen/
 node_modules/
 target/
 
-resources/
+resources/*
 
 # Web IDE, App Studio
 .che/
@@ -36,26 +36,7 @@ default-env.json
 #Package lock
 package-lock.json
 
-# auto generated wildcard
-WMapp-CAP/gen/db/.env
-# auto generated wildcard
-WMapp-CAP/gen/db/.env
-# auto generated wildcard
-WMapp-CAP/gen/db/.env
-# auto generated wildcard
-WMapp-CAP/gen/db/.env
-# auto generated wildcard
-WMapp-CAP/gen/db/.env
-# auto generated wildcard
 WMapp-CAP/.env
-# auto generated wildcard
-WMapp-CAP/gen/db/.env
-# auto generated wildcard
-WMapp-CAP/gen/db/.env
-# auto generated wildcard
-WMapp-CAP/gen/db/.env
-# auto generated wildcard
-WMapp-CAP/gen/db/.env
 # auto generated wildcard
 WMapp-CAP/gen/db/.env
 
