@@ -175,6 +175,6 @@
     },
     "sap.cloud": {
         "public": true,
-        "service": "wmapp.service"
+        "service": "wmappsrv"
     }
 }

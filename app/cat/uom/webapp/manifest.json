@@ -32,7 +32,8 @@
                     "additionalParameters": "allowed"
                 },
                 "semanticObject": "UOM",
-                "action": "display"
+                "action": "display",
+                "icon": "sap-icon://measure"
                 }
             }
         }

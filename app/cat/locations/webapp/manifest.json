@@ -32,7 +32,8 @@
                     "additionalParameters": "allowed"
                 },
                 "semanticObject": "Locations",
-                "action": "display"
+                "action": "display",
+                "icon": "sap-icon://shelf"
                 }
             }
         }
