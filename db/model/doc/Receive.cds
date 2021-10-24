@@ -178,6 +178,8 @@ annotate WM.model.doc.docReceive with @(
             Value: Number,
             Label: 'Number'
         },
+        {Value : createdAt},
+        {Value : createdBy},
         {
             Value: PostDate,
             Label: 'Post date'
@@ -187,7 +189,7 @@ annotate WM.model.doc.docReceive with @(
     UI.Facets : [
         {
             $Type :     'UI.ReferenceFacet',
-            Target :    '@UI.FieldGroup#PostData',
+            Target :    '@UI.FieldGroup#GeneralData',
             Label :     'Post data'
         },
         {
@@ -205,6 +207,8 @@ annotate WM.model.doc.docReceive with @(
     UI.FieldGroup #AdministrativeData : {
         Label : '{i18n>Admin}',
         Data  : [
+            {   Value : PostDate,
+                Label : 'Post Date' },
             {Value : createdBy},
             {Value : createdAt},
             {Value : modifiedBy},
@@ -212,11 +216,13 @@ annotate WM.model.doc.docReceive with @(
         ]
     },
 
-    UI.FieldGroup #PostData : {
-        Label : 'Post data',
+    UI.FieldGroup #GeneralData : {
+        Label : 'General data',
         Data  : [
-            {   Value : PostDate,
-                Label : 'Post Date' }
+            {
+                Value: Number,
+                Label: 'Number'
+            }    
         ]
     }
 );

@@ -29,29 +29,3 @@ type Quantity {
     Amount  : Decimal(10,3);
     UOM     : Association to one uom; 
 }
-
-// annotate common.Items with @(
-//     UI.Identification: [ {Value: Linenr} ],
-
-//     UI.HeaderInfo : {
-//         $Type          : 'UI.HeaderInfoType',
-//         TypeName       : 'Item',
-//         TypeNamePlural : 'Items',
-//         Title          : {Value : Linenr}
-//     }
-// );
-
-// annotate common.Items.Product with @(
-//     Common.FieldControl : #Mandatory,
-//     Common.ValueList :{
-//         CollectionPath: 'Products',
-//         Parameters : [{
-//             $Type:              'Common.ValueListParameterInOut',
-//             LocalDataProperty   :'Product_ID',
-//             ValueListProperty   :'ID'
-//         },{
-//             $Type               : 'Common.ValueListParameterDisplayOnly',
-//             ValueListProperty   : 'Name'
-//         }]
-//     }
-// );
