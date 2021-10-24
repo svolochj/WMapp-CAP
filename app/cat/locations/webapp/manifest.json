@@ -120,7 +120,8 @@
                                         "route": "LocationsObjectPage"
                                     }
                                 }
-                            }
+                            },
+                            "initialLoad": true
                         }
                     },
                     "controlAggregation": "beginColumnPages",
