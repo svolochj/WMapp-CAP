@@ -29,46 +29,16 @@ service wmappsrv {
         @( odata.draft.enabled : true )     
         as projection on docReceive;
 
-    @(restrict : [
-        {
-            grant : [ 'READ' ],
-            to : [ 'WMViewer' ]
-        },
-        {
-            grant : [ '*' ],
-            to : [ 'WMAdmin' ]
-        }
-    ]) 
     entity Issue        
         @( odata.draft.enabled : true )    
         as projection on docIssue;
-
-    @(restrict : [
-        {
-            grant : [ 'READ' ],
-            to : [ 'WMViewer' ]
-        },
-        {
-            grant : [ '*' ],
-            to : [ 'WMAdmin' ]
-        }
-    ]) 
+ 
     entity Movement     
         @( odata.draft.enabled : true )
         as projection on docMovement;
 
 
-    //Registry
-    @(restrict : [
-        {
-            grant : [ 'READ' ],
-            to : [ 'WMViewer' ]
-        },
-        {
-            grant : [ '*' ],
-            to : [ 'WMAdmin' ]
-        }
-    ])    
+    //Registry 
     entity Stock 
         @(readonly:true)
         as projection on _Stock;

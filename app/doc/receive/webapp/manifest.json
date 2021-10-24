@@ -27,14 +27,13 @@
         "crossNavigation": {
             "inbounds": {
                 "Receive-display": {
-                "signature": {
-                    "parameters": {},
-                    "additionalParameters": "allowed"
-                },
-                "semanticObject": "Receive",
-                "action": "display",
-                "title": "{{appTitle}}",
-                "icon":"sap-icon://journey-arrive"
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "Receive",
+                    "action": "display",
+                    "icon": "sap-icon://journey-arrive"
                 }
             }
         }
@@ -175,6 +174,6 @@
     },
     "sap.cloud": {
         "public": true,
-        "service": "wmappsrv"
+        "service": "wmapp.service"
     }
 }

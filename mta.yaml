@@ -87,6 +87,14 @@ modules:
       - wmdocreceive.zip
       name: wmdocreceive
       target-path: resources/
+    - artifacts:
+      - wmdocmovement.zip
+      name: wmdocmovement
+      target-path: resources/
+    - artifacts:
+      - wmdocissue.zip
+      name: wmdocissue
+      target-path: resources/
 - name: wmcatproducts
   type: html5
   description: WM app - Pproducts
@@ -123,6 +131,26 @@ modules:
 - name: wmdocreceive
   type: html5
   path: app/doc/receive
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: wmdocmovement
+  type: html5
+  path: app/doc/movement
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: wmdocissue
+  type: html5
+  path: app/doc/issue
   build-parameters:
     build-result: dist
     builder: custom

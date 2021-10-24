@@ -1,7 +1,7 @@
 {
-    "name": "receive",
+    "name": "issue",
     "version": "0.0.1",
-    "description": "Warehouse Management appliation - Receive products",
+    "description": "Warehouse Management application - Issue products",
     "keywords": [
         "ui5",
         "openui5",

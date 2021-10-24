@@ -1,7 +1,7 @@
 {
     "_version": "1.32.0",
     "sap.app": {
-        "id": "wm.cat.uom",
+        "id": "wm.doc.movement",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
@@ -26,14 +26,14 @@
         },
         "crossNavigation": {
             "inbounds": {
-                "UOM-display": {
+                "Movement-display": {
                     "signature": {
                         "parameters": {},
                         "additionalParameters": "allowed"
                     },
-                    "semanticObject": "UOM",
+                    "semanticObject": "Movement",
                     "action": "display",
-                    "icon": "sap-icon://measure"
+                    "icon": "sap-icon://journey-change"
                 }
             }
         }
@@ -63,8 +63,7 @@
             "minUI5Version": "1.95.0",
             "libs": {
                 "sap.ui.core": {},
-                "sap.fe.templates": {},
-                "sap.f": {}
+                "sap.fe.templates": {}
             }
         },
         "models": {
@@ -91,72 +90,81 @@
             "routes": [
                 {
                     "pattern": ":?query:",
-                    "name": "UOMList",
-                    "target": [
-                        "UOMList"
-                    ]
+                    "name": "MovementList",
+                    "target": "MovementList"
                 },
                 {
-                    "pattern": "UOM({key}):?query:",
-                    "name": "UOMObjectPage",
-                    "target": [
-                        "UOMList",
-                        "UOMObjectPage"
-                    ]
+                    "pattern": "Movement({key}):?query:",
+                    "name": "MovementObjectPage",
+                    "target": "MovementObjectPage"
+                },
+                {
+                    "pattern": "Movement({key})/Items({key2}):?query:",
+                    "name": "Movement_ItemsObjectPage",
+                    "target": "Movement_ItemsObjectPage"
                 }
             ],
             "targets": {
-                "UOMList": {
+                "MovementList": {
                     "type": "Component",
-                    "id": "UOMList",
+                    "id": "MovementList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings": {
-                            "entitySet": "UOM",
+                            "entitySet": "Movement",
                             "variantManagement": "Page",
                             "navigation": {
-                                "UOM": {
+                                "Movement": {
                                     "detail": {
-                                        "route": "UOMObjectPage"
+                                        "route": "MovementObjectPage"
+                                    }
+                                }
+                            },
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "columns": {
+                                        "DataField::Number": {
+                                            "width": "5em"
+                                        }
                                     }
                                 }
                             }
                         }
-                    },
-                    "controlAggregation": "beginColumnPages",
-                    "contextPattern": ""
+                    }
                 },
-                "UOMObjectPage": {
+                "MovementObjectPage": {
                     "type": "Component",
-                    "id": "UOMObjectPage",
+                    "id": "MovementObjectPage",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "UOM"
+                            "entitySet": "Movement",
+                            "navigation": {
+                                "Items": {
+                                    "detail": {
+                                        "route": "Movement_ItemsObjectPage"
+                                    }
+                                }
+                            }
                         }
-                    },
-                    "controlAggregation": "midColumnPages",
-                    "contextPattern": "/UOM({key})"
-                }
-            },
-            "config": {
-                "flexibleColumnLayout": {
-                    "defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
-                    "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+                    }
                 },
-                "routerClass": "sap.f.routing.Router"
+                "Movement_ItemsObjectPage": {
+                    "type": "Component",
+                    "id": "Movement_ItemsObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "entitySet": "Movement_Items"
+                        }
+                    }
+                }
             }
         },
         "contentDensities": {
             "compact": true,
             "cozy": true
-        },
-        "rootView": {
-            "viewName": "sap.fe.templates.RootContainer.view.Fcl",
-            "type": "XML",
-            "async": true,
-            "id": "appRootView"
         }
     },
     "sap.platform.abap": {

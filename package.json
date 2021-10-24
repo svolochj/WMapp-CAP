@@ -39,6 +39,8 @@
         "app/cat/uom",
         "app/cat/locations",
         "app/cat/products",
-        "app/doc/receive"
+        "app/doc/receive",
+        "app/doc/movement",
+        "app/doc/issue"
     ]
 }

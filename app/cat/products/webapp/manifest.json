@@ -27,13 +27,13 @@
         "crossNavigation": {
             "inbounds": {
                 "Products-display": {
-                "signature": {
-                    "parameters": {},
-                    "additionalParameters": "allowed"
-                },
-                "semanticObject": "Products",
-                "action": "display",
-                "icon":"sap-icon://product"
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "Products",
+                    "action": "display",
+                    "icon": "sap-icon://product"
                 }
             }
         }

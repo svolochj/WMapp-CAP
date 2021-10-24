@@ -27,13 +27,13 @@
         "crossNavigation": {
             "inbounds": {
                 "Locations-display": {
-                "signature": {
-                    "parameters": {},
-                    "additionalParameters": "allowed"
-                },
-                "semanticObject": "Locations",
-                "action": "display",
-                "icon": "sap-icon://shelf"
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "Locations",
+                    "action": "display",
+                    "icon": "sap-icon://shelf"
                 }
             }
         }
@@ -63,7 +63,8 @@
             "minUI5Version": "1.95.0",
             "libs": {
                 "sap.ui.core": {},
-                "sap.fe.templates": {}
+                "sap.fe.templates": {},
+                "sap.f": {}
             }
         },
         "models": {
@@ -91,12 +92,17 @@
                 {
                     "pattern": ":?query:",
                     "name": "LocationsList",
-                    "target": "LocationsList"
+                    "target": [
+                        "LocationsList"
+                    ]
                 },
                 {
                     "pattern": "Locations({key}):?query:",
                     "name": "LocationsObjectPage",
-                    "target": "LocationsObjectPage"
+                    "target": [
+                        "LocationsList",
+                        "LocationsObjectPage"
+                    ]
                 }
             ],
             "targets": {
@@ -116,7 +122,9 @@
                                 }
                             }
                         }
-                    }
+                    },
+                    "controlAggregation": "beginColumnPages",
+                    "contextPattern": ""
                 },
                 "LocationsObjectPage": {
                     "type": "Component",
@@ -127,13 +135,28 @@
                             "editableHeaderContent": false,
                             "entitySet": "Locations"
                         }
-                    }
+                    },
+                    "controlAggregation": "midColumnPages",
+                    "contextPattern": "/Locations({key})"
                 }
+            },
+            "config": {
+                "flexibleColumnLayout": {
+                    "defaultTwoColumnLayoutType": "TwoColumnsBeginExpanded",
+                    "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+                },
+                "routerClass": "sap.f.routing.Router"
             }
         },
         "contentDensities": {
             "compact": true,
             "cozy": true
+        },
+        "rootView": {
+            "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+            "type": "XML",
+            "async": true,
+            "id": "appRootView"
         }
     },
     "sap.platform.abap": {
