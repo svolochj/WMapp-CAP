@@ -10,6 +10,8 @@ annotate WM.model.doc.docReceive_Items with {
     LocationTo_ID @UI : {  Hidden : true };
     LocationFrom_ID @UI : {  Hidden : true };
     UOM_ID @UI : {  Hidden : true };
+
+    Number @UI : { Label: 'Document number' };
     
     //@TODO: Switch to Unit
     //10.10.2021 -> Looksbuggy

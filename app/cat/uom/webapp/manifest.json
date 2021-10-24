@@ -120,7 +120,8 @@
                                         "route": "UOMObjectPage"
                                     }
                                 }
-                            }
+                            },
+                            "initialLoad": true
                         }
                     },
                     "controlAggregation": "beginColumnPages",

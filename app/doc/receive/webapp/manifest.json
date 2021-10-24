@@ -119,7 +119,8 @@
                                         "route": "ReceiveObjectPage"
                                     }
                                 }
-                            }
+                            },
+                            "initialLoad": true
                         }
                     }
                 },
@@ -147,7 +148,6 @@
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
-                            "editableHeaderContent": false,
                             "entitySet": "Receive_Items"
                         }
                     }

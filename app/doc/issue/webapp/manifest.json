@@ -147,7 +147,6 @@
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
-                            "editableHeaderContent": false,
                             "entitySet": "Issue_Items"
                         }
                     }
