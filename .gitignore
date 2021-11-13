@@ -43,3 +43,8 @@ WMapp-CAP/gen/db/.env
 
 # Apps
 app/**/dist
+
+# auto generated wildcard
+WMapp-CAP/gen/db/.env
+# auto generated wildcard
+gen/db/.env

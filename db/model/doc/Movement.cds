@@ -4,7 +4,7 @@ using { WM.model.doc.Header   as WMDoc } from './common';
 
 entity docMovement : WMDoc { }
 
-annotate WM.model.doc.docMovement_Items with {
+annotate WM.model.doc.docMovement.Items with {
     ID @UI : {  Hidden : true };
     Linenr @Common : { Label : 'Line number' };
     LocationTo_ID @UI : {  Hidden : true };
@@ -12,7 +12,7 @@ annotate WM.model.doc.docMovement_Items with {
     UOM_ID @UI : {  Hidden : true }; 
 }
 
-annotate WM.model.doc.docMovement_Items with @(
+annotate WM.model.doc.docMovement.Items with @(
     UI.Identification: [ { Value: ID } ],
 
     UI.HeaderInfo : {

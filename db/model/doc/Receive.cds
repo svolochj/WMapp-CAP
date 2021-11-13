@@ -4,7 +4,7 @@ using { WM.model.doc.Header   as WMDoc } from './common';
 
 entity docReceive : WMDoc {  } 
 
-annotate WM.model.doc.docReceive_Items with {
+annotate WM.model.doc.docReceive.Items with {
     ID @UI : {  Hidden : true };
     Linenr @Common : { Label : 'Line number' };
     LocationTo_ID @UI : {  Hidden : true };
@@ -103,7 +103,7 @@ annotate WM.model.doc.docReceive_Items with {
     };
 }
 
-annotate WM.model.doc.docReceive_Items with @(
+annotate WM.model.doc.docReceive.Items with @(
 
     UI.Identification: [ { Value: ID } ],
 
