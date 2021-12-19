@@ -8,9 +8,6 @@ node_modules/
 target/
 resources/
 
-#App 
-app/**/dist
-
 # Web IDE, App Studio
 .che/
 .gen/
@@ -43,3 +40,11 @@ WMapp-CAP/.env
 WMapp-CAP/gen/db/.env
 
 .env
+
+# Apps
+app/**/dist
+
+# auto generated wildcard
+WMapp-CAP/gen/db/.env
+# auto generated wildcard
+gen/db/.env

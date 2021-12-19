@@ -27,12 +27,13 @@
         "crossNavigation": {
             "inbounds": {
                 "UOM-display": {
-                "signature": {
-                    "parameters": {},
-                    "additionalParameters": "allowed"
-                },
-                "semanticObject": "UOM",
-                "action": "display"
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "UOM",
+                    "action": "display",
+                    "icon": "sap-icon://measure"
                 }
             }
         }
@@ -119,7 +120,8 @@
                                         "route": "UOMObjectPage"
                                     }
                                 }
-                            }
+                            },
+                            "initialLoad": true
                         }
                     },
                     "controlAggregation": "beginColumnPages",

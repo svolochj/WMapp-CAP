@@ -1,7 +1,7 @@
 {
     "_version": "1.32.0",
     "sap.app": {
-        "id": "wm.doc.receive",
+        "id": "wm.doc.movement",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
@@ -26,14 +26,14 @@
         },
         "crossNavigation": {
             "inbounds": {
-                "Receive-display": {
+                "Movement-display": {
                     "signature": {
                         "parameters": {},
                         "additionalParameters": "allowed"
                     },
-                    "semanticObject": "Receive",
+                    "semanticObject": "Movement",
                     "action": "display",
-                    "icon": "sap-icon://journey-arrive"
+                    "icon": "sap-icon://journey-change"
                 }
             }
         }
@@ -90,33 +90,33 @@
             "routes": [
                 {
                     "pattern": ":?query:",
-                    "name": "ReceiveList",
-                    "target": "ReceiveList"
+                    "name": "MovementList",
+                    "target": "MovementList"
                 },
                 {
-                    "pattern": "Receive({key}):?query:",
-                    "name": "ReceiveObjectPage",
-                    "target": "ReceiveObjectPage"
+                    "pattern": "Movement({key}):?query:",
+                    "name": "MovementObjectPage",
+                    "target": "MovementObjectPage"
                 },
                 {
-                    "pattern": "Receive({key})/Items({key2}):?query:",
-                    "name": "Receive_ItemsObjectPage",
-                    "target": "Receive_ItemsObjectPage"
+                    "pattern": "Movement({key})/Items({key2}):?query:",
+                    "name": "Movement_ItemsObjectPage",
+                    "target": "Movement_ItemsObjectPage"
                 }
             ],
             "targets": {
-                "ReceiveList": {
+                "MovementList": {
                     "type": "Component",
-                    "id": "ReceiveList",
+                    "id": "MovementList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings": {
-                            "entitySet": "Receive",
+                            "entitySet": "Movement",
                             "variantManagement": "Page",
                             "navigation": {
-                                "Receive": {
+                                "Movement": {
                                     "detail": {
-                                        "route": "ReceiveObjectPage"
+                                        "route": "MovementObjectPage"
                                     }
                                 }
                             },
@@ -133,31 +133,31 @@
                         }
                     }
                 },
-                "ReceiveObjectPage": {
+                "MovementObjectPage": {
                     "type": "Component",
-                    "id": "ReceiveObjectPage",
+                    "id": "MovementObjectPage",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "Receive",
+                            "entitySet": "Movement",
                             "navigation": {
                                 "Items": {
                                     "detail": {
-                                        "route": "Receive_ItemsObjectPage"
+                                        "route": "Movement_ItemsObjectPage"
                                     }
                                 }
                             }
                         }
                     }
                 },
-                "Receive_ItemsObjectPage": {
+                "Movement_ItemsObjectPage": {
                     "type": "Component",
-                    "id": "Receive_ItemsObjectPage",
+                    "id": "Movement_ItemsObjectPage",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
-                            "entitySet": "Receive_Items"
+                            "entitySet": "Movement_Items"
                         }
                     }
                 }

@@ -1,7 +1,7 @@
 {
     "_version": "1.32.0",
     "sap.app": {
-        "id": "wm.doc.receive",
+        "id": "wm.doc.issue",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
@@ -26,14 +26,14 @@
         },
         "crossNavigation": {
             "inbounds": {
-                "Receive-display": {
+                "Issue-display": {
                     "signature": {
                         "parameters": {},
                         "additionalParameters": "allowed"
                     },
-                    "semanticObject": "Receive",
+                    "semanticObject": "Issue",
                     "action": "display",
-                    "icon": "sap-icon://journey-arrive"
+                    "icon": "sap-icon://journey-depart"
                 }
             }
         }
@@ -90,33 +90,33 @@
             "routes": [
                 {
                     "pattern": ":?query:",
-                    "name": "ReceiveList",
-                    "target": "ReceiveList"
+                    "name": "IssueList",
+                    "target": "IssueList"
                 },
                 {
-                    "pattern": "Receive({key}):?query:",
-                    "name": "ReceiveObjectPage",
-                    "target": "ReceiveObjectPage"
+                    "pattern": "Issue({key}):?query:",
+                    "name": "IssueObjectPage",
+                    "target": "IssueObjectPage"
                 },
                 {
-                    "pattern": "Receive({key})/Items({key2}):?query:",
-                    "name": "Receive_ItemsObjectPage",
-                    "target": "Receive_ItemsObjectPage"
+                    "pattern": "Issue({key})/Items({key2}):?query:",
+                    "name": "Issue_ItemsObjectPage",
+                    "target": "Issue_ItemsObjectPage"
                 }
             ],
             "targets": {
-                "ReceiveList": {
+                "IssueList": {
                     "type": "Component",
-                    "id": "ReceiveList",
+                    "id": "IssueList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings": {
-                            "entitySet": "Receive",
+                            "entitySet": "Issue",
                             "variantManagement": "Page",
                             "navigation": {
-                                "Receive": {
+                                "Issue": {
                                     "detail": {
-                                        "route": "ReceiveObjectPage"
+                                        "route": "IssueObjectPage"
                                     }
                                 }
                             },
@@ -133,31 +133,31 @@
                         }
                     }
                 },
-                "ReceiveObjectPage": {
+                "IssueObjectPage": {
                     "type": "Component",
-                    "id": "ReceiveObjectPage",
+                    "id": "IssueObjectPage",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "Receive",
+                            "entitySet": "Issue",
                             "navigation": {
                                 "Items": {
                                     "detail": {
-                                        "route": "Receive_ItemsObjectPage"
+                                        "route": "Issue_ItemsObjectPage"
                                     }
                                 }
                             }
                         }
                     }
                 },
-                "Receive_ItemsObjectPage": {
+                "Issue_ItemsObjectPage": {
                     "type": "Component",
-                    "id": "Receive_ItemsObjectPage",
+                    "id": "Issue_ItemsObjectPage",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
-                            "entitySet": "Receive_Items"
+                            "entitySet": "Issue_Items"
                         }
                     }
                 }

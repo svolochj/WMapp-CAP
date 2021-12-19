@@ -6,13 +6,13 @@
     "license": "UNLICENSED",
     "private": true,
     "dependencies": {
-        "@sap/cds": "^4",
-        "@sap/hana-client": "^2.6.61",
+        "@sap/cds": "^5.6.2",
+        "@sap/hana-client": "^2.10.15",
         "express": "^4",
         "passport": "^0.5.0"
     },
     "devDependencies": {
-        "@sap/ux-specification": "^1.90.10",
+        "@sap/ux-specification": "^1.90.12",
         "jest": "^26.6.3",
         "sqlite3": "^5"
     },
@@ -36,8 +36,11 @@
         }
     },
     "sapux": [
-        "app/uom",
-        "app/locations",
-        "app/products"
+        "app/cat/uom",
+        "app/cat/locations",
+        "app/cat/products",
+        "app/doc/receive",
+        "app/doc/movement",
+        "app/doc/issue"
     ]
 }
