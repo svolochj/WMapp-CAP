@@ -1,17 +1,22 @@
 const cds = require ('@sap/cds')
 
-// class WMappService extends cds.ApplicationService {
-//     /** register custom handlers */
-//     init(){
+class WMappService extends cds.ApplicationService {
+    /** register custom handlers */
+    init(){
 
-//         // this.before (['CREATE','UPDATE'], 'Receive', async function(req) {
-//         //     const{ID} = req.data;            
-//         //     console.log('Hello World!'); 
-//         // })
+        this.on(["PostDocument"], async function(req) {
+            console.log(req.data);
+        });
 
-//         return super.init()
-//    }
+        this.on(["PostReceive"],"Receive",function(req) {
+            //Get Documment Data 
+            //Use DB procedure to calculate stock
+            console.log(req.data)
+        });
 
-// }
+        return super.init()
+   }
 
-// module.exports =  WMappService
+}
+
+module.exports =  WMappService

@@ -2,6 +2,18 @@
 
 Welcome to Warehouse Management application project.
 
+Project has these objects: 
+
+Catalogs
+- UOM
+- Location
+- Product 
+
+Documents
+- Receive products
+- Movement products
+- Issue products
+
 It contains these folders and files:
 
 File or Folder | Purpose

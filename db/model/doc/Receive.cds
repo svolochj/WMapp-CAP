@@ -13,10 +13,6 @@ annotate WM.model.doc.docReceive.Items with {
 
     Number @UI : { Label: 'Document number' };
     
-    //@TODO: Switch to Unit
-    //10.10.2021 -> Looksbuggy
-    // Quantity @Measures : { Unit : UOM_ID };
-
     Product @Common : {
 
         Text : Product.Name, 
@@ -138,6 +134,8 @@ annotate WM.model.doc.docReceive.Items with @(
         }
     ],
 
+    UI.PresentationVariant : { SortOrder : [{ Property : Linenr }] },
+
     UI.Facets :[
         {
             $Type :     'UI.ReferenceFacet',
@@ -166,7 +164,8 @@ annotate WM.model.doc.docReceive with {
 };
 
 annotate WM.model.doc.docReceive with @(
-    UI.Identification: [ {Value: ID} ],
+    
+    UI.Identification: [{Value: Number}],
 
     UI.HeaderInfo : {
         $Type          : 'UI.HeaderInfoType',

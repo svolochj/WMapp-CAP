@@ -10,9 +10,96 @@ annotate WM.model.doc.docIssue.Items with {
     LocationTo_ID @UI : {  Hidden : true };
     LocationFrom_ID @UI : {  Hidden : true };
     UOM_ID @UI : {  Hidden : true }; 
+
+    Number @UI : { Label: 'Document number' };
+
+    Product @Common : {
+        Text : Product.Name, 
+        TextArrangement : #TextOnly, 
+
+        ValueList : {          
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Products',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterOut',
+                    LocalDataProperty : Product_ID,
+                    ValueListProperty : 'ID',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Code',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Description',
+                },
+            ],
+        } 
+    };
+
+    LocationFrom @Common : {
+        Text : LocationFrom.Name, 
+        TextArrangement : #TextOnly, 
+
+        ValueList : {          
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Locations',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterOut',
+                    LocalDataProperty : LocationFrom_ID,
+                    ValueListProperty : 'ID',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Code',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'Description',
+                },
+            ],
+        } 
+    }; 
+
+    UOM @Common : {
+        Text : UOM.name, 
+        TextArrangement : #TextOnly, 
+
+        ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'UOM',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterOut',
+                    LocalDataProperty : UOM_ID,
+                    ValueListProperty : 'ID',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'descr',
+                },
+            ],
+        } 
+    };
+
 }
 
 annotate WM.model.doc.docIssue.Items with @(
+    
     UI.Identification: [ { Value: ID } ],
 
     UI.HeaderInfo : {
@@ -21,28 +108,6 @@ annotate WM.model.doc.docIssue.Items with @(
         TypeNamePlural : '',
         Title          : {Value : Product.Name},
         Description    : {Value : Linenr, Label: 'Line number' }
-    },
-
-    UI.Facets :[
-        {
-            $Type :     'UI.ReferenceFacet',
-            Target :    '@UI.FieldGroup#LineItemData',
-            Label :     'Item data'
-        },
-    ],
-
-    UI.FieldGroup #LineItemData : {
-        Label : 'Item data',
-        Data  : [
-            {   Value : Product_ID,
-                Label : 'Product' },
-            {   Value : Quantity,
-                Label : 'Quantity' },
-            {   Value : UOM_ID,
-                Label : 'UOM' },
-            {   Value : LocationFrom_ID,
-                Label : 'Issue location' }
-        ]
     },
 
     UI.LineItem : [
@@ -67,7 +132,35 @@ annotate WM.model.doc.docIssue.Items with @(
             Label: 'Issue location'
         }
     ],
+
+    UI.PresentationVariant : { SortOrder : [{ Property : Linenr }] },
+
+    UI.Facets :[
+        {
+            $Type :     'UI.ReferenceFacet',
+            Target :    '@UI.FieldGroup#LineItemData',
+            Label :     'Item data'
+        },
+    ],
+
+    UI.FieldGroup #LineItemData : {
+        Label : 'Item data',
+        Data  : [
+            {   Value : Product_ID,
+                Label : 'Product' },
+            {   Value : Quantity,
+                Label : 'Quantity' },
+            {   Value : UOM_ID,
+                Label : 'UOM' },
+            {   Value : LocationFrom_ID,
+                Label : 'Issue location' }
+        ]
+    }
 );
+
+annotate WM.model.doc.docIssue with {
+    ID @UI : {  Hidden }
+};
 
 annotate WM.model.doc.docIssue with @(
 
