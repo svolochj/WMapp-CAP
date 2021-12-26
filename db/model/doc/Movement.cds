@@ -104,7 +104,7 @@ annotate WM.model.doc.docMovement.Items with {
     };
 
     UOM @Common : {
-        Text : UOM.name, 
+        Text : UOM.Name, 
         TextArrangement : #TextOnly, 
 
         ValueList : {

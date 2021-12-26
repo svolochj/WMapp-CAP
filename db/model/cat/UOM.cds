@@ -2,16 +2,19 @@ namespace WM.model.cat;
 
 using {cuid, managed, sap.common.CodeList as CodeList} from '@sap/cds/common';
 
-entity UOM : cuid, managed, CodeList, {}
+entity UOM : cuid, managed {
+    Code        : String(23)    @(title : 'Code');
+    Name        : String(200)   @(title : 'Name');
+
+    Description : String        @(title : 'Description');
+}
 
 annotate UOM with {
     ID  @UI : { Hidden }             
         @Common : {   
             IsUnit :            true, 
-            Text:               name, 
+            Text:               Name, 
             TextArrangement:    #TextOnly };
-
-    // name @Common : { IsUnit : true };
 };
 
 annotate UOM with @(
@@ -21,17 +24,22 @@ annotate UOM with @(
             { Value: ID }
         ],
 
-        LineItem  : [
-            {Value:name,    Label:'Name'},
-            {Value:descr,   Label:'Description'} 
+        LineItem   : [
+            {
+                Value : Code,
+            },{
+                Value : Name,
+            },{
+                Value: Description,
+            }
         ],
     
         HeaderInfo : {
             $Type          : 'UI.HeaderInfoType',
             TypeName       : 'UOM',
             TypeNamePlural : 'UOM',
-            Title          : {Value : name},
-            Description    : {Value : descr}
+            Title          : {Value : Name},
+            Description    : {Value : Description}
         },
 
         HeaderFacets  : [
@@ -69,10 +77,11 @@ annotate UOM with @(
             $Type : 'UI.FieldGroupType',
             Data: [
                 {
-                    Value: name
-                },
-                {
-                    Value: descr
+                    Value : Code,
+                },{
+                    Value : Name,
+                },{
+                    Value: Description,
                 }
             ]
         }

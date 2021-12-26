@@ -12,6 +12,7 @@
         "passport": "^0.5.0"
     },
     "devDependencies": {
+        "@sap/hdi-deploy": "^4.2.3",
         "@sap/ux-specification": "^1.90.12",
         "jest": "^26.6.3",
         "sqlite3": "^5"

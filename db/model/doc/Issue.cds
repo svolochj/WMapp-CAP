@@ -72,7 +72,7 @@ annotate WM.model.doc.docIssue.Items with {
     }; 
 
     UOM @Common : {
-        Text : UOM.name, 
+        Text : UOM.Name, 
         TextArrangement : #TextOnly, 
 
         ValueList : {
