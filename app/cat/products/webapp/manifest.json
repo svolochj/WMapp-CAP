@@ -92,12 +92,17 @@
                 {
                     "pattern": ":?query:",
                     "name": "ProductsList",
-                    "target": "ProductsList"
+                    "target": [
+                        "ProductsList"
+                    ]
                 },
                 {
                     "pattern": "Products({key}):?query:",
                     "name": "ProductsObjectPage",
-                    "target": "ProductsObjectPage"
+                    "target": [
+                        "ProductsList",
+                        "ProductsObjectPage"
+                    ]
                 }
             ],
             "targets": {
@@ -118,7 +123,9 @@
                             },
                             "initialLoad": true
                         }
-                    }
+                    },
+                    "controlAggregation": "beginColumnPages",
+                    "contextPattern": ""
                 },
                 "ProductsObjectPage": {
                     "type": "Component",
@@ -129,13 +136,28 @@
                             "editableHeaderContent": false,
                             "entitySet": "Products"
                         }
-                    }
+                    },
+                    "controlAggregation": "midColumnPages",
+                    "contextPattern": "/Products({key})"
                 }
+            },
+            "config": {
+                "flexibleColumnLayout": {
+                    "defaultTwoColumnLayoutType": "TwoColumnsBeginExpanded",
+                    "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+                },
+                "routerClass": "sap.f.routing.Router"
             }
         },
         "contentDensities": {
             "compact": true,
             "cozy": true
+        },
+        "rootView": {
+            "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+            "type": "XML",
+            "async": true,
+            "id": "appRootView"
         }
     },
     "sap.platform.abap": {
