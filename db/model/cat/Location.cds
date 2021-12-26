@@ -3,10 +3,10 @@ namespace WM.model.cat;
 using { cuid, managed} from '@sap/cds/common';
 
 entity Location : cuid, managed {
-    Code        : String(23);
-    Name        : String(200);
+    Code        : String(23)    @(title : 'Code');
+    Name        : String(200)   @(title : 'Name');
 
-    Description : String;
+    Description : String        @(title : 'Description');
 }
 
 annotate Location with {
@@ -24,10 +24,10 @@ annotate Location with @(
         LineItem   : [
             {
                 Value : Code,
-                Label : 'Code'
             },{
                 Value : Name,
-                Label : 'Name'
+            },{
+                Value: Description,
             }
         ],
 
@@ -74,9 +74,11 @@ annotate Location with @(
             $Type : 'UI.FieldGroupType',
             Data: [
                 {
-                    Value: Name
+                    Value : Code,
                 },{
-                    Value: Description
+                    Value : Name,
+                },{
+                    Value: Description,
                 }
             ]
         }

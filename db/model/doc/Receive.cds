@@ -74,7 +74,7 @@ annotate WM.model.doc.docReceive.Items with {
     };   
 
     UOM @Common : {
-        Text : UOM.name, 
+        Text : UOM.Name, 
         TextArrangement : #TextOnly, 
 
         ValueList : {

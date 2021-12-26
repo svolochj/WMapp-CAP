@@ -22,7 +22,7 @@ annotate Product with {
     UOM     @Common : {
         IsUnit: true,  
 
-        Text : UOM.name, 
+        Text : UOM.Name, 
         TextArrangement : #TextOnly, 
         
         ValueList : {
