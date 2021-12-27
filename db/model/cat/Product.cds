@@ -36,11 +36,11 @@ annotate Product with {
                 },
                 {
                     $Type : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'name',
+                    ValueListProperty : 'Name',
                 },
                 {
                     $Type : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'descr',
+                    ValueListProperty : 'Description',
                 },
             ],
         }

@@ -88,11 +88,11 @@ annotate WM.model.doc.docReceive.Items with {
                 },
                 {
                     $Type : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'name',
+                    ValueListProperty : 'Name',
                 },
                 {
                     $Type : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'descr',
+                    ValueListProperty : 'Description',
                 },
             ],
         } 
