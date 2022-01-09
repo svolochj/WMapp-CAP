@@ -6,6 +6,7 @@ entity docMovement : WMDoc { }
 
 annotate WM.model.doc.docMovement.Items with {
     ID @UI : {  Hidden : true };
+    up_ @UI : { Hidden : true };
     Linenr @Common : { Label : 'Line number' };
     LocationTo_ID @UI : {  Hidden : true };
     LocationFrom_ID @UI : {  Hidden : true };
