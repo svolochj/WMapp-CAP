@@ -20,7 +20,7 @@
 
 ## reqmovement
 
-WM app registry movements
+Warehouse Management application - Registry Movements
 
 ### Starting the generated app
 
