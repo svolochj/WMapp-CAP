@@ -1,1 +1,11 @@
-using wmappsrv as service from 'wmapp../../../home/user/projects/WMapp-CAP/srv/services';
+using wmappsrv as service from '../../../srv/services';
+
+annotate service.Movement with @(
+    UI.Identification : [
+        {
+            $Type : 'UI.DataFieldForAction',
+            Action : 'wmappsrv.PostMovement',
+            Label : 'Post',
+        }
+    ]
+);

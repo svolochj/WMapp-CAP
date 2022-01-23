@@ -193,7 +193,7 @@ annotate WM.model.doc.docReceive with @(
         {
             $Type :     'UI.ReferenceFacet',
             Target :    '@UI.FieldGroup#GeneralData',
-            Label :     'Post data'
+            Label :     'General data'
         },
         {
             $Type :     'UI.ReferenceFacet',

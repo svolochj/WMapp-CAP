@@ -5,7 +5,10 @@ using { WM.model.cat.Product as product } from '../cat/Product';
 using { WM.model.cat.UOM as uom } from '../cat/UOM';
 using { WM.model.cat.Location as location } from '../cat/Location';
 
+type action : String(3) enum { REC; MOV; ISS };
+
 entity Movement : cuid {
+    Action          : action;
     Document        : UUID;
     Item            : UUID;
     Date            : Timestamp;
@@ -15,3 +18,23 @@ entity Movement : cuid {
     Quantity        : Decimal(17,3);
     UOM             : Association to one uom;
 }
+
+annotate WM.model.reg.Movement with {
+    ID @UI : { Hidden }
+}
+
+annotate WM.model.reg.Movement with @(
+
+    UI.LineItem : [
+        { Value: Action, Label: 'Action' },
+        { Value: Date, Label: 'Movement date' },
+        { Value: Product.Name, Label: 'Product' },
+        { Value: Quantity, Label: 'Quantity' },
+        { Value: UOM.Name, Label: 'UOM' },
+        { Value: LocationFrom.Name, Label: 'Location From' },
+        { Value: LocationTo.Name, Label: 'Location To' }        
+    ],
+
+    UI.PresentationVariant : { SortOrder : [{ Property: Date }] }
+
+);

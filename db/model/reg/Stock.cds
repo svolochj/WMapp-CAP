@@ -31,7 +31,7 @@ annotate WM.model.reg.Stock with @(
             Label: 'Quantity'
         },
         {
-            Value: UOM.name,
+            Value: UOM.Name,
             Label: 'UOM'
         }
     ]
