@@ -96,8 +96,8 @@ modules:
       name: wmdocissue
       target-path: resources/
     - artifacts:
-      - regmovementsreqmovement.zip
-      name: regmovementsreqmovement
+      - wmregmovements.zip
+      name: wmregmovements
       target-path: resources/
 - name: wmcatproducts
   type: html5
@@ -162,9 +162,9 @@ modules:
     - npm install
     - npm run build:cf
     supported-platforms: []
-- name: regmovementsreqmovement
+- name: wmregmovements
   type: html5
-  path: app/reqmovement
+  path: app/reg/movements
   build-parameters:
     build-result: dist
     builder: custom

@@ -1,6 +1,6 @@
 specVersion: '2.4'
 metadata:
-  name: 'reqmovement'
+  name: 'regmovements'
 type: application
 server:
   customMiddleware:
