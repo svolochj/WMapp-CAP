@@ -21,7 +21,7 @@
 
 ## receive
 
-Warehouse Management appliation - Receive products
+Warehouse Management application - Receive products
 
 ### Starting the generated app
 
