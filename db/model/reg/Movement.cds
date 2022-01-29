@@ -20,7 +20,13 @@ entity Movement : cuid {
 }
 
 annotate WM.model.reg.Movement with {
-    ID @UI : { Hidden }
+    ID              @UI : { Hidden };
+    Document        @UI : { Hidden };
+    Item            @UI : { Hidden };
+    LocationFrom    @UI : { Hidden };
+    LocationTo      @UI : { Hidden };
+    Product         @UI : { Hidden };
+    UOM             @UI : { Hidden };
 }
 
 annotate WM.model.reg.Movement with @(
@@ -36,5 +42,4 @@ annotate WM.model.reg.Movement with @(
     ],
 
     UI.PresentationVariant : { SortOrder : [{ Property: Date }] }
-
 );

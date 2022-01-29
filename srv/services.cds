@@ -54,7 +54,7 @@ service wmappsrv {
         @(readonly:true)
         as projection on regStock;
 
-    entity RegMovement
+    entity RegMovements
         @(readonly:true)
         as projection on regMovement;
 }

@@ -9,13 +9,6 @@
       "destination": "ui5"
     },
     {
-      "source": "/wmappsrv/(.*)$",
-      "target": "/wmappsrv/$1",
-      "destination": "wmapp-srv",
-      "csrfProtection": true,
-      "authenticationType": "xsuaa"
-    },
-    {
       "source": "^/test-resources/(.*)$",
       "target": "/test-resources/$1",
       "authenticationType": "none",
