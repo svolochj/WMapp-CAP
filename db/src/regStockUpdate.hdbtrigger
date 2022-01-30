@@ -1,0 +1,34 @@
+TRIGGER "regStockUpdate" AFTER INSERT ON "WM_MODEL_REG_MOVEMENT"
+REFERENCING NEW ROW NEWR    --, OLD ROW oldr
+
+FOR EACH ROW 
+
+BEGIN
+
+	IF :NEWR."ACTION" = 'REC' THEN
+
+	 	CALL "regStockIncrease"( 	:NEWR."PRODUCT_ID", 
+                                    :NEWR."QUANTITY",
+                                    :NEWR."UOM_ID",
+                                    :NEWR."LOCATIONTO_ID" );
+	ELSEIF :NEWR."ACTION" = 'ISS' THEN 
+
+	  	CALL "regStockDecrease"( 	:NEWR."PRODUCT_ID", 
+                                    :NEWR."QUANTITY",
+                                    :NEWR."UOM_ID",
+                                    :NEWR."LOCATIONFROM_ID" );
+		  	
+	ELSEIF :NEWR."ACTION" = 'MOV' THEN
+
+        CALL "regStockDecrease"( 	:NEWR."PRODUCT_ID", 
+                                    :NEWR."QUANTITY",
+                                    :NEWR."UOM_ID",
+                                    :NEWR."LOCATIONFROM_ID" );
+
+        CALL "regStockIncrease"( 	:NEWR."PRODUCT_ID", 
+                                    :NEWR."QUANTITY",
+                                    :NEWR."UOM_ID",
+                                    :NEWR."LOCATIONTO_ID" );
+	END IF;
+
+END;

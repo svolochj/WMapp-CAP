@@ -1,0 +1,43 @@
+PROCEDURE "regStockIncrease" (  IN im_product 	VARCHAR(36),
+								IN im_quantity	DECIMAL,
+								IN im_unit 	VARCHAR(36),
+								IN im_location VARCHAR(36) ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	--READS SQL DATA 
+	AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+ 	DECLARE lv_quantity DECIMAL DEFAULT 0;
+
+	--for checking existance	  
+	SELECT COUNT(*) INTO lv_quantity
+ 		FROM "WM_MODEL_REG_STOCK"
+ 		WHERE "PRODUCT_ID" 	= im_product 	AND
+			  "UOM_ID"	 	= im_unit	  	AND
+			  "LOCATION_ID"	= im_location;	
+						
+	IF :lv_quantity = 0 THEN 
+		lv_quantity = im_quantity;
+	ELSE 
+	 	SELECT "QUANTITY" INTO lv_quantity
+ 			FROM "WM_MODEL_REG_STOCK"
+	 		WHERE "PRODUCT_ID" 	= im_product 	AND
+				  "UOM_ID"	 	= im_unit	  	AND
+				  "LOCATION_ID"	= im_location;	
+		 	
+		 lv_quantity = :lv_quantity + im_quantity;
+	END IF;
+	
+	UPSERT "WM_MODEL_REG_STOCK" 	
+	 	VALUES ( 
+	  		im_product,		--product 
+			im_location,	--location,
+			lv_quantity,	--quantityt
+			im_unit			--unit
+	  	) WITH PRIMARY KEY;
+ 
+END;
