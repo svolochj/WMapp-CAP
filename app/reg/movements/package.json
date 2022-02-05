@@ -1,7 +1,7 @@
 {
-    "name": "receive",
+    "name": "movements",
     "version": "0.0.1",
-    "description": "Warehouse Management application - Receive products",
+    "description": "Warehouse Management application - Registry Movements",
     "keywords": [
         "ui5",
         "openui5",

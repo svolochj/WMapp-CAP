@@ -4,7 +4,8 @@ using { WM.model.cat.Product        as Product,
         WM.model.doc.docReceive     as docReceive,
         WM.model.doc.docIssue       as docIssue,
         WM.model.doc.docMovement    as docMovement,
-        WM.model.reg.Stock          as _Stock
+        WM.model.reg.Stock          as regStock,
+        WM.model.reg.Movement       as regMovement
          } from '../db/schema';
 
 
@@ -49,7 +50,11 @@ service wmappsrv {
     action PostDocument(ID:UUID) returns Boolean;
 
     //Registry 
-    entity Stock 
+    entity RegStock
         @(readonly:true)
-        as projection on _Stock;
+        as projection on regStock;
+
+    entity RegMovements
+        @(readonly:true)
+        as projection on regMovement;
 }

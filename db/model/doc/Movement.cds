@@ -228,7 +228,7 @@ annotate WM.model.doc.docMovement with @(
         {
             $Type :     'UI.ReferenceFacet',
             Target :    '@UI.FieldGroup#GeneralData',
-            Label :     'Post data'
+            Label :     'General data'
         },
         {
             $Type :     'UI.ReferenceFacet',

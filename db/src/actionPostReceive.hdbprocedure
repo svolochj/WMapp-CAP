@@ -1,0 +1,41 @@
+PROCEDURE "actionPostReceive"( IN im_doc_guid 	VARCHAR(36), IN im_doc_date TIMESTAMP )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   --READS SQL DATA 
+   AS
+BEGIN
+
+    -- 1. Get Docuemnt items 
+    DECLARE CURSOR c_doc_items FOR 
+        select *
+        from 
+            "WM_MODEL_DOC_DOCRECEIVE_ITEMS" 
+        where 
+            "UP__ID" = im_doc_guid;
+
+    -- 2. Insert into registry movements  
+    FOR r_doc_items AS c_doc_items 
+    DO
+        INSERT INTO "WM_MODEL_REG_MOVEMENT" VALUES(
+            to_nvarchar(SYSUUID)        /*ID <NVARCHAR(36)>*/,
+            'REC'                       /*ACTION <NVARCHAR(3)>*/,
+            r_doc_items."UP__ID"        /*DOCUMENT <NVARCHAR(36)>*/,
+            r_doc_items."ID"            /*ITEM <NVARCHAR(36)>*/,
+            im_doc_date          /*DATE <TIMESTAMP>*/,
+            r_doc_items."PRODUCT_ID"    /*PRODUCT_ID <NVARCHAR(36)>*/,
+            ''                          /*LOCATIONFROM_ID <NVARCHAR(36)>*/,
+            r_doc_items."LOCATIONTO_ID" /*LOCATIONTO_ID <NVARCHAR(36)>*/,
+            r_doc_items."QUANTITY"      /*QUANTITY <DECIMAL>*/,
+            r_doc_items."UOM_ID"        /*UOM_ID <NVARCHAR(36)>*/
+        );
+    END FOR;
+
+    -- 3. Update document wih posting date and post flag
+    UPDATE "WM_MODEL_DOC_DOCRECEIVE" 
+        SET 
+            "POSTED" = true, 
+            "POSTDATE" = im_doc_date 
+        WHERE 
+            "ID" = :im_doc_guid;
+END

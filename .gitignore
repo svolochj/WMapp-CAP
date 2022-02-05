@@ -15,6 +15,7 @@ resources/
 # MTA
 *_mta_build_tmp
 *.mtar
+*.mta
 mta_archives/
 
 # Other
@@ -46,7 +47,5 @@ app/**/dist
 
 # auto generated wildcard
 WMapp-CAP/gen/db/.env
-# auto generated wildcard
-gen/db/.env
 # auto generated wildcard
 gen/db/.env

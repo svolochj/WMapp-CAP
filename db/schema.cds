@@ -8,3 +8,4 @@ using { WM.model.doc.docIssue }             from './model/doc/Issue';
 using { WM.model.doc.docMovement }          from './model/doc/Movement';
 
 using { WM.model.reg.Stock }                from './model/reg/Stock';
+using { WM.model.reg.Movement }             from './model/reg/Movement';
