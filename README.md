@@ -14,6 +14,10 @@ Documents
 - Movement products
 - Issue products
 
+Registry
+- Movements
+- Stock
+
 It contains these folders and files:
 
 File or Folder | Purpose
