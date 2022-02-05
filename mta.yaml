@@ -182,7 +182,7 @@ modules:
     supported-platforms: []
 - name: wmregstock
   type: html5
-  path: app/stock
+  path: app/reg/stock
   build-parameters:
     build-result: dist
     builder: custom
