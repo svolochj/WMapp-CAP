@@ -1,243 +1,257 @@
-_schema-version: '3.1'
+_schema-version: "3.1"
 ID: wmapp
 description: Warehouse Manegement application
 version: 1.0.0
 copyright: SVO
 modules:
-  - name: wmapp-srv
-    type: nodejs
-    path: gen/srv
-    requires:
-      - name: wmapp-db
-      - name: wmapp-logs
-    provides:
-      - name: srv-api
-        properties:
-          srv-url: ${default-url}
+- name: wmapp-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: wmapp-db
+  - name: wmapp-logs
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+- name: wmapp-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: wmapp-db
+  - name: wmapp-logs
+  parameters:
+    buildpack: nodejs_buildpack
+- name: wmapp-destinations
+  type: com.sap.application.content
+  requires:
+  - name: wmapp-xsuaa-service
     parameters:
-      buildpack: nodejs_buildpack
-  - name: wmapp-db-deployer
-    type: hdb
-    path: gen/db
-    requires:
-      - name: wmapp-db
-      - name: wmapp-logs
+      service-key:
+        name: wmapp-xsuaa-service-key
+  - name: wmapp-html5-repo-host
     parameters:
-      buildpack: nodejs_buildpack
-  - name: wmapp-destinations
-    type: com.sap.application.content
-    requires:
-      - name: wmapp-xsuaa-service
-        parameters:
-          service-key:
-            name: wmapp-xsuaa-service-key
-      - name: wmapp-html5-repo-host
-        parameters:
-          service-key:
-            name: wmapp-html5-repo-host-key
-      - name: srv-api
-      - name: wmapp-destination
-        parameters:
-          content-target: true
+      service-key:
+        name: wmapp-html5-repo-host-key
+  - name: srv-api
+  - name: wmapp-destination
     parameters:
-      content:
+      content-target: true
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Authentication: OAuth2UserTokenExchange
+          Name: wmapp-srv
+          TokenServiceInstanceName: wmapp-xsuaa-service
+          TokenServiceKeyName: wmapp-xsuaa-service-key
+          URL: ~{srv-api/srv-url}
+          sap.cloud.service: wmapp.service
+        - Name: wmapp-html5-repo-host
+          ServiceInstanceName: wmapp-html5-repo-host
+          ServiceKeyName: wmapp-html5-repo-host-key
+          sap.cloud.service: wmapp.service
+        - Authentication: OAuth2UserTokenExchange
+          Name: wmapp-xsuaa-service
+          ServiceInstanceName: wmapp-xsuaa-service
+          ServiceKeyName: wmapp-xsuaa-service-key
+          sap.cloud.service: wmapp.service
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+- name: wmapp-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: wmapp-html5-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - wmcatproducts.zip
+      name: wmcatproducts
+      target-path: resources/
+    - artifacts:
+      - wmcatlocations.zip
+      name: wmcatlocations
+      target-path: resources/
+    - artifacts:
+      - wmcatuom.zip
+      name: wmcatuom
+      target-path: resources/
+    - artifacts:
+      - wmdocreceive.zip
+      name: wmdocreceive
+      target-path: resources/
+    - artifacts:
+      - wmdocmovement.zip
+      name: wmdocmovement
+      target-path: resources/
+    - artifacts:
+      - wmdocissue.zip
+      name: wmdocissue
+      target-path: resources/
+    - artifacts:
+      - wmregmovements.zip
+      name: wmregmovements
+      target-path: resources/
+    - artifacts:
+      - wmregstock.zip
+      name: wmregstock
+      target-path: resources/
+- name: wmcatproducts
+  type: html5
+  description: WM app - Pproducts
+  path: app/cat/products
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: wmcatlocations
+  type: html5
+  description: WM app - Locations
+  path: app/cat/locations
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: wmcatuom
+  type: html5
+  description: WM app - UOM
+  path: app/cat/uom
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: wmdocreceive
+  type: html5
+  description: WM app - Doc Receive
+  path: app/doc/receive
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: wmdocmovement
+  type: html5
+  description: WM app -  Doc Movement
+  path: app/doc/movement
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: wmdocissue
+  type: html5
+  description: WM app -  Doc Issue
+  path: app/doc/issue
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: wmregmovements
+  type: html5
+  description: WM app -  Reg Movements
+  path: app/reg/movements
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: wmregstock
+  type: html5
+  path: app/stock
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: wmapp-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+  properties:
+    hdi-service-name: wmapp-db
+- name: wmapp-destination
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
         instance:
           destinations:
-            - Authentication: OAuth2UserTokenExchange
-              Name: wmapp-srv
-              TokenServiceInstanceName: wmapp-xsuaa-service
-              TokenServiceKeyName: wmapp-xsuaa-service-key
-              URL: ~{srv-api/srv-url}
-              sap.cloud.service: wmapp.service
-            - Name: wmapp-html5-repo-host
-              ServiceInstanceName: wmapp-html5-repo-host
-              ServiceKeyName: wmapp-html5-repo-host-key
-              sap.cloud.service: wmapp.service
-            - Authentication: OAuth2UserTokenExchange
-              Name: wmapp-xsuaa-service
-              ServiceInstanceName: wmapp-xsuaa-service
-              ServiceKeyName: wmapp-xsuaa-service-key
-              sap.cloud.service: wmapp.service
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
           existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-  - name: wmapp-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: wmapp-html5-repo-host
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources
-      requires:
-        - artifacts:
-            - wmcatproducts.zip
-          name: wmcatproducts
-          target-path: resources/
-        - artifacts:
-            - wmcatlocations.zip
-          name: wmcatlocations
-          target-path: resources/
-        - artifacts:
-            - wmcatuom.zip
-          name: wmcatuom
-          target-path: resources/
-        - artifacts:
-            - wmdocreceive.zip
-          name: wmdocreceive
-          target-path: resources/
-        - artifacts:
-            - wmdocmovement.zip
-          name: wmdocmovement
-          target-path: resources/
-        - artifacts:
-            - wmdocissue.zip
-          name: wmdocissue
-          target-path: resources/
-        - artifacts:
-          - wmregmovements.zip
-          name: wmregmovements
-          target-path: resources/
-  - name: wmcatproducts
-    type: html5
-    description: WM app - Pproducts
-    path: app/cat/products
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm install
-        - npm run build:cf
-      supported-platforms: []
-  - name: wmcatlocations
-    type: html5
-    description: WM app - Locations
-    path: app/cat/locations
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm install
-        - npm run build:cf
-      supported-platforms: []
-  - name: wmcatuom
-    type: html5
-    description: WM app - UOM
-    path: app/cat/uom
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm install
-        - npm run build:cf
-      supported-platforms: []
-  - name: wmdocreceive
-    type: html5
-    path: app/doc/receive
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm install
-        - npm run build:cf
-      supported-platforms: []
-    description: WM app - Doc Receive
-  - name: wmdocmovement
-    type: html5
-    path: app/doc/movement
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm install
-        - npm run build:cf
-      supported-platforms: []
-    description: WM app -  Doc Movement
-  - name: wmdocissue
-    type: html5
-    path: app/doc/issue
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm install
-        - npm run build:cf
-      supported-platforms: []
-    description: WM app -  Doc Issue
-  - name: wmregmovements
-    type: html5
-    path: app/reg/movements
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-      - npm install
-      - npm run build:cf
-      supported-platforms: []
-    description: WM app -  Reg Movements
-resources:
-  - name: wmapp-db
-    type: com.sap.xs.hdi-container
-    parameters:
-      service: hana
-      service-plan: hdi-shared
-    properties:
-      hdi-service-name: wmapp-db
-  - name: wmapp-destination
-    type: org.cloudfoundry.managed-service
-    parameters:
-      config:
-        HTML5Runtime_enabled: true
-        init_data:
-          instance:
-            destinations:
-              - Authentication: NoAuthentication
-                Name: ui5
-                ProxyType: Internet
-                Type: HTTP
-                URL: https://ui5.sap.com
-            existing_destinations_policy: update
-        version: 1.0.0
-      service: destination
-      service-plan: lite
-    properties:
-      HTML5Runtime_enabled: true
-  - name: wmapp-html5-repo-host
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-  - name: wmapp-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      config:
-        role-collections:
-          - description: Administrator
-            name: WMAdmin-${space}
-            role-template-references:
-              - $XSAPPNAME.WMAdmin
-          - description: Viewer
-            name: WMViewer-${space}
-            role-template-references:
-              - $XSAPPNAME.WMViewer
-        tenant-mode: dedicated
-        xsappname: wmapp-${space}
-      path: ./xs-security.json
-      service: xsuaa
-      service-plan: application
-  - name: wmapp-logs
-    type: org.cloudfoundry.managed-service
-    description: WM application  logging service
-    parameters:
-      service: application-logs
-      service-plan: lite
+      version: 1.0.0
+    service: destination
+    service-plan: lite
+  properties:
+    HTML5Runtime_enabled: true
+- name: wmapp-html5-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: wmapp-xsuaa-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      role-collections:
+      - description: Administrator
+        name: WMAdmin-${space}
+        role-template-references:
+        - $XSAPPNAME.WMAdmin
+      - description: Viewer
+        name: WMViewer-${space}
+        role-template-references:
+        - $XSAPPNAME.WMViewer
+      tenant-mode: dedicated
+      xsappname: wmapp-${space}
+    path: ./xs-security.json
+    service: xsuaa
+    service-plan: application
+- name: wmapp-logs
+  type: org.cloudfoundry.managed-service
+  description: WM application  logging service
+  parameters:
+    service: application-logs
+    service-plan: lite
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
 build-parameters:
   before-all:
-    - builder: custom
-      commands:
-        - npm install --production
-        - npx -p @sap/cds-dk cds build --production
+  - builder: custom
+    commands:
+    - npm install --production
+    - npx -p @sap/cds-dk cds build --production

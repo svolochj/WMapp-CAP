@@ -6,3 +6,4 @@ using from './doc/movement/annotations';
 using from './doc/receive/annotations';
 using from './doc/issue/annotations';
 using from './reg/movements/annotations';
+using from './reg/stock/annotations';
