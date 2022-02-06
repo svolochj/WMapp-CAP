@@ -16,6 +16,9 @@
     "devDependencies": {
         "@sap/hdi-deploy": "^4.2.3",
         "@sap/ux-specification": "^1.96.3",
+        "chai": "^4.3.6",
+        "chai-as-promised": "^7.1.1",
+        "chai-subset": "^1.6.0",
         "jest": "^26.6.3",
         "sqlite3": "^5"
     },
