@@ -4,5 +4,12 @@
     "**/.git": true,
     "**/.vscode": true
 },
-"SAP HANA Database Artifacts.lastSelectedTargetPath": "/home/user/projects/WMapp-CAP/db/src"
+"SAP HANA Database Artifacts.lastSelectedTargetPath": "/home/user/projects/WMapp-CAP/db/src",
+"sqltools.connections": [
+    {
+        "dialect": "SQLite",
+        "name": "Local DB",
+        "database": "./sqlite.db"
+    }
+]
 }
