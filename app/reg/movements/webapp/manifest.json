@@ -102,7 +102,8 @@
                     "options": {
                         "settings": {
                             "entitySet": "RegMovements",
-                            "variantManagement": "Page"
+                            "variantManagement": "Page",
+                            "initialLoad": true
                         }
                     }
                 }
@@ -111,6 +112,12 @@
         "contentDensities": {
             "compact": true,
             "cozy": true
+        },
+        "rootView": {
+            "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+            "type": "XML",
+            "async": true,
+            "id": "appRootView"
         }
     },
     "sap.platform.abap": {
