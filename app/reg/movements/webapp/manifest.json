@@ -26,7 +26,7 @@
         },
         "crossNavigation": {
             "inbounds": {
-                "Receive-display": {
+                "Movements-display": {
                     "signature": {
                         "parameters": {},
                         "additionalParameters": "allowed"

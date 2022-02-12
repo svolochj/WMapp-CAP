@@ -23,6 +23,19 @@
         "sourceTemplate": {
             "id": "ui5template.fiorielements.v4.lrop",
             "version": "1.0.0"
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "Stocks-display": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "Stocks",
+                    "action": "display",
+                    "icon": "sap-icon://move"
+                }
+            }
         }
     },
     "sap.ui": {
@@ -89,7 +102,8 @@
                     "options": {
                         "settings": {
                             "entitySet": "RegStock",
-                            "variantManagement": "Page"
+                            "variantManagement": "Page",
+                            "initialLoad": true
                         }
                     }
                 }
