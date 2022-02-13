@@ -25,7 +25,8 @@
   "scripts": {
     "start": "cds run",
     "test": "jest --coverage",
-    "undeploy": "cf undeploy wmapp --delete-services --delete-service-keys"
+    "undeploy": "cf undeploy wmapp --delete-services --delete-service-keys",
+    "clean": "find . \\( -name dist -o -name node_modules -o -name resources -o -name gen -o -name package-lock.json -o -name mta_archives \\)  -exec rm -rv {} +"
   },
   "cds": {
     "hana": {
