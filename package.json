@@ -9,6 +9,7 @@
     "@sap/cds": "^5.8.1",
     "@sap/hana-client": "^2.10.15",
     "@sap/hdbext": "^7.5.0",
+    "chai-uuid": "^1.0.6",
     "express": "^4",
     "passport": "^0.5.0",
     "sap-hdbext-promisfied": "^2.202201.1"
