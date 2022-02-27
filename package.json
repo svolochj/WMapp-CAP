@@ -40,6 +40,14 @@
       "uaa": {
         "kind": "xsuaa",
         "credentials": {}
+      },
+      "[development]": {
+          "db":{
+            "kind":"sqlite",
+            "credentials": {
+                "database" : "developdb.db"
+            }
+          }
       }
     }
   },
