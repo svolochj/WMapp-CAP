@@ -25,32 +25,33 @@
   },
   "scripts": {
     "start": "cds run",
-    "test": "jest --coverage",
+    "test": "jest --coverage --maxWorkers 1",
     "undeploy": "cf undeploy wmapp --delete-services --delete-service-keys",
     "clean": "find . \\( -name dist -o -name node_modules -o -name resources -o -name gen -o -name package-lock.json -o -name mta_archives \\)  -exec rm -rv {} +"
   },
-  "cds": {
+"cds": {
     "hana": {
-      "deploy-format": "hdbtable"
+        "deploy-format": "hdbtable"
     },
     "requires": {
-      "db": {
-        "kind": "hana"
-      },
-      "uaa": {
-        "kind": "xsuaa",
-        "credentials": {}
-      },
-      "[development]": {
-          "db":{
-            "kind":"sqlite",
-            "credentials": {
-                "database" : "developdb.db"
+        "db": {
+            "kind": "hana"
+        },
+        "[development]": {
+            "db": {
+                "kind": "sqlite",
+                "multitenance": false,
+                "credentials": {
+                    "database": "developdb.db"
+                }
             }
-          }
-      }
+        },
+        "uaa": {
+            "kind": "xsuaa",
+            "credentials": {}
+        }
     }
-  },
+},
   "sapux": [
     "app/cat/uom",
     "app/cat/locations",

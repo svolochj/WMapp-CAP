@@ -34,9 +34,9 @@ describe( "OData service tests", () => {
 
         // Activate entry
         try {
-            const { status: statusPatch, data: activeUOM } = await POST `/wmappsrv/Products(ID=${uuidProduct},IsActiveEntity=false)/wmappsrv.draftActivate`;
+            const { status: statusPost, data: activeUOM } = await POST `/wmappsrv/Products(ID=${uuidProduct},IsActiveEntity=false)/wmappsrv.draftActivate`;
             
-            expect(statusPatch).to.equal(201);
+            expect(statusPost).to.equal(201);
 
             expect(activeUOM.IsActiveEntity).to.equal(true);
         } catch (e) {
