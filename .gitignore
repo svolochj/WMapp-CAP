@@ -8,6 +8,8 @@ node_modules/
 target/
 resources/
 
+coverage/
+
 # Web IDE, App Studio
 .che/
 .gen/
@@ -49,3 +51,6 @@ app/**/dist
 WMapp-CAP/gen/db/.env
 # auto generated wildcard
 gen/db/.env
+
+
+KEEP.txt
