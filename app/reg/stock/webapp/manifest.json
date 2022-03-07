@@ -1,7 +1,7 @@
 {
     "_version": "1.32.0",
     "sap.app": {
-        "id": "wm.reg.movements",
+        "id": "wm.reg.stock",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
@@ -26,12 +26,12 @@
         },
         "crossNavigation": {
             "inbounds": {
-                "Movements-display": {
+                "Stocks-display": {
                     "signature": {
                         "parameters": {},
                         "additionalParameters": "allowed"
                     },
-                    "semanticObject": "Movements",
+                    "semanticObject": "Stock",
                     "action": "display",
                     "icon": "sap-icon://move"
                 }
@@ -90,18 +90,18 @@
             "routes": [
                 {
                     "pattern": ":?query:",
-                    "name": "RegMovementList",
-                    "target": "RegMovementList"
+                    "name": "RegStockList",
+                    "target": "RegStockList"
                 }
             ],
             "targets": {
-                "RegMovementList": {
+                "RegStockList": {
                     "type": "Component",
-                    "id": "RegMovementList",
+                    "id": "RegStockList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings": {
-                            "entitySet": "RegMovements",
+                            "entitySet": "RegStock",
                             "variantManagement": "Page",
                             "initialLoad": true
                         }

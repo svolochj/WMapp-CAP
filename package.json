@@ -1,49 +1,55 @@
 {
-    "name": "wmapp",
-    "version": "1.0.0",
-    "description": "Warehouse Manegement application",
-    "repository": "https://github.com/svolochj/WMapp-CAP.git",
-    "license": "UNLICENSED",
-    "private": true,
-    "dependencies": {
-        "@sap/cds": "^5.6.2",
-        "@sap/hana-client": "^2.10.15",
-        "@sap/hdbext": "^7.5.0",
-        "express": "^4",
-        "passport": "^0.5.0",
-        "sap-hdbext-promisfied": "^2.202201.1"
+  "name": "wmapp",
+  "version": "1.0.0",
+  "description": "Warehouse Manegement application",
+  "repository": "https://github.com/svolochj/WMapp-CAP.git",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^5.8.1",
+    "@sap/hana-client": "^2.10.15",
+    "@sap/hdbext": "^7.5.0",
+    "express": "^4",
+    "passport": "^0.5.0",
+    "sap-hdbext-promisfied": "^2.202201.1"
+  },
+  "devDependencies": {
+    "@sap/hdi-deploy": "^4.2.3",
+    "@sap/ux-specification": "^1.96.3",
+    "chai": "^4.3.6",
+    "chai-as-promised": "^7.1.1",
+    "chai-subset": "^1.6.0",
+    "jest": "^27.5.1",
+    "sqlite3": "^5"
+  },
+  "scripts": {
+    "start": "cds run",
+    "test": "jest --coverage",
+    "undeploy": "cf undeploy wmapp --delete-services --delete-service-keys",
+    "clean": "find . \\( -name dist -o -name node_modules -o -name resources -o -name gen -o -name package-lock.json -o -name mta_archives \\)  -exec rm -rv {} +"
+  },
+  "cds": {
+    "hana": {
+      "deploy-format": "hdbtable"
     },
-    "devDependencies": {
-        "@sap/hdi-deploy": "^4.2.3",
-        "@sap/ux-specification": "^1.96.2",
-        "jest": "^26.6.3",
-        "sqlite3": "^5"
-    },
-    "scripts": {
-        "start": "cds run",
-        "test": "jest",
-        "undeploy": "cf undeploy wmapp --delete-services --delete-service-keys"
-    },
-    "cds": {
-        "hana": {
-            "deploy-format": "hdbtable"
-        },
-        "requires": {
-            "db": {
-                "kind": "hana"
-            },
-            "uaa": {
-                "kind": "xsuaa",
-                "credentials": {}
-            }
-        }
-    },
-    "sapux": [
-        "app/cat/uom",
-        "app/cat/locations",
-        "app/cat/products",
-        "app/doc/receive",
-        "app/doc/movement",
-        "app/doc/issue"
-    ]
+    "requires": {
+      "db": {
+        "kind": "hana"
+      },
+      "uaa": {
+        "kind": "xsuaa",
+        "credentials": {}
+      }
+    }
+  },
+  "sapux": [
+    "app/cat/uom",
+    "app/cat/locations",
+    "app/cat/products",
+    "app/doc/receive",
+    "app/doc/movement",
+    "app/doc/issue",
+    "app/reg/movements",
+    "app/reg/stock"
+  ]
 }
