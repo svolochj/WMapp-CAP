@@ -166,7 +166,14 @@ annotate WM.model.doc.docIssue with {
 
 annotate WM.model.doc.docIssue with @(
 
-    UI.Identification: [ {Value: Number} ],
+    UI.Identification: [
+        {Value: Number},
+        {
+            $Type : 'UI.DataFieldForAction',
+            Action : 'wmappsrv.PostIssue',
+            Label : 'Post'
+        }    
+    ],
 
     UI.HeaderInfo : {
         $Type          : 'UI.HeaderInfoType',

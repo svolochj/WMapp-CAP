@@ -202,7 +202,14 @@ annotate WM.model.doc.docMovement with {
 };
 
 annotate WM.model.doc.docMovement with @(
-    UI.Identification: [ {Value: Number} ],
+        UI.Identification: [
+        {Value: Number},
+        {
+            $Type : 'UI.DataFieldForAction',
+            Action : 'wmappsrv.PostMovement',
+            Label : 'Post'
+        }    
+    ],
 
     UI.HeaderInfo : {
         $Type          : 'UI.HeaderInfoType',

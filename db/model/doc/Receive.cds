@@ -103,7 +103,14 @@ annotate WM.model.doc.docReceive.Items with {
 
 annotate WM.model.doc.docReceive.Items with @(
 
-    UI.Identification: [ { Value: ID } ],
+    UI.Identification: [ 
+        { Value: ID },
+        { 
+            $Type : 'UI.DataFieldForAction',
+            Action : 'wmappsrv.PostReceive',
+            Label : 'Post'
+        } 
+    ],
 
     UI.HeaderInfo : {
         $Type          : 'UI.HeaderInfoType',
@@ -167,7 +174,14 @@ annotate WM.model.doc.docReceive with {
 
 annotate WM.model.doc.docReceive with @(
     
-    UI.Identification: [{Value: Number}],
+    UI.Identification: [
+        {Value: Number},
+        {
+            $Type : 'UI.DataFieldForAction',
+            Action : 'wmappsrv.PostReceive',
+            Label : 'Post'
+        }    
+    ],
 
     UI.HeaderInfo : {
         $Type          : 'UI.HeaderInfoType',
