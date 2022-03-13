@@ -14,7 +14,7 @@ service wmappsrv {
     //Vocabularies
     entity Products 
         @( odata.draft.enabled : true )    
-        as projection on Product;
+        as projection on Product order by Code;
         
     entity UOM
         @( odata.draft.enabled : true )       
@@ -22,27 +22,27 @@ service wmappsrv {
 
     entity Locations    
         @( odata.draft.enabled : true )    
-        as select from Location;
+        as select from Location order by Code;
 
 
     //Documents
     entity Receive  
         @( odata.draft.enabled : true )     
-        as projection on docReceive
+        as projection on docReceive order by Number
         actions {
             action PostReceive() returns Boolean
         };
 
     entity Issue        
         @( odata.draft.enabled : true )    
-        as projection on docIssue
+        as projection on docIssue order by Number
         actions {
             action PostIssue() returns Boolean
         };
  
     entity Movement     
         @( odata.draft.enabled : true )
-        as projection on docMovement
+        as projection on docMovement order by Number
         actions {
             action PostMovement() returns Boolean
         };
@@ -52,9 +52,9 @@ service wmappsrv {
     //Registry 
     entity RegStock
         @(readonly:true)
-        as projection on regStock;
+        as projection on regStock order by Quantity desc;
 
     entity RegMovements
         @(readonly:true)
-        as projection on regMovement;
+        as projection on regMovement order by Date desc;
 }
