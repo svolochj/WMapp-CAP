@@ -30,21 +30,24 @@ service wmappsrv {
         @( odata.draft.enabled : true )     
         as projection on docReceive order by Number
         actions {
-            action PostReceive() returns Boolean
+            action PostReceive() returns Boolean;
+            action UnPostReceive() returns Boolean;
         };
 
     entity Issue        
         @( odata.draft.enabled : true )    
         as projection on docIssue order by Number
         actions {
-            action PostIssue() returns Boolean
+            action PostIssue() returns Boolean;
+            action UnPostIssue() returns Boolean;
         };
  
     entity Movement     
         @( odata.draft.enabled : true )
         as projection on docMovement order by Number
         actions {
-            action PostMovement() returns Boolean
+            action PostMovement() returns Boolean;
+            action UnPostMovement() returns Boolean
         };
 
     action PostDocument(ID:UUID) returns Boolean;
