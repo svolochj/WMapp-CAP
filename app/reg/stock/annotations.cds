@@ -1,1 +1,0 @@
-using wmappsrv as service from 'wmapp../../../home/user/projects/WMapp-CAP/srv/services';

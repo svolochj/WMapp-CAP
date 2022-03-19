@@ -1,0 +1,45 @@
+VIEW "viewMovements"
+AS SELECT * FROM (
+    SELECT
+        'REC' AS Action,
+        "UP__ID" AS DocumentID,
+        Items."ID" as LineID,
+        "LINENR",
+        Header.Postdate AS PostDate,
+        "QUANTITY",
+        "PRODUCT_ID",
+        "UOM_ID",
+        "LOCATIONFROM_ID",
+        "LOCATIONTO_ID"
+    FROM  "WM_MODEL_DOC_DOCRECEIVE" as Header INNER JOIN 
+          "WM_MODEL_DOC_DOCRECEIVE_ITEMS" as Items on Items.up__id = Header.ID AND Header.Posted = TRUE
+    UNION
+    SELECT
+        'MOV' AS Action,
+        "UP__ID" AS DocumentID,
+        Items."ID" as LineID,
+        "LINENR",
+        Header.Postdate AS PostDate,
+        "QUANTITY",
+        "PRODUCT_ID",
+        "UOM_ID",
+        "LOCATIONFROM_ID",
+        "LOCATIONTO_ID"
+        FROM  "WM_MODEL_DOC_DOCMOVEMENT" as Header INNER JOIN 
+              "WM_MODEL_DOC_DOCMOVEMENT_ITEMS" as Items on Items.up__id = Header.ID AND Header.Posted = TRUE
+    UNION
+    SELECT
+        'ISS' AS Action,
+        "UP__ID" AS DocumentID,
+        Items."ID" as LineID,
+        "LINENR",
+        Header.Postdate AS PostDate,
+        "QUANTITY",
+        "PRODUCT_ID",
+        "UOM_ID",
+        "LOCATIONFROM_ID",
+        "LOCATIONTO_ID"
+        FROM  "WM_MODEL_DOC_DOCISSUE" as Header INNER JOIN 
+              "WM_MODEL_DOC_DOCISSUE_ITEMS" as Items on Items.up__id = Header.ID AND Header.Posted = TRUE	
+    )
+    ORDER BY Postdate asc, Linenr asc

@@ -47,6 +47,16 @@ class WMappService extends cds.ApplicationService {
            }
         });
 
+        this.on(["recalculateStock"], async req => {
+            try {
+                cds.run(`CALL "actionRecalculateStock"()`);
+                return true
+           } catch (error) { 
+                console.error(error)
+                return false
+           }
+        });
+
         return super.init()
    }
 }
