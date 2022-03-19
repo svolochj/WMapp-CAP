@@ -30,24 +30,22 @@ service wmappsrv {
         @( odata.draft.enabled : true )     
         as projection on docReceive order by Number
         actions {
-            action PostReceive() returns Boolean
+            action PostReceive() returns Boolean;
         };
 
     entity Issue        
         @( odata.draft.enabled : true )    
         as projection on docIssue order by Number
         actions {
-            action PostIssue() returns Boolean
+            action PostIssue() returns Boolean;
         };
  
     entity Movement     
         @( odata.draft.enabled : true )
         as projection on docMovement order by Number
         actions {
-            action PostMovement() returns Boolean
+            action PostMovement() returns Boolean;
         };
-
-    action PostDocument(ID:UUID) returns Boolean;
 
     //Registry 
     entity RegStock
@@ -57,4 +55,6 @@ service wmappsrv {
     entity RegMovements
         @(readonly:true)
         as projection on regMovement order by Date desc;
+
+    action recalculateStock() returns Boolean;
 }

@@ -1,3 +1,5 @@
+using wmappsrv as service from '../../../srv/services';
+
 namespace WM.model.reg;
 
 using { WM.model.cat.Product as product } from '../cat/Product';
@@ -11,8 +13,15 @@ entity Stock {
     key UOM         : Association to one uom;
 }
 
+annotate WM.model.reg.Stock with {
+    UOM         @UI : {  Hidden : true };
+    Product     @UI : {  Hidden : true };
+    Location    @UI : {  Hidden : true };
+};
+
 annotate WM.model.reg.Stock with @(
-        UI.LineItem : [
+       
+    UI.LineItem : [
         {
             Value: Product.Name,
             Label: 'Product'
@@ -28,6 +37,11 @@ annotate WM.model.reg.Stock with @(
         {
             Value: UOM.Name,
             Label: 'UOM'
-        }
+        },
+        {
+            $Type : 'UI.DataFieldForAction',
+            Action : 'wmappsrv.EntityContainer/recalculateStock',
+            Label : 'Recalculate',
+        },
     ]
 );

@@ -1,0 +1,61 @@
+PROCEDURE "actionRecalculateStock"
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   --READS SQL DATA 
+   AS
+BEGIN
+	
+ 	--get all docuement items sorted by date time
+ 	DECLARE CURSOR c_mvmnt FOR SELECT
+        "ACTION",
+        "DOCUMENTID",
+        "LINEID",
+        "POSTDATE",
+        "QUANTITY",
+        "PRODUCT_ID",
+        "UOM_ID",
+        "LOCATIONFROM_ID",
+        "LOCATIONTO_ID"
+            FROM "viewMovements";
+ 	 	
+ 	--back up regMovement
+ 	
+ 	--Clear movement
+ 	TRUNCATE TABLE "WM_MODEL_REG_MOVEMENT";
+ 	
+ 	--Clear stock
+ 	TRUNCATE TABLE "WM_MODEL_REG_STOCK";
+ 	
+ 	-- --Update table regMovement 
+ 	FOR r_mvmnt AS c_mvmnt 
+	    DO    
+        INSERT INTO "WM_MODEL_REG_MOVEMENT" (
+            ID,
+            Action,
+            Date,
+            Document,
+            Item,
+            LocationFrom_ID,
+            LocationTo_ID,
+            Product_ID,
+            Quantity,
+            UOM_ID
+          )
+        VALUES
+          (
+            to_nvarchar(SYSUUID),    
+            r_mvmnt."ACTION",
+            r_mvmnt."POSTDATE",
+            r_mvmnt."DOCUMENTID",
+            r_mvmnt."LINEID",
+            r_mvmnt."LOCATIONFROM_ID",
+            r_mvmnt."LOCATIONTO_ID",
+            r_mvmnt."PRODUCT_ID",
+            r_mvmnt."QUANTITY",
+            r_mvmnt."UOM_ID"
+          );
+    
+    END FOR;
+
+END

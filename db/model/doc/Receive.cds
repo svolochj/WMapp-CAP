@@ -104,12 +104,7 @@ annotate WM.model.doc.docReceive.Items with {
 annotate WM.model.doc.docReceive.Items with @(
 
     UI.Identification: [ 
-        { Value: ID },
-        { 
-            $Type : 'UI.DataFieldForAction',
-            Action : 'wmappsrv.PostReceive',
-            Label : 'Post'
-        } 
+        { Value: ID }
     ],
 
     UI.HeaderInfo : {
