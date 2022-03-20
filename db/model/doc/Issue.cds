@@ -161,7 +161,10 @@ annotate WM.model.doc.docIssue.Items with @(
 );
 
 annotate WM.model.doc.docIssue with {
-    ID @UI : {  Hidden }
+    ID @UI : {  Hidden };
+
+    @readonly
+    PostDate;
 };
 
 annotate WM.model.doc.docIssue with @(
