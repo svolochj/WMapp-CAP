@@ -14,7 +14,7 @@ annotate WM.model.doc.docReceive.Items with {
     UOM_ID @UI : {  Hidden : true };
 
     Number @UI : { Label: 'Document number' };
-    
+   
     Product @Common : {
 
         Text : Product.Name, 
@@ -104,12 +104,7 @@ annotate WM.model.doc.docReceive.Items with {
 annotate WM.model.doc.docReceive.Items with @(
 
     UI.Identification: [ 
-        { Value: ID },
-        { 
-            $Type : 'UI.DataFieldForAction',
-            Action : 'wmappsrv.PostReceive',
-            Label : 'Post'
-        } 
+        { Value: ID }
     ],
 
     UI.HeaderInfo : {
@@ -169,7 +164,10 @@ annotate WM.model.doc.docReceive.Items with @(
 );
 
 annotate WM.model.doc.docReceive with {
-    ID @UI : {  Hidden }
+    ID @UI : {  Hidden };
+
+    @readonly
+    PostDate;
 };
 
 annotate WM.model.doc.docReceive with @(
@@ -199,7 +197,7 @@ annotate WM.model.doc.docReceive with @(
         {Value : createdBy},
         {
             Value: PostDate,
-            Label: 'Post date'
+            Label: 'Post date',
         }
     ],
         
@@ -225,7 +223,8 @@ annotate WM.model.doc.docReceive with @(
         Label : '{i18n>Admin}',
         Data  : [
             {   Value : PostDate,
-                Label : 'Post Date' },
+                Label : 'Post Date' 
+            },
             {Value : createdBy},
             {Value : createdAt},
             {Value : modifiedBy},

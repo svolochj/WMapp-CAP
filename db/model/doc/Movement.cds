@@ -198,7 +198,10 @@ annotate WM.model.doc.docMovement.Items with @(
 );
 
 annotate WM.model.doc.docMovement with {
-    ID @UI : {  Hidden }
+    ID @UI : {  Hidden };
+    
+    @readonly
+    PostDate;
 };
 
 annotate WM.model.doc.docMovement with @(
