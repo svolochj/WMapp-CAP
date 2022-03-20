@@ -11,7 +11,7 @@ aspect Header : cuid , managed {
         Number  : docNumber;
         Posted  : cds.Boolean;
         PostDate: Timestamp;
-        Items   : Composition of many Items ;
+        Items   : Composition of many Items;
 }
 
 aspect Items : cuid {
