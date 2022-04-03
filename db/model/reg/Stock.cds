@@ -17,6 +17,8 @@ annotate WM.model.reg.Stock with {
     UOM         @UI : {  Hidden : true };
     Product     @UI : {  Hidden : true };
     Location    @UI : {  Hidden : true };
+
+    Quantity    @Measures : { Unit : UOM.Name };
 };
 
 annotate WM.model.reg.Stock with @(
@@ -33,10 +35,6 @@ annotate WM.model.reg.Stock with @(
         {
             Value: Quantity,
             Label: 'Quantity'
-        },
-        {
-            Value: UOM.Name,
-            Label: 'UOM'
         },
         {
             $Type : 'UI.DataFieldForAction',

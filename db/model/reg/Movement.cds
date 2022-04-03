@@ -27,6 +27,8 @@ annotate WM.model.reg.Movement with {
     LocationTo      @UI : { Hidden };
     Product         @UI : { Hidden };
     UOM             @UI : { Hidden };
+
+    Quantity        @Measures : { Unit : UOM.Name };
 }
 
 annotate WM.model.reg.Movement with @(
@@ -36,7 +38,6 @@ annotate WM.model.reg.Movement with @(
         { Value: Date, Label: 'Movement date' },
         { Value: Product.Name, Label: 'Product' },
         { Value: Quantity, Label: 'Quantity' },
-        { Value: UOM.Name, Label: 'UOM' },
         { Value: LocationFrom.Name, Label: 'Location From' },
         { Value: LocationTo.Name, Label: 'Location To' }        
     ],
