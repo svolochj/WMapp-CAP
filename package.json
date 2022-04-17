@@ -6,16 +6,17 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@sap/cds": "^5.8.1",
+    "@sap/cds": "^5.9.2",
     "@sap/hana-client": "^2.10.15",
-    "@sap/hdbext": "^7.5.0",
+    "@sap/hdbext": "^7.6.3",
+    "@sap/xssec": "^3.2.13",
     "express": "^4",
     "passport": "^0.5.0",
     "sap-hdbext-promisfied": "^2.202201.1"
   },
   "devDependencies": {
-    "@sap/hdi-deploy": "^4.2.3",
-    "@sap/ux-specification": "^1.96.3",
+    "@sap/hdi-deploy": "^4.3.3",
+    "@sap/ux-specification": "^1.100",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "chai-subset": "^1.6.0",

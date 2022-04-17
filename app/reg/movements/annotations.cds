@@ -1,1 +1,0 @@
-using wmappsrv as service from '../../../srv/services';
