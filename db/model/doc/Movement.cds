@@ -11,6 +11,7 @@ annotate WM.model.doc.docMovement.Items with {
     LocationTo_ID @UI : {  Hidden : true };
     LocationFrom_ID @UI : {  Hidden : true };
     UOM_ID @UI : {  Hidden : true };
+    Editable @UI : { Hidden : true };
 
     Number @UI : { Label: 'Document number' };
 
@@ -132,6 +133,8 @@ annotate WM.model.doc.docMovement.Items with {
 }
 
 annotate WM.model.doc.docMovement.Items with @(
+
+    Capabilities: { Deletable: up_.Editable, Updatable: up_.Editable, Insertable: up_.Editable },
     
     UI.Identification: [ { Value: ID } ],
 
@@ -205,12 +208,16 @@ annotate WM.model.doc.docMovement with {
 };
 
 annotate WM.model.doc.docMovement with @(
-        UI.Identification: [
+    
+    Capabilities : { Deletable : Editable, Updatable : Editable },
+
+    UI.Identification: [
         {Value: Number},
         {
             $Type : 'UI.DataFieldForAction',
             Action : 'wmappsrv.PostMovement',
-            Label : 'Post'
+            Label : 'Post',
+            ![@UI.Hidden] : {$edmJson: {$Path: 'Posted'}}
         }    
     ],
 

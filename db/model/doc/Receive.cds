@@ -12,6 +12,7 @@ annotate WM.model.doc.docReceive.Items with {
     LocationFrom_ID @UI : {  Hidden : true };
     LocationFrom @UI : { Hidden : true };
     UOM_ID @UI : {  Hidden : true };
+    Editable @UI : { Hidden : true };
 
     Number @UI : { Label: 'Document number' };
    
@@ -103,6 +104,8 @@ annotate WM.model.doc.docReceive.Items with {
 
 annotate WM.model.doc.docReceive.Items with @(
 
+    Capabilities: { Deletable: up_.Editable, Updatable: up_.Editable, Insertable: up_.Editable },
+
     UI.Identification: [ 
         { Value: ID }
     ],
@@ -172,12 +175,15 @@ annotate WM.model.doc.docReceive with {
 
 annotate WM.model.doc.docReceive with @(
     
+    Capabilities : { Deletable : Editable, Updatable : Editable },
+
     UI.Identification: [
         {Value: Number},
         {
             $Type : 'UI.DataFieldForAction',
             Action : 'wmappsrv.PostReceive',
-            Label : 'Post'
+            Label : 'Post',
+            ![@UI.Hidden] : {$edmJson: {$Path: 'Posted'}}
         }    
     ],
 

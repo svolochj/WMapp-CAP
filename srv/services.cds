@@ -28,21 +28,27 @@ service wmappsrv {
     //Documents
     entity Receive  
         @( odata.draft.enabled : true )     
-        as projection on docReceive order by Number desc
+        as projection on docReceive
+        order by Number desc 
+        
         actions {
             action PostReceive() returns Boolean;
         };
-
+    
     entity Issue        
         @( odata.draft.enabled : true )    
-        as projection on docIssue order by Number desc
+        as projection on docIssue 
+        order by Number desc
+        
         actions {
             action PostIssue() returns Boolean;
         };
  
     entity Movement     
         @( odata.draft.enabled : true )
-        as projection on docMovement order by Number desc
+        as projection on docMovement 
+        order by Number desc
+        
         actions {
             action PostMovement() returns Boolean;
         };

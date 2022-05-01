@@ -11,6 +11,7 @@ aspect Header : cuid , managed {
         Number  : docNumber;
         Posted  : cds.Boolean;
         PostDate: Timestamp;
+        Editable: cds.Boolean default true;
         Items   : Composition of many Items;
 }
 

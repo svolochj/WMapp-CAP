@@ -11,7 +11,8 @@ annotate WM.model.doc.docIssue.Items with {
     LocationTo_ID @UI : {  Hidden : true };
     LocationTo @UI : {  Hidden : true };
     LocationFrom_ID @UI : {  Hidden : true };
-    UOM_ID @UI : {  Hidden : true }; 
+    UOM_ID @UI : {  Hidden : true };
+    Editable @UI : { Hidden : true }; 
 
     Number @UI : { Label: 'Document number' };
 
@@ -101,6 +102,8 @@ annotate WM.model.doc.docIssue.Items with {
 }
 
 annotate WM.model.doc.docIssue.Items with @(
+
+    Capabilities: { Deletable: up_.Editable, Updatable: up_.Editable, Insertable: up_.Editable },
     
     UI.Identification: [ { Value: ID } ],
 
@@ -169,12 +172,15 @@ annotate WM.model.doc.docIssue with {
 
 annotate WM.model.doc.docIssue with @(
 
+    Capabilities : { Deletable : Editable, Updatable : Editable },
+    
     UI.Identification: [
         {Value: Number},
         {
             $Type : 'UI.DataFieldForAction',
             Action : 'wmappsrv.PostIssue',
-            Label : 'Post'
+            Label : 'Post',
+            ![@UI.Hidden] : {$edmJson: {$Path: 'Posted'}}
         }    
     ],
 

@@ -34,7 +34,8 @@ BEGIN
     -- 3. Update document wih posting date and post flag
     UPDATE "WM_MODEL_DOC_DOCISSUE" 
         SET 
-            "POSTED" = true, 
+            "POSTED" = true,
+            "EDITABLE" = false, 
             "POSTDATE" = im_doc_date 
         WHERE 
             "ID" = :im_doc_guid;
