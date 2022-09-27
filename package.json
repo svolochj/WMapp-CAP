@@ -12,7 +12,7 @@
     "@sap/xssec": "^3.2.13",
     "express": "^4",
     "passport": "^0.5.0",
-    "sap-hdbext-promisfied": "^2.202201.1"
+    "sap-hdbext-promisfied": "^2.202208.1"
   },
   "devDependencies": {
     "@sap/hdi-deploy": "^4.3.3",
