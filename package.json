@@ -8,7 +8,7 @@
   "dependencies": {
     "@sap/cds": "6.6.0",
     "@sap/hana-client": "2.15.22",
-    "@sap/hdbext": "7.7.0",
+    "@sap/hdbext": "7.7.2",
     "@sap/xssec": "3.2.17",
     "express": "4.18.2",
     "passport": "0.6.0",
