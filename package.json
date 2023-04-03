@@ -6,7 +6,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@sap/cds": "6.6.2",
+    "@sap/cds": "6.7.0",
     "@sap/hana-client": "2.15.22",
     "@sap/hdbext": "7.7.2",
     "@sap/xssec": "3.2.17",
