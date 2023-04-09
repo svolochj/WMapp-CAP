@@ -62,3 +62,4 @@ WMapp-CAP/gen/db/.env
 # auto generated wildcard
 WMapp-CAP/gen/db/.env
 package-lock.json
+.vscode/settings.json
