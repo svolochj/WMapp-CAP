@@ -3,6 +3,15 @@
     "**/.gitignore": false,
     "**/.git": true,
     "**/.vscode": true
-},
-"SAP HANA Database Artifacts.lastSelectedTargetPath": "/home/user/projects/WMapp-CAP/db/src"
+  },
+  "SAP HANA Database Artifacts.lastSelectedTargetPath": "/home/user/projects/WMapp-CAP/db/src",
+  "eslint.validate": [
+    "cds",
+    "csn",
+    "csv",
+    "csv",
+    "csv (semicolon)",
+    "tsv",
+    "tab"
+  ]
 }
