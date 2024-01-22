@@ -18,7 +18,7 @@
     "@sap/eslint-plugin-cds": "^2.6.4",
     "@sap/hdi-deploy": "^4.3.3",
     "@sap/ux-specification": "^1.100",
-    "chai": "^4.3.6",
+    "chai": "^5.0.0",
     "chai-as-promised": "^7.1.1",
     "chai-subset": "^1.6.0",
     "eslint": "^8.56.0",
