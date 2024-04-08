@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@sap/eslint-plugin-cds": "^2.6.4",
-    "@sap/hdi-deploy": "^4.3.3",
+    "@sap/hdi-deploy": "^5.1.0",
     "@sap/ux-specification": "^1.100",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
