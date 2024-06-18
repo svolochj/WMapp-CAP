@@ -6,9 +6,9 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@sap/cds": "7.5.2",
+    "@sap/cds": "7.8.1",
     "@sap/hana-client": "2.19.21",
-    "@sap/hdbext": "8.0.2",
+    "@sap/hdbext": "8.0.3",
     "@sap/xssec": "3.6.1",
     "express": "4.19.2",
     "passport": "0.7.0",
@@ -16,9 +16,9 @@
   },
   "devDependencies": {
     "@sap/eslint-plugin-cds": "^2.6.4",
-    "@sap/hdi-deploy": "^4.3.3",
+    "@sap/hdi-deploy": "^5.1.1",
     "@sap/ux-specification": "^1.100",
-    "chai": "^4.3.6",
+    "chai": "^5.1.0",
     "chai-as-promised": "^7.1.1",
     "chai-subset": "^1.6.0",
     "eslint": "^8.56.0",
