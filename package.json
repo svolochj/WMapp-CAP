@@ -15,7 +15,7 @@
     "sap-hdbext-promisfied": "^2.202201.1"
   },
   "devDependencies": {
-    "@sap/eslint-plugin-cds": "^2.6.4",
+    "@sap/eslint-plugin-cds": "^3.0.4",
     "@sap/hdi-deploy": "^5.1.1",
     "@sap/ux-specification": "^1.100",
     "chai": "^5.1.0",
