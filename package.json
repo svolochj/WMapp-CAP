@@ -42,6 +42,16 @@
       "uaa": {
         "kind": "xsuaa",
         "credentials": {}
+      },
+      "[development]": {
+        "db": {
+            "kind": "sqlite",
+            "multitenance": false,
+            "credentials": {
+                "database": "developdb.db"
+            }
+        },
+        "auth": "dummy"
       }
     }
   },
