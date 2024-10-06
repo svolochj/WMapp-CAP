@@ -63,3 +63,4 @@ WMapp-CAP/gen/db/.env
 WMapp-CAP/gen/db/.env
 package-lock.json
 .vscode/settings.json
+/db/data
