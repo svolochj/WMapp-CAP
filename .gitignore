@@ -1,2 +1,66 @@
-/node_modules
+# CAP WMapp
+_out
+*.db
+connection.properties
+default-*.json
+gen/
+node_modules/
+target/
+resources/
+coverage/*
+
+coverage/
+
+# Web IDE, App Studio
+.che/
+.gen/
+
+# MTA
+*_mta_build_tmp
+*.mtar
+*.mta
+mta_archives/
+
+# Other
+.DS_Store
+*.orig
+*.log
+
+*.iml
+*.flattened-pom.xml
+
+# IDEs
+# .vscode
+# .idea
+
+#Environment
+default-env.json
+
+#Package lock
 package-lock.json
+
+WMapp-CAP/.env
+# auto generated wildcard
+WMapp-CAP/gen/db/.env
+
+.env
+
+# Apps
+app/**/dist
+
+# auto generated wildcard
+WMapp-CAP/gen/db/.env
+# auto generated wildcard
+gen/db/.env
+
+
+KEEP.txt
+# auto generated wildcard
+WMapp-CAP/gen/db/.env
+# auto generated wildcard
+WMapp-CAP/gen/db/.env
+# auto generated wildcard
+WMapp-CAP/gen/db/.env
+package-lock.json
+.vscode/settings.json
+/db/data
