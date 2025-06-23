@@ -1,0 +1,17 @@
+{
+        "auth": {
+        "passport": {
+            "strategy": "mock",
+            "users": {
+                "s": {
+                    "password": "s",
+                    "ID":       "202",
+                    "roles": [
+                        "authenticated-user",
+                        "Admin"
+                    ]
+                }
+            }
+        }
+    }
+}

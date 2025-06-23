@@ -1,0 +1,5771 @@
+{
+  "definitions": {
+    "wmappsrv": {
+      "@source": "srv/services.cds",
+      "kind": "service"
+    },
+    "wmappsrv.Products": {
+      "kind": "entity",
+      "@odata.draft.enabled": true,
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "ID"
+          }
+        }
+      ],
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Code"
+          }
+        },
+        {
+          "Value": {
+            "=": "Name"
+          }
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Product",
+      "@UI.HeaderInfo.TypeNamePlural": "Products",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Name"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "Description"
+      },
+      "@UI.HeaderFacets": [
+        {
+          "$Type": "UI.CollectionFacet",
+          "Facets": [
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Target": "@UI.FieldGroup#AdministrativeData",
+              "Label": "Administrative data"
+            }
+          ]
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#GeneralData",
+          "Label": "General data"
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Label": "{i18n>Admin}",
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.FieldGroup#GeneralData.$Type": "UI.FieldGroupType",
+      "@UI.FieldGroup#GeneralData.Data": [
+        {
+          "Value": {
+            "=": "Code"
+          }
+        },
+        {
+          "Value": {
+            "=": "Name"
+          }
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          }
+        },
+        {
+          "Value": {
+            "=": "Description"
+          }
+        }
+      ],
+      "projection": {
+        "from": {
+          "ref": [
+            "WM.model.cat.Product"
+          ]
+        },
+        "orderBy": [
+          {
+            "ref": [
+              "Code"
+            ]
+          }
+        ]
+      },
+      "elements": {
+        "ID": {
+          "@UI.Hidden": true,
+          "@Common.Text": {
+            "=": "Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "Code": {
+          "@title": "Code",
+          "type": "cds.String",
+          "length": 23
+        },
+        "Name": {
+          "@title": "Name",
+          "type": "cds.String",
+          "length": 200
+        },
+        "Description": {
+          "@title": "Description",
+          "type": "cds.String",
+          "length": 1000
+        },
+        "UOM": {
+          "@title": "UOM",
+          "@Common.IsUnit": true,
+          "@Common.Text": {
+            "=": "UOM.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "UOM",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "UOM_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.UOM",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "wmappsrv.UOM": {
+      "kind": "entity",
+      "@odata.draft.enabled": true,
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "ID"
+          }
+        }
+      ],
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Code"
+          }
+        },
+        {
+          "Value": {
+            "=": "Name"
+          }
+        },
+        {
+          "Value": {
+            "=": "Description"
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "UOM",
+      "@UI.HeaderInfo.TypeNamePlural": "UOM",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Name"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "Description"
+      },
+      "@UI.HeaderFacets": [
+        {
+          "$Type": "UI.CollectionFacet",
+          "Facets": [
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Target": "@UI.FieldGroup#AdministrativeData",
+              "Label": "    Administrative data"
+            }
+          ]
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#GeneralData",
+          "Label": "General data"
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Label": "{i18n>Admin}",
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.FieldGroup#GeneralData.$Type": "UI.FieldGroupType",
+      "@UI.FieldGroup#GeneralData.Data": [
+        {
+          "Value": {
+            "=": "Code"
+          }
+        },
+        {
+          "Value": {
+            "=": "Name"
+          }
+        },
+        {
+          "Value": {
+            "=": "Description"
+          }
+        }
+      ],
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "WM.model.cat.UOM"
+            ],
+            "as": "UOM_Data"
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@UI.Hidden": true,
+          "@Common.IsUnit": true,
+          "@Common.Text": {
+            "=": "Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "Code": {
+          "@title": "Code",
+          "type": "cds.String",
+          "length": 23
+        },
+        "Name": {
+          "@title": "Name",
+          "type": "cds.String",
+          "length": 200
+        },
+        "Description": {
+          "@title": "Description",
+          "type": "cds.String"
+        }
+      }
+    },
+    "wmappsrv.Locations": {
+      "kind": "entity",
+      "@odata.draft.enabled": true,
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "ID"
+          }
+        }
+      ],
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Code"
+          }
+        },
+        {
+          "Value": {
+            "=": "Name"
+          }
+        },
+        {
+          "Value": {
+            "=": "Description"
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Location",
+      "@UI.HeaderInfo.TypeNamePlural": "Locations",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Name"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "Description"
+      },
+      "@UI.HeaderFacets": [
+        {
+          "$Type": "UI.CollectionFacet",
+          "Facets": [
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Target": "@UI.FieldGroup#AdministrativeData",
+              "Label": "    Administrative data"
+            }
+          ]
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#GeneralData",
+          "Label": "General data"
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Label": "{i18n>Admin}",
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.FieldGroup#GeneralData.$Type": "UI.FieldGroupType",
+      "@UI.FieldGroup#GeneralData.Data": [
+        {
+          "Value": {
+            "=": "Code"
+          }
+        },
+        {
+          "Value": {
+            "=": "Name"
+          }
+        },
+        {
+          "Value": {
+            "=": "Description"
+          }
+        }
+      ],
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "WM.model.cat.Location"
+            ]
+          },
+          "orderBy": [
+            {
+              "ref": [
+                "Code"
+              ]
+            }
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "@UI.Hidden": true,
+          "@Common.Text": {
+            "=": "Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "Code": {
+          "@title": "Code",
+          "type": "cds.String",
+          "length": 23
+        },
+        "Name": {
+          "@title": "Name",
+          "type": "cds.String",
+          "length": 200
+        },
+        "Description": {
+          "@title": "Description",
+          "type": "cds.String"
+        }
+      }
+    },
+    "wmappsrv.Receive": {
+      "kind": "entity",
+      "@odata.draft.enabled": true,
+      "@Capabilities.Deletable": {
+        "=": "Editable"
+      },
+      "@Capabilities.Updatable": {
+        "=": "Editable"
+      },
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "Number"
+          }
+        },
+        {
+          "$Type": "UI.DataFieldForAction",
+          "Action": "wmappsrv.PostReceive",
+          "Label": "Post",
+          "@UI.Hidden": {
+            "$edmJson": {
+              "$Path": "Posted"
+            }
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Receives",
+      "@UI.HeaderInfo.TypeNamePlural": "Receives",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Number"
+      },
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Number"
+          },
+          "Label": "Number"
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "PostDate"
+          },
+          "Label": "Post date"
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#GeneralData",
+          "Label": "General data"
+        },
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#AdministrativeData",
+          "Label": "Admin data"
+        },
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "Items/@UI.LineItem",
+          "Label": "Items"
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Label": "{i18n>Admin}",
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "Value": {
+            "=": "PostDate"
+          },
+          "Label": "Post Date"
+        },
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.FieldGroup#GeneralData.Label": "General data",
+      "@UI.FieldGroup#GeneralData.Data": [
+        {
+          "Value": {
+            "=": "Number"
+          },
+          "Label": "Number"
+        }
+      ],
+      "projection": {
+        "from": {
+          "ref": [
+            "WM.model.doc.docReceive"
+          ]
+        },
+        "orderBy": [
+          {
+            "ref": [
+              "Number"
+            ],
+            "sort": "desc"
+          }
+        ]
+      },
+      "elements": {
+        "ID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "Number": {
+          "type": "WM.model.doc.docNumber",
+          "length": 11
+        },
+        "Posted": {
+          "type": "cds.Boolean"
+        },
+        "PostDate": {
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "Editable": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "Items": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": "WM.model.doc.Items",
+          "target": "wmappsrv.Receive.Items",
+          "on": [
+            {
+              "ref": [
+                "Items",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      },
+      "actions": {
+        "PostReceive": {
+          "kind": "action",
+          "returns": {
+            "type": "cds.Boolean"
+          }
+        }
+      }
+    },
+    "wmappsrv.Issue": {
+      "kind": "entity",
+      "@odata.draft.enabled": true,
+      "@Capabilities.Deletable": {
+        "=": "Editable"
+      },
+      "@Capabilities.Updatable": {
+        "=": "Editable"
+      },
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "Number"
+          }
+        },
+        {
+          "$Type": "UI.DataFieldForAction",
+          "Action": "wmappsrv.PostIssue",
+          "Label": "Post",
+          "@UI.Hidden": {
+            "$edmJson": {
+              "$Path": "Posted"
+            }
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Issues",
+      "@UI.HeaderInfo.TypeNamePlural": "Issues",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Number"
+      },
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Number"
+          },
+          "Label": "Number"
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "PostDate"
+          },
+          "Label": "Post date"
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#GeneralData",
+          "Label": "General data"
+        },
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#AdministrativeData",
+          "Label": "Admin data"
+        },
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "Items/@UI.LineItem",
+          "Label": "Items"
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Label": "{i18n>Admin}",
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "Value": {
+            "=": "PostDate"
+          },
+          "Label": "Post Date"
+        },
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.FieldGroup#GeneralData.Label": "General data",
+      "@UI.FieldGroup#GeneralData.Data": [
+        {
+          "Value": {
+            "=": "Number"
+          },
+          "Label": "Number"
+        }
+      ],
+      "projection": {
+        "from": {
+          "ref": [
+            "WM.model.doc.docIssue"
+          ]
+        },
+        "orderBy": [
+          {
+            "ref": [
+              "Number"
+            ],
+            "sort": "desc"
+          }
+        ]
+      },
+      "elements": {
+        "ID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "Number": {
+          "type": "WM.model.doc.docNumber",
+          "length": 11
+        },
+        "Posted": {
+          "type": "cds.Boolean"
+        },
+        "PostDate": {
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "Editable": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "Items": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": "WM.model.doc.Items",
+          "target": "wmappsrv.Issue.Items",
+          "on": [
+            {
+              "ref": [
+                "Items",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      },
+      "actions": {
+        "PostIssue": {
+          "kind": "action",
+          "returns": {
+            "type": "cds.Boolean"
+          }
+        }
+      }
+    },
+    "wmappsrv.Movement": {
+      "kind": "entity",
+      "@odata.draft.enabled": true,
+      "@Capabilities.Deletable": {
+        "=": "Editable"
+      },
+      "@Capabilities.Updatable": {
+        "=": "Editable"
+      },
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "Number"
+          }
+        },
+        {
+          "$Type": "UI.DataFieldForAction",
+          "Action": "wmappsrv.PostMovement",
+          "Label": "Post",
+          "@UI.Hidden": {
+            "$edmJson": {
+              "$Path": "Posted"
+            }
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Movements",
+      "@UI.HeaderInfo.TypeNamePlural": "Movements",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Number"
+      },
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Number"
+          },
+          "Label": "Number"
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "PostDate"
+          },
+          "Label": "Post date"
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#GeneralData",
+          "Label": "General data"
+        },
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#AdministrativeData",
+          "Label": "Admin data"
+        },
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "Items/@UI.LineItem",
+          "Label": "Items"
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Label": "{i18n>Admin}",
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "Value": {
+            "=": "PostDate"
+          },
+          "Label": "Post Date"
+        },
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.FieldGroup#GeneralData.Label": "General data",
+      "@UI.FieldGroup#GeneralData.Data": [
+        {
+          "Value": {
+            "=": "Number"
+          },
+          "Label": "Number"
+        }
+      ],
+      "projection": {
+        "from": {
+          "ref": [
+            "WM.model.doc.docMovement"
+          ]
+        },
+        "orderBy": [
+          {
+            "ref": [
+              "Number"
+            ],
+            "sort": "desc"
+          }
+        ]
+      },
+      "elements": {
+        "ID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "Number": {
+          "type": "WM.model.doc.docNumber",
+          "length": 11
+        },
+        "Posted": {
+          "type": "cds.Boolean"
+        },
+        "PostDate": {
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "Editable": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "Items": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": "WM.model.doc.Items",
+          "target": "wmappsrv.Movement.Items",
+          "on": [
+            {
+              "ref": [
+                "Items",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      },
+      "actions": {
+        "PostMovement": {
+          "kind": "action",
+          "returns": {
+            "type": "cds.Boolean"
+          }
+        }
+      }
+    },
+    "wmappsrv.RegStock": {
+      "kind": "entity",
+      "@readonly": true,
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Product.Name"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Location.Name"
+          },
+          "Label": "Location"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "$Type": "UI.DataFieldForAction",
+          "Action": "wmappsrv.EntityContainer/recalculateStock",
+          "Label": "Recalculate"
+        }
+      ],
+      "projection": {
+        "from": {
+          "ref": [
+            "WM.model.reg.Stock"
+          ],
+          "as": "regStock"
+        },
+        "orderBy": [
+          {
+            "ref": [
+              "Quantity"
+            ],
+            "sort": "desc"
+          }
+        ]
+      },
+      "elements": {
+        "Product": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.Products",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "Location": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.Locations",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "Quantity": {
+          "@Measures.Unit": {
+            "=": "UOM.Name"
+          },
+          "type": "cds.Decimal",
+          "precision": 17,
+          "scale": 3
+        },
+        "UOM": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.UOM",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "wmappsrv.RegMovements": {
+      "kind": "entity",
+      "@readonly": true,
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Action"
+          },
+          "Label": "Action"
+        },
+        {
+          "Value": {
+            "=": "Date"
+          },
+          "Label": "Movement date"
+        },
+        {
+          "Value": {
+            "=": "Product.Name"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "Value": {
+            "=": "LocationFrom.Name"
+          },
+          "Label": "Location From"
+        },
+        {
+          "Value": {
+            "=": "LocationTo.Name"
+          },
+          "Label": "Location To"
+        }
+      ],
+      "@UI.PresentationVariant.SortOrder": [
+        {
+          "Property": {
+            "=": "Date"
+          }
+        }
+      ],
+      "projection": {
+        "from": {
+          "ref": [
+            "WM.model.reg.Movement"
+          ],
+          "as": "regMovement"
+        },
+        "orderBy": [
+          {
+            "ref": [
+              "Date"
+            ],
+            "sort": "desc"
+          }
+        ]
+      },
+      "elements": {
+        "ID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "Action": {
+          "type": "WM.model.reg.action",
+          "length": 3
+        },
+        "Document": {
+          "@UI.Hidden": true,
+          "type": "cds.UUID"
+        },
+        "Item": {
+          "@UI.Hidden": true,
+          "type": "cds.UUID"
+        },
+        "Date": {
+          "type": "cds.Timestamp"
+        },
+        "Product": {
+          "@UI.Hidden": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.Products",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationFrom": {
+          "@UI.Hidden": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.Locations",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationTo": {
+          "@UI.Hidden": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.Locations",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "Quantity": {
+          "@Measures.Unit": {
+            "=": "UOM.Name"
+          },
+          "type": "cds.Decimal",
+          "precision": 17,
+          "scale": 3
+        },
+        "UOM": {
+          "@UI.Hidden": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.UOM",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "wmappsrv.recalculateStock": {
+      "kind": "action",
+      "returns": {
+        "type": "cds.Boolean"
+      }
+    },
+    "WM.model.cat.Product": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "ID"
+          }
+        }
+      ],
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Code"
+          }
+        },
+        {
+          "Value": {
+            "=": "Name"
+          }
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Product",
+      "@UI.HeaderInfo.TypeNamePlural": "Products",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Name"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "Description"
+      },
+      "@UI.HeaderFacets": [
+        {
+          "$Type": "UI.CollectionFacet",
+          "Facets": [
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Target": "@UI.FieldGroup#AdministrativeData",
+              "Label": "Administrative data"
+            }
+          ]
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#GeneralData",
+          "Label": "General data"
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Label": "{i18n>Admin}",
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.FieldGroup#GeneralData.$Type": "UI.FieldGroupType",
+      "@UI.FieldGroup#GeneralData.Data": [
+        {
+          "Value": {
+            "=": "Code"
+          }
+        },
+        {
+          "Value": {
+            "=": "Name"
+          }
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          }
+        },
+        {
+          "Value": {
+            "=": "Description"
+          }
+        }
+      ],
+      "includes": [
+        "cuid",
+        "managed"
+      ],
+      "elements": {
+        "ID": {
+          "@UI.Hidden": true,
+          "@Common.Text": {
+            "=": "Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "Code": {
+          "@title": "Code",
+          "type": "cds.String",
+          "length": 23
+        },
+        "Name": {
+          "@title": "Name",
+          "type": "cds.String",
+          "length": 200
+        },
+        "Description": {
+          "@title": "Description",
+          "type": "cds.String",
+          "length": 1000
+        },
+        "UOM": {
+          "@title": "UOM",
+          "@Common.IsUnit": true,
+          "@Common.Text": {
+            "=": "UOM.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "UOM",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "UOM_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.UOM",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "WM.model.cat.UOM": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "ID"
+          }
+        }
+      ],
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Code"
+          }
+        },
+        {
+          "Value": {
+            "=": "Name"
+          }
+        },
+        {
+          "Value": {
+            "=": "Description"
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "UOM",
+      "@UI.HeaderInfo.TypeNamePlural": "UOM",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Name"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "Description"
+      },
+      "@UI.HeaderFacets": [
+        {
+          "$Type": "UI.CollectionFacet",
+          "Facets": [
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Target": "@UI.FieldGroup#AdministrativeData",
+              "Label": "    Administrative data"
+            }
+          ]
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#GeneralData",
+          "Label": "General data"
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Label": "{i18n>Admin}",
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.FieldGroup#GeneralData.$Type": "UI.FieldGroupType",
+      "@UI.FieldGroup#GeneralData.Data": [
+        {
+          "Value": {
+            "=": "Code"
+          }
+        },
+        {
+          "Value": {
+            "=": "Name"
+          }
+        },
+        {
+          "Value": {
+            "=": "Description"
+          }
+        }
+      ],
+      "includes": [
+        "cuid",
+        "managed"
+      ],
+      "elements": {
+        "ID": {
+          "@UI.Hidden": true,
+          "@Common.IsUnit": true,
+          "@Common.Text": {
+            "=": "Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "Code": {
+          "@title": "Code",
+          "type": "cds.String",
+          "length": 23
+        },
+        "Name": {
+          "@title": "Name",
+          "type": "cds.String",
+          "length": 200
+        },
+        "Description": {
+          "@title": "Description",
+          "type": "cds.String"
+        }
+      }
+    },
+    "WM.model.cat.Location": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "ID"
+          }
+        }
+      ],
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Code"
+          }
+        },
+        {
+          "Value": {
+            "=": "Name"
+          }
+        },
+        {
+          "Value": {
+            "=": "Description"
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Location",
+      "@UI.HeaderInfo.TypeNamePlural": "Locations",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Name"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "Description"
+      },
+      "@UI.HeaderFacets": [
+        {
+          "$Type": "UI.CollectionFacet",
+          "Facets": [
+            {
+              "$Type": "UI.ReferenceFacet",
+              "Target": "@UI.FieldGroup#AdministrativeData",
+              "Label": "    Administrative data"
+            }
+          ]
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#GeneralData",
+          "Label": "General data"
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Label": "{i18n>Admin}",
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.FieldGroup#GeneralData.$Type": "UI.FieldGroupType",
+      "@UI.FieldGroup#GeneralData.Data": [
+        {
+          "Value": {
+            "=": "Code"
+          }
+        },
+        {
+          "Value": {
+            "=": "Name"
+          }
+        },
+        {
+          "Value": {
+            "=": "Description"
+          }
+        }
+      ],
+      "includes": [
+        "cuid",
+        "managed"
+      ],
+      "elements": {
+        "ID": {
+          "@UI.Hidden": true,
+          "@Common.Text": {
+            "=": "Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "Code": {
+          "@title": "Code",
+          "type": "cds.String",
+          "length": 23
+        },
+        "Name": {
+          "@title": "Name",
+          "type": "cds.String",
+          "length": 200
+        },
+        "Description": {
+          "@title": "Description",
+          "type": "cds.String"
+        }
+      }
+    },
+    "WM.model.doc.docReceive": {
+      "kind": "entity",
+      "@Capabilities.Deletable": {
+        "=": "Editable"
+      },
+      "@Capabilities.Updatable": {
+        "=": "Editable"
+      },
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "Number"
+          }
+        },
+        {
+          "$Type": "UI.DataFieldForAction",
+          "Action": "wmappsrv.PostReceive",
+          "Label": "Post",
+          "@UI.Hidden": {
+            "$edmJson": {
+              "$Path": "Posted"
+            }
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Receives",
+      "@UI.HeaderInfo.TypeNamePlural": "Receives",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Number"
+      },
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Number"
+          },
+          "Label": "Number"
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "PostDate"
+          },
+          "Label": "Post date"
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#GeneralData",
+          "Label": "General data"
+        },
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#AdministrativeData",
+          "Label": "Admin data"
+        },
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "Items/@UI.LineItem",
+          "Label": "Items"
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Label": "{i18n>Admin}",
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "Value": {
+            "=": "PostDate"
+          },
+          "Label": "Post Date"
+        },
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.FieldGroup#GeneralData.Label": "General data",
+      "@UI.FieldGroup#GeneralData.Data": [
+        {
+          "Value": {
+            "=": "Number"
+          },
+          "Label": "Number"
+        }
+      ],
+      "includes": [
+        "WM.model.doc.Header"
+      ],
+      "elements": {
+        "ID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "Number": {
+          "type": "WM.model.doc.docNumber",
+          "length": 11
+        },
+        "Posted": {
+          "type": "cds.Boolean"
+        },
+        "PostDate": {
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "Editable": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "Items": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": "WM.model.doc.Items",
+          "target": "WM.model.doc.docReceive.Items",
+          "on": [
+            {
+              "ref": [
+                "Items",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "WM.model.doc.docIssue": {
+      "kind": "entity",
+      "@Capabilities.Deletable": {
+        "=": "Editable"
+      },
+      "@Capabilities.Updatable": {
+        "=": "Editable"
+      },
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "Number"
+          }
+        },
+        {
+          "$Type": "UI.DataFieldForAction",
+          "Action": "wmappsrv.PostIssue",
+          "Label": "Post",
+          "@UI.Hidden": {
+            "$edmJson": {
+              "$Path": "Posted"
+            }
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Issues",
+      "@UI.HeaderInfo.TypeNamePlural": "Issues",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Number"
+      },
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Number"
+          },
+          "Label": "Number"
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "PostDate"
+          },
+          "Label": "Post date"
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#GeneralData",
+          "Label": "General data"
+        },
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#AdministrativeData",
+          "Label": "Admin data"
+        },
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "Items/@UI.LineItem",
+          "Label": "Items"
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Label": "{i18n>Admin}",
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "Value": {
+            "=": "PostDate"
+          },
+          "Label": "Post Date"
+        },
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.FieldGroup#GeneralData.Label": "General data",
+      "@UI.FieldGroup#GeneralData.Data": [
+        {
+          "Value": {
+            "=": "Number"
+          },
+          "Label": "Number"
+        }
+      ],
+      "includes": [
+        "WM.model.doc.Header"
+      ],
+      "elements": {
+        "ID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "Number": {
+          "type": "WM.model.doc.docNumber",
+          "length": 11
+        },
+        "Posted": {
+          "type": "cds.Boolean"
+        },
+        "PostDate": {
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "Editable": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "Items": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": "WM.model.doc.Items",
+          "target": "WM.model.doc.docIssue.Items",
+          "on": [
+            {
+              "ref": [
+                "Items",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "WM.model.doc.docMovement": {
+      "kind": "entity",
+      "@Capabilities.Deletable": {
+        "=": "Editable"
+      },
+      "@Capabilities.Updatable": {
+        "=": "Editable"
+      },
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "Number"
+          }
+        },
+        {
+          "$Type": "UI.DataFieldForAction",
+          "Action": "wmappsrv.PostMovement",
+          "Label": "Post",
+          "@UI.Hidden": {
+            "$edmJson": {
+              "$Path": "Posted"
+            }
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Movements",
+      "@UI.HeaderInfo.TypeNamePlural": "Movements",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Number"
+      },
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Number"
+          },
+          "Label": "Number"
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "PostDate"
+          },
+          "Label": "Post date"
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#GeneralData",
+          "Label": "General data"
+        },
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#AdministrativeData",
+          "Label": "Admin data"
+        },
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "Items/@UI.LineItem",
+          "Label": "Items"
+        }
+      ],
+      "@UI.FieldGroup#AdministrativeData.Label": "{i18n>Admin}",
+      "@UI.FieldGroup#AdministrativeData.Data": [
+        {
+          "Value": {
+            "=": "PostDate"
+          },
+          "Label": "Post Date"
+        },
+        {
+          "Value": {
+            "=": "createdBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "createdAt"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedBy"
+          }
+        },
+        {
+          "Value": {
+            "=": "modifiedAt"
+          }
+        }
+      ],
+      "@UI.FieldGroup#GeneralData.Label": "General data",
+      "@UI.FieldGroup#GeneralData.Data": [
+        {
+          "Value": {
+            "=": "Number"
+          },
+          "Label": "Number"
+        }
+      ],
+      "includes": [
+        "WM.model.doc.Header"
+      ],
+      "elements": {
+        "ID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "Number": {
+          "type": "WM.model.doc.docNumber",
+          "length": 11
+        },
+        "Posted": {
+          "type": "cds.Boolean"
+        },
+        "PostDate": {
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "Editable": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "Items": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": "WM.model.doc.Items",
+          "target": "WM.model.doc.docMovement.Items",
+          "on": [
+            {
+              "ref": [
+                "Items",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "WM.model.reg.Stock": {
+      "kind": "entity",
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Product.Name"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Location.Name"
+          },
+          "Label": "Location"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "$Type": "UI.DataFieldForAction",
+          "Action": "wmappsrv.EntityContainer/recalculateStock",
+          "Label": "Recalculate"
+        }
+      ],
+      "elements": {
+        "Product": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Product",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "Location": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Location",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "Quantity": {
+          "@Measures.Unit": {
+            "=": "UOM.Name"
+          },
+          "type": "cds.Decimal",
+          "precision": 17,
+          "scale": 3
+        },
+        "UOM": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.UOM",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "WM.model.reg.action": {
+      "kind": "type",
+      "type": "cds.String",
+      "length": 3,
+      "enum": {
+        "REC": {},
+        "MOV": {},
+        "ISS": {}
+      }
+    },
+    "WM.model.reg.Movement": {
+      "kind": "entity",
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Action"
+          },
+          "Label": "Action"
+        },
+        {
+          "Value": {
+            "=": "Date"
+          },
+          "Label": "Movement date"
+        },
+        {
+          "Value": {
+            "=": "Product.Name"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "Value": {
+            "=": "LocationFrom.Name"
+          },
+          "Label": "Location From"
+        },
+        {
+          "Value": {
+            "=": "LocationTo.Name"
+          },
+          "Label": "Location To"
+        }
+      ],
+      "@UI.PresentationVariant.SortOrder": [
+        {
+          "Property": {
+            "=": "Date"
+          }
+        }
+      ],
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "Action": {
+          "type": "WM.model.reg.action",
+          "length": 3
+        },
+        "Document": {
+          "@UI.Hidden": true,
+          "type": "cds.UUID"
+        },
+        "Item": {
+          "@UI.Hidden": true,
+          "type": "cds.UUID"
+        },
+        "Date": {
+          "type": "cds.Timestamp"
+        },
+        "Product": {
+          "@UI.Hidden": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Product",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationFrom": {
+          "@UI.Hidden": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Location",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationTo": {
+          "@UI.Hidden": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Location",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "Quantity": {
+          "@Measures.Unit": {
+            "=": "UOM.Name"
+          },
+          "type": "cds.Decimal",
+          "precision": 17,
+          "scale": 3
+        },
+        "UOM": {
+          "@UI.Hidden": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.UOM",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "Language": {
+      "kind": "type",
+      "@title": "{i18n>Language}",
+      "@description": "{i18n>LanguageCode.Description}",
+      "type": "cds.Association",
+      "target": "sap.common.Languages",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "Currency": {
+      "kind": "type",
+      "@title": "{i18n>Currency}",
+      "@description": "{i18n>CurrencyCode.Description}",
+      "type": "cds.Association",
+      "target": "sap.common.Currencies",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "Country": {
+      "kind": "type",
+      "@title": "{i18n>Country}",
+      "@description": "{i18n>CountryCode.Description}",
+      "type": "cds.Association",
+      "target": "sap.common.Countries",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "Timezone": {
+      "kind": "type",
+      "type": "cds.Association",
+      "target": "sap.common.Timezones",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "sap.common": {
+      "kind": "context"
+    },
+    "sap.common.Locale": {
+      "kind": "type",
+      "@title": "{i18n>LanguageCode}",
+      "type": "cds.String",
+      "length": 14
+    },
+    "sap.common.Languages": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.skip": "if-unused",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.odata.valuelist": true,
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Text": {
+            "=": "name"
+          },
+          "@title": "{i18n>LanguageCode}",
+          "key": true,
+          "type": "sap.common.Locale",
+          "length": 14
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Languages.texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Languages.texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Countries": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.skip": "if-unused",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.odata.valuelist": true,
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@title": "{i18n>CountryCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Countries.texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Countries.texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Currencies": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.skip": "if-unused",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.odata.valuelist": true,
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@title": "{i18n>CurrencyCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "symbol": {
+          "@title": "{i18n>CurrencySymbol}",
+          "type": "cds.String",
+          "length": 5
+        },
+        "minorUnit": {
+          "@title": "{i18n>CurrencyMinorUnit}",
+          "type": "cds.Int16"
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Currencies.texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Currencies.texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Timezones": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.skip": "if-unused",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.odata.valuelist": true,
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@title": "{i18n>TimeZoneCode}",
+          "key": true,
+          "type": "cds.String",
+          "length": 100
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Timezones.texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Timezones.texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.CodeList": {
+      "kind": "aspect",
+      "@cds.autoexpose": true,
+      "@cds.persistence.skip": "if-unused",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.odata.valuelist": true,
+      "elements": {
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        }
+      }
+    },
+    "sap.common.TextsAspect": {
+      "kind": "aspect",
+      "elements": {
+        "locale": {
+          "@title": "{i18n>LanguageCode}",
+          "key": true,
+          "type": "sap.common.Locale",
+          "length": 14
+        }
+      }
+    },
+    "cuid": {
+      "kind": "aspect",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        }
+      }
+    },
+    "managed": {
+      "kind": "aspect",
+      "elements": {
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        }
+      }
+    },
+    "temporal": {
+      "kind": "aspect",
+      "elements": {
+        "validFrom": {
+          "@cds.valid.from": true,
+          "type": "cds.Timestamp"
+        },
+        "validTo": {
+          "@cds.valid.to": true,
+          "type": "cds.Timestamp"
+        }
+      }
+    },
+    "User": {
+      "kind": "type",
+      "@title": "{i18n>UserID}",
+      "@description": "{i18n>UserID.Description}",
+      "type": "cds.String",
+      "length": 255
+    },
+    "WM.model.doc.Header": {
+      "kind": "aspect",
+      "includes": [
+        "cuid",
+        "managed"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@UI.ExcludeFromNavigationContext": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "Number": {
+          "type": "WM.model.doc.docNumber",
+          "length": 11
+        },
+        "Posted": {
+          "type": "cds.Boolean"
+        },
+        "PostDate": {
+          "type": "cds.Timestamp"
+        },
+        "Editable": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "Items": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": "WM.model.doc.Items"
+        }
+      }
+    },
+    "WM.model.doc.Items": {
+      "kind": "aspect",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "Linenr": {
+          "type": "cds.Integer"
+        },
+        "Product": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Product",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "Quantity": {
+          "type": "cds.Decimal",
+          "precision": 10,
+          "scale": 3
+        },
+        "UOM": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.UOM",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationFrom": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Location",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationTo": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Location",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "WM.model.doc.docNumber": {
+      "kind": "type",
+      "type": "cds.String",
+      "length": 11
+    },
+    "WM.model.doc.Quantity": {
+      "kind": "type",
+      "elements": {
+        "Amount": {
+          "type": "cds.Decimal",
+          "precision": 10,
+          "scale": 3
+        },
+        "UOM": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.UOM",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "WM.model.doc.docReceive.Items": {
+      "kind": "entity",
+      "@Capabilities.Deletable": {
+        "=": "up_.Editable"
+      },
+      "@Capabilities.Updatable": {
+        "=": "up_.Editable"
+      },
+      "@Capabilities.Insertable": {
+        "=": "up_.Editable"
+      },
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "ID"
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Item",
+      "@UI.HeaderInfo.TypeNamePlural": "",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Product.Name"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "Linenr"
+      },
+      "@UI.HeaderInfo.Description.Label": "Line number",
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Linenr"
+          },
+          "Label": "Line Nr."
+        },
+        {
+          "Value": {
+            "=": "Product_ID"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          },
+          "Label": "UOM"
+        },
+        {
+          "Value": {
+            "=": "LocationTo_ID"
+          },
+          "Label": "Receive location"
+        }
+      ],
+      "@UI.PresentationVariant.SortOrder": [
+        {
+          "Property": {
+            "=": "Linenr"
+          }
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#LineItemData",
+          "Label": "Item data"
+        }
+      ],
+      "@UI.FieldGroup#LineItemData.Label": "Item data",
+      "@UI.FieldGroup#LineItemData.Data": [
+        {
+          "Value": {
+            "=": "Product_ID"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          },
+          "Label": "UOM"
+        },
+        {
+          "Value": {
+            "=": "LocationTo_ID"
+          },
+          "Label": "Receive location"
+        }
+      ],
+      "elements": {
+        "up_": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "WM.model.doc.docReceive",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "ID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "Linenr": {
+          "@Common.Label": "Line number",
+          "type": "cds.Integer"
+        },
+        "Product": {
+          "@Common.Text": {
+            "=": "Product.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Products",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "Product_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Product",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "Quantity": {
+          "type": "cds.Decimal",
+          "precision": 10,
+          "scale": 3
+        },
+        "UOM": {
+          "@Common.Text": {
+            "=": "UOM.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "UOM",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "UOM_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.UOM",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationFrom": {
+          "@UI.Hidden": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Location",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationTo": {
+          "@Common.Text": {
+            "=": "LocationTo.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Locations",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "LocationTo_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Location",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "WM.model.doc.docIssue.Items": {
+      "kind": "entity",
+      "@Capabilities.Deletable": {
+        "=": "up_.Editable"
+      },
+      "@Capabilities.Updatable": {
+        "=": "up_.Editable"
+      },
+      "@Capabilities.Insertable": {
+        "=": "up_.Editable"
+      },
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "ID"
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Item",
+      "@UI.HeaderInfo.TypeNamePlural": "",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Product.Name"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "Linenr"
+      },
+      "@UI.HeaderInfo.Description.Label": "Line number",
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Linenr"
+          },
+          "Label": "Line Nr."
+        },
+        {
+          "Value": {
+            "=": "Product_ID"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          },
+          "Label": "UOM"
+        },
+        {
+          "Value": {
+            "=": "LocationFrom_ID"
+          },
+          "Label": "Issue location"
+        }
+      ],
+      "@UI.PresentationVariant.SortOrder": [
+        {
+          "Property": {
+            "=": "Linenr"
+          }
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#LineItemData",
+          "Label": "Item data"
+        }
+      ],
+      "@UI.FieldGroup#LineItemData.Label": "Item data",
+      "@UI.FieldGroup#LineItemData.Data": [
+        {
+          "Value": {
+            "=": "Product_ID"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          },
+          "Label": "UOM"
+        },
+        {
+          "Value": {
+            "=": "LocationFrom_ID"
+          },
+          "Label": "Issue location"
+        }
+      ],
+      "elements": {
+        "up_": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "WM.model.doc.docIssue",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "ID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "Linenr": {
+          "@Common.Label": "Line number",
+          "type": "cds.Integer"
+        },
+        "Product": {
+          "@Common.Text": {
+            "=": "Product.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Products",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "Product_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Product",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "Quantity": {
+          "type": "cds.Decimal",
+          "precision": 10,
+          "scale": 3
+        },
+        "UOM": {
+          "@Common.Text": {
+            "=": "UOM.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "UOM",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "UOM_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.UOM",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationFrom": {
+          "@Common.Text": {
+            "=": "LocationFrom.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Locations",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "LocationFrom_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Location",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationTo": {
+          "@UI.Hidden": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Location",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "WM.model.doc.docMovement.Items": {
+      "kind": "entity",
+      "@Capabilities.Deletable": {
+        "=": "up_.Editable"
+      },
+      "@Capabilities.Updatable": {
+        "=": "up_.Editable"
+      },
+      "@Capabilities.Insertable": {
+        "=": "up_.Editable"
+      },
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "ID"
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Item",
+      "@UI.HeaderInfo.TypeNamePlural": "",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Product.Name"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "Linenr"
+      },
+      "@UI.HeaderInfo.Description.Label": "Line number",
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Linenr"
+          },
+          "Label": "Line Nr."
+        },
+        {
+          "Value": {
+            "=": "Product_ID"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          },
+          "Label": "UOM"
+        },
+        {
+          "Value": {
+            "=": "LocationFrom_ID"
+          },
+          "Label": "Issue location"
+        },
+        {
+          "Value": {
+            "=": "LocationTo_ID"
+          },
+          "Label": "Receive location"
+        }
+      ],
+      "@UI.PresentationVariant.SortOrder": [
+        {
+          "Property": {
+            "=": "Linenr"
+          }
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#LineItemData",
+          "Label": "Item data"
+        }
+      ],
+      "@UI.FieldGroup#LineItemData.Label": "Item data",
+      "@UI.FieldGroup#LineItemData.Data": [
+        {
+          "Value": {
+            "=": "Product_ID"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          },
+          "Label": "UOM"
+        },
+        {
+          "Value": {
+            "=": "LocationFrom_ID"
+          },
+          "Label": "Issue location"
+        },
+        {
+          "Value": {
+            "=": "LocationTo_ID"
+          },
+          "Label": "Receive location"
+        }
+      ],
+      "elements": {
+        "up_": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "WM.model.doc.docMovement",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "ID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "Linenr": {
+          "@Common.Label": "Line number",
+          "type": "cds.Integer"
+        },
+        "Product": {
+          "@Common.Text": {
+            "=": "Product.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Products",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "Product_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Product",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "Quantity": {
+          "type": "cds.Decimal",
+          "precision": 10,
+          "scale": 3
+        },
+        "UOM": {
+          "@Common.Text": {
+            "=": "UOM.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "UOM",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "UOM_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.UOM",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationFrom": {
+          "@Common.Text": {
+            "=": "LocationFrom.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Locations",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "LocationFrom_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Location",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationTo": {
+          "@Common.Text": {
+            "=": "LocationTo.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Locations",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "LocationTo_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "WM.model.cat.Location",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Languages.texts": {
+      "kind": "entity",
+      "@odata.draft.enabled": false,
+      "includes": [
+        "sap.common.TextsAspect"
+      ],
+      "elements": {
+        "locale": {
+          "@title": "{i18n>LanguageCode}",
+          "key": true,
+          "type": "sap.common.Locale",
+          "length": 14
+        },
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@odata.containment.ignore": true,
+          "@Common.Text": {
+            "=": "name"
+          },
+          "@title": "{i18n>LanguageCode}",
+          "key": true,
+          "type": "sap.common.Locale",
+          "length": 14
+        }
+      }
+    },
+    "sap.common.Countries.texts": {
+      "kind": "entity",
+      "@odata.draft.enabled": false,
+      "includes": [
+        "sap.common.TextsAspect"
+      ],
+      "elements": {
+        "locale": {
+          "@title": "{i18n>LanguageCode}",
+          "key": true,
+          "type": "sap.common.Locale",
+          "length": 14
+        },
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@odata.containment.ignore": true,
+          "@title": "{i18n>CountryCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "sap.common.Currencies.texts": {
+      "kind": "entity",
+      "@odata.draft.enabled": false,
+      "includes": [
+        "sap.common.TextsAspect"
+      ],
+      "elements": {
+        "locale": {
+          "@title": "{i18n>LanguageCode}",
+          "key": true,
+          "type": "sap.common.Locale",
+          "length": 14
+        },
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@odata.containment.ignore": true,
+          "@title": "{i18n>CurrencyCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "sap.common.Timezones.texts": {
+      "kind": "entity",
+      "@odata.draft.enabled": false,
+      "includes": [
+        "sap.common.TextsAspect"
+      ],
+      "elements": {
+        "locale": {
+          "@title": "{i18n>LanguageCode}",
+          "key": true,
+          "type": "sap.common.Locale",
+          "length": 14
+        },
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@odata.containment.ignore": true,
+          "@title": "{i18n>TimeZoneCode}",
+          "key": true,
+          "type": "cds.String",
+          "length": 100
+        }
+      }
+    },
+    "wmappsrv.Receive.Items": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "@Capabilities.Deletable": {
+        "=": "up_.Editable"
+      },
+      "@Capabilities.Updatable": {
+        "=": "up_.Editable"
+      },
+      "@Capabilities.Insertable": {
+        "=": "up_.Editable"
+      },
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "ID"
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Item",
+      "@UI.HeaderInfo.TypeNamePlural": "",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Product.Name"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "Linenr"
+      },
+      "@UI.HeaderInfo.Description.Label": "Line number",
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Linenr"
+          },
+          "Label": "Line Nr."
+        },
+        {
+          "Value": {
+            "=": "Product_ID"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          },
+          "Label": "UOM"
+        },
+        {
+          "Value": {
+            "=": "LocationTo_ID"
+          },
+          "Label": "Receive location"
+        }
+      ],
+      "@UI.PresentationVariant.SortOrder": [
+        {
+          "Property": {
+            "=": "Linenr"
+          }
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#LineItemData",
+          "Label": "Item data"
+        }
+      ],
+      "@UI.FieldGroup#LineItemData.Label": "Item data",
+      "@UI.FieldGroup#LineItemData.Data": [
+        {
+          "Value": {
+            "=": "Product_ID"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          },
+          "Label": "UOM"
+        },
+        {
+          "Value": {
+            "=": "LocationTo_ID"
+          },
+          "Label": "Receive location"
+        }
+      ],
+      "projection": {
+        "from": {
+          "ref": [
+            "WM.model.doc.docReceive.Items"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "wmappsrv.Receive",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "ID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "Linenr": {
+          "@Common.Label": "Line number",
+          "type": "cds.Integer"
+        },
+        "Product": {
+          "@Common.Text": {
+            "=": "Product.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Products",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "Product_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.Products",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "Quantity": {
+          "type": "cds.Decimal",
+          "precision": 10,
+          "scale": 3
+        },
+        "UOM": {
+          "@Common.Text": {
+            "=": "UOM.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "UOM",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "UOM_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.UOM",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationFrom": {
+          "@UI.Hidden": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.Locations",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationTo": {
+          "@Common.Text": {
+            "=": "LocationTo.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Locations",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "LocationTo_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.Locations",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "wmappsrv.Issue.Items": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "@Capabilities.Deletable": {
+        "=": "up_.Editable"
+      },
+      "@Capabilities.Updatable": {
+        "=": "up_.Editable"
+      },
+      "@Capabilities.Insertable": {
+        "=": "up_.Editable"
+      },
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "ID"
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Item",
+      "@UI.HeaderInfo.TypeNamePlural": "",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Product.Name"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "Linenr"
+      },
+      "@UI.HeaderInfo.Description.Label": "Line number",
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Linenr"
+          },
+          "Label": "Line Nr."
+        },
+        {
+          "Value": {
+            "=": "Product_ID"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          },
+          "Label": "UOM"
+        },
+        {
+          "Value": {
+            "=": "LocationFrom_ID"
+          },
+          "Label": "Issue location"
+        }
+      ],
+      "@UI.PresentationVariant.SortOrder": [
+        {
+          "Property": {
+            "=": "Linenr"
+          }
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#LineItemData",
+          "Label": "Item data"
+        }
+      ],
+      "@UI.FieldGroup#LineItemData.Label": "Item data",
+      "@UI.FieldGroup#LineItemData.Data": [
+        {
+          "Value": {
+            "=": "Product_ID"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          },
+          "Label": "UOM"
+        },
+        {
+          "Value": {
+            "=": "LocationFrom_ID"
+          },
+          "Label": "Issue location"
+        }
+      ],
+      "projection": {
+        "from": {
+          "ref": [
+            "WM.model.doc.docIssue.Items"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "wmappsrv.Issue",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "ID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "Linenr": {
+          "@Common.Label": "Line number",
+          "type": "cds.Integer"
+        },
+        "Product": {
+          "@Common.Text": {
+            "=": "Product.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Products",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "Product_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.Products",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "Quantity": {
+          "type": "cds.Decimal",
+          "precision": 10,
+          "scale": 3
+        },
+        "UOM": {
+          "@Common.Text": {
+            "=": "UOM.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "UOM",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "UOM_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.UOM",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationFrom": {
+          "@Common.Text": {
+            "=": "LocationFrom.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Locations",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "LocationFrom_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.Locations",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationTo": {
+          "@UI.Hidden": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.Locations",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "wmappsrv.Movement.Items": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "@Capabilities.Deletable": {
+        "=": "up_.Editable"
+      },
+      "@Capabilities.Updatable": {
+        "=": "up_.Editable"
+      },
+      "@Capabilities.Insertable": {
+        "=": "up_.Editable"
+      },
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "ID"
+          }
+        }
+      ],
+      "@UI.HeaderInfo.$Type": "UI.HeaderInfoType",
+      "@UI.HeaderInfo.TypeName": "Item",
+      "@UI.HeaderInfo.TypeNamePlural": "",
+      "@UI.HeaderInfo.Title.Value": {
+        "=": "Product.Name"
+      },
+      "@UI.HeaderInfo.Description.Value": {
+        "=": "Linenr"
+      },
+      "@UI.HeaderInfo.Description.Label": "Line number",
+      "@UI.LineItem": [
+        {
+          "Value": {
+            "=": "Linenr"
+          },
+          "Label": "Line Nr."
+        },
+        {
+          "Value": {
+            "=": "Product_ID"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          },
+          "Label": "UOM"
+        },
+        {
+          "Value": {
+            "=": "LocationFrom_ID"
+          },
+          "Label": "Issue location"
+        },
+        {
+          "Value": {
+            "=": "LocationTo_ID"
+          },
+          "Label": "Receive location"
+        }
+      ],
+      "@UI.PresentationVariant.SortOrder": [
+        {
+          "Property": {
+            "=": "Linenr"
+          }
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "Target": "@UI.FieldGroup#LineItemData",
+          "Label": "Item data"
+        }
+      ],
+      "@UI.FieldGroup#LineItemData.Label": "Item data",
+      "@UI.FieldGroup#LineItemData.Data": [
+        {
+          "Value": {
+            "=": "Product_ID"
+          },
+          "Label": "Product"
+        },
+        {
+          "Value": {
+            "=": "Quantity"
+          },
+          "Label": "Quantity"
+        },
+        {
+          "Value": {
+            "=": "UOM_ID"
+          },
+          "Label": "UOM"
+        },
+        {
+          "Value": {
+            "=": "LocationFrom_ID"
+          },
+          "Label": "Issue location"
+        },
+        {
+          "Value": {
+            "=": "LocationTo_ID"
+          },
+          "Label": "Receive location"
+        }
+      ],
+      "projection": {
+        "from": {
+          "ref": [
+            "WM.model.doc.docMovement.Items"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "wmappsrv.Movement",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "ID": {
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "Linenr": {
+          "@Common.Label": "Line number",
+          "type": "cds.Integer"
+        },
+        "Product": {
+          "@Common.Text": {
+            "=": "Product.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Products",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "Product_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.Products",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "Quantity": {
+          "type": "cds.Decimal",
+          "precision": 10,
+          "scale": 3
+        },
+        "UOM": {
+          "@Common.Text": {
+            "=": "UOM.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "UOM",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "UOM_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.UOM",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationFrom": {
+          "@Common.Text": {
+            "=": "LocationFrom.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Locations",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "LocationFrom_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.Locations",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "LocationTo": {
+          "@Common.Text": {
+            "=": "LocationTo.Name"
+          },
+          "@Common.TextArrangement": {
+            "#": "TextOnly"
+          },
+          "@Common.ValueList.$Type": "Common.ValueListType",
+          "@Common.ValueList.CollectionPath": "Locations",
+          "@Common.ValueList.Parameters": [
+            {
+              "$Type": "Common.ValueListParameterOut",
+              "LocalDataProperty": {
+                "=": "LocationTo_ID"
+              },
+              "ValueListProperty": "ID"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Code"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Name"
+            },
+            {
+              "$Type": "Common.ValueListParameterDisplayOnly",
+              "ValueListProperty": "Description"
+            }
+          ],
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "wmappsrv.Locations",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "extensions": [
+    {
+      "annotate": "WM.model.doc.docIssue.Items",
+      "elements": {
+        "LocationTo_ID": {
+          "@UI.Hidden": true
+        },
+        "LocationFrom_ID": {
+          "@UI.Hidden": true
+        },
+        "UOM_ID": {
+          "@UI.Hidden": true
+        },
+        "Editable": {
+          "@UI.Hidden": true
+        },
+        "Number": {
+          "@UI.Label": "Document number"
+        }
+      }
+    },
+    {
+      "annotate": "WM.model.doc.docMovement.Items",
+      "elements": {
+        "LocationTo_ID": {
+          "@UI.Hidden": true
+        },
+        "LocationFrom_ID": {
+          "@UI.Hidden": true
+        },
+        "UOM_ID": {
+          "@UI.Hidden": true
+        },
+        "Editable": {
+          "@UI.Hidden": true
+        },
+        "Number": {
+          "@UI.Label": "Document number"
+        }
+      }
+    },
+    {
+      "annotate": "WM.model.doc.docReceive.Items",
+      "elements": {
+        "LocationTo_ID": {
+          "@UI.Hidden": true
+        },
+        "LocationFrom_ID": {
+          "@UI.Hidden": true
+        },
+        "UOM_ID": {
+          "@UI.Hidden": true
+        },
+        "Editable": {
+          "@UI.Hidden": true
+        },
+        "Number": {
+          "@UI.Label": "Document number"
+        }
+      }
+    }
+  ],
+  "meta": {
+    "creator": "CDS Compiler v5.3.0",
+    "flavor": "inferred"
+  },
+  "$version": "2.0"
+}
