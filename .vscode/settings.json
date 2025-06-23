@@ -13,5 +13,6 @@
     "csv (semicolon)",
     "tsv",
     "tab"
-  ]
+  ],
+  "git.ignoreLimitWarning": true
 }
