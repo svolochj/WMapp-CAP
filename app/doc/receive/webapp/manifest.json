@@ -11,7 +11,7 @@
         "description": "{{appDescription}}",
         "dataSources": {
             "mainService": {
-                "uri": "/wmappsrv/",
+                "uri": "/odata/v4/wmappsrv/",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "4.0"
