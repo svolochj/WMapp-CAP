@@ -9,7 +9,7 @@
     "@sap/cds": "9.0.4",
     "@sap/hana-client": "2.24.26",
     "@sap/hdbext": "8.1.9",
-    "@sap/xssec": "4.8.0",
+    "@sap/xssec": "4.9.1",
     "express": "4.21.2",
     "passport": "0.7.0",
     "sap-hdbext-promisfied": "^2.202201.1"
