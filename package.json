@@ -19,7 +19,7 @@
     "@sap/hdi-deploy": "^5.1.1",
     "@sap/ux-specification": "^1.100",
     "@cap-js/sqlite": "^2.0.1",
-    "chai": "^5.1.0",
+    "chai": "^6.2.0",
     "chai-as-promised": "^8.0.1",
     "chai-subset": "^1.6.0",
     "eslint": "^9.11.1",
