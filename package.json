@@ -6,10 +6,10 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@sap/cds": "9.4.4",
-    "@sap/hana-client": "2.26.26",
+    "@sap/cds": "9.6.3",
+    "@sap/hana-client": "2.27.19",
     "@sap/hdbext": "8.1.9",
-    "@sap/xssec": "4.11.2",
+    "@sap/xssec": "4.12.2",
     "express": "5.2.1",
     "passport": "0.7.0",
     "sap-hdbext-promisfied": "^2.202201.1"
