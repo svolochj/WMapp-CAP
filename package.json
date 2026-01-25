@@ -7,7 +7,7 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "9.6.3",
-    "@sap/hana-client": "2.26.26",
+    "@sap/hana-client": "2.27.19",
     "@sap/hdbext": "8.1.9",
     "@sap/xssec": "4.12.2",
     "express": "5.2.0",
