@@ -22,7 +22,7 @@
     "chai": "^6.2.1",
     "chai-as-promised": "^8.0.1",
     "chai-subset": "^1.6.0",
-    "eslint": "^9.11.1",
+    "eslint": "^10.0.0",
     "jest": "^30.0.2",
     "sqlite3": "^5"
   },
