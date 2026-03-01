@@ -6,9 +6,9 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@sap/cds": "9.6.3",
+    "@sap/cds": "9.7.1",
     "@sap/hana-client": "2.27.23",
-    "@sap/hdbext": "8.1.9",
+    "@sap/hdbext": "8.1.10",
     "@sap/xssec": "4.12.2",
     "express": "5.2.1",
     "passport": "0.7.0",
@@ -22,7 +22,7 @@
     "chai": "^6.2.1",
     "chai-as-promised": "^8.0.1",
     "chai-subset": "^1.6.0",
-    "eslint": "^9.11.1",
+    "eslint": "^10.0.1",
     "jest": "^30.0.2",
     "sqlite3": "^5"
   },
