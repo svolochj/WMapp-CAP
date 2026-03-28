@@ -24,7 +24,7 @@
     "chai-subset": "^1.6.0",
     "eslint": "^10.0.1",
     "jest": "^30.0.2",
-    "sqlite3": "^5"
+    "sqlite3": "^6"
   },
   "scripts": {
     "start": "cds run",
